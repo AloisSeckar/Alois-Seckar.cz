@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img src="@/as.webp" />
+    <img src="/as.webp" />
     <h1>Alois Sečkár</h1>
     <p>Programátor / Běžec / Politik</p>
     <p>&copy; 2022</p>
