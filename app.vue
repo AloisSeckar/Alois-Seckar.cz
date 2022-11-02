@@ -1,0 +1,6 @@
+<template>
+  <div>
+    <h1>Alois Sečkár</h1>
+    <p>Programátor / Běžec / Politik</p>
+  </div>
+</template>
