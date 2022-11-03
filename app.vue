@@ -9,7 +9,8 @@
     <a href="https://www.linkedin.com/in/alois-/"><img class="social" src="/ln.webp" alt="LN" title="LinkedIn" /></a>
     <div id="footer">
       <hr />
-      <p><strong>&copy; 2022 Alois Sečkár</strong> | <a href="https://www.vecteezy.com/free-vector/social-media">Social Media Vectors by Vecteezy</a></p>
+      <p><strong>&copy; 2022 Alois Sečkár</strong></p>
+      <p class="attr"><a href="https://www.vecteezy.com/free-vector/social-media">Social Media Vectors by Vecteezy</a> & <a href="https://www.vecteezy.com/free-vector/black">Black Vectors by Vecteezy</a></p>
     </div>  
   </div>
 </template>
@@ -58,6 +59,13 @@ a:link, a:hover, a:active, a:visited {
   position: fixed;
   bottom: 0px;
   width: 100%;
+  font-size: 14px;
+}
+
+.attr {
+  font-size: 11px;
+  margin-top: -10px;
+  margin-bottom: 5px;
 }
 
 </style>
