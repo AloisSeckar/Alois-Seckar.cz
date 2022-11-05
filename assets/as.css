@@ -1,0 +1,29 @@
+@font-face {
+    font-family: kaushan;
+    src: url('~/assets/KaushanScript-AS.woff2');
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #009682;
+    color: white;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+}
+
+a:link,
+a:hover,
+a:active,
+a:visited {
+    color: white;
+}
+
+h1 {
+    font-family: kaushan, cursive;
+    font-size: 50px;
+    margin-bottom: 15px;
+}
