@@ -18,7 +18,7 @@
                     <img class="social" src="/ln.webp" alt="LN" title="LinkedIn" />
                 </a>
             </div>
-            <a href="#content"><img class="more" src="arrow.webp" alt="more" title="Více info..." /></a>
+            <a href="#content"><img class="more" src="/arrow.webp" alt="more" title="Více info..." /></a>
     </div>
     </div>
 </template>

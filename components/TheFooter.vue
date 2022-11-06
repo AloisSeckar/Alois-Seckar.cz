@@ -11,6 +11,7 @@
 <style scoped>
 #footer {
     font-size: 14px;
+    margin-top: 10px;
 }
 
 #copy {
