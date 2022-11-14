@@ -19,7 +19,7 @@
                 </a>
             </div>
             <a href="#content"><img class="more" src="/arrow.webp" alt="more" title="Více info..." /></a>
-    </div>
+        </div>
     </div>
 </template>
 
