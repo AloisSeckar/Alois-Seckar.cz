@@ -40,7 +40,7 @@
 }
 
 #header-content img.logo {
-    border: 1px solid black;
+    border: 2px solid #e1b400;
     border-radius: 50%;
     height: 200px;
     box-shadow:

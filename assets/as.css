@@ -28,4 +28,14 @@ h1 {
     font-family: kaushan, cursive;
     font-size: 50px;
     margin-bottom: 15px;
+    color: #e1b400;
+}
+
+h2 {
+    font-family: arial;
+    font-size: 25px;
+    margin: 0px auto;
+    text-decoration: underline;
+    text-align: center;
+    color: #e1b400;
 }
