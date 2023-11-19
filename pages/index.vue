@@ -24,21 +24,18 @@
         </p>
         <p class="center">
           <strong><u>Dokumenty</u></strong><br>
-          <a href="/cv.pdf">ŽIVOTOPIS</a><br>
-          Certifikát - <a href="/as-java-ocp-8.pdf">Java 8 OCP</a><br>
-          Potvrzení - <a href="/as-vuejs-master-class.pdf">Vue.js Master class</a>
+          <a href="/pdf/cv.pdf">ŽIVOTOPIS</a><br>
+          Certifikát - <a href="/pdf/as-java-ocp-8.pdf">Java 8 OCP</a><br>
+          Potvrzení - <a href="/pdf/as-vuejs-master-class.pdf">Vue.js Master class</a>
         </p>
         <h2>Sportovec</h2>
         <p>
           Rád chodím běhat a jsem členem <a href="http://www.tjsokolprahakrc.cz/">TJ Sokol Praha-Krč</a>, kde
-          od
-          roku 2019 vedu oddíl rekreačního běhu. Zde se můžete podívat na kompletní
+          od roku 2019 vedu oddíl rekreačního běhu. Zde se můžete podívat na kompletní
           <a href="http://ellrohir.mzf.cz/run.php">přehled mých běžeckých výkonů</a>. Kromě toho rád hraju
-          softbal,
-          aktuálně za klub <a href="https://www.facebook.com/pikespraha">Pikes Praha</a>.
+          softbal, aktuálně za klub <a href="https://www.facebook.com/pikespraha">Pikes Praha</a>.
           Věnuju se také zapisování softballu a baseballu, v ČR pomáhám udržovat a rozvíjet systém
-          zapisovatelů a
-          přes zimu školit nové.
+          zapisovatelů a přes zimu školit nové.
           Od roku 2009 pravidelně jezdím zapisovat mezinárodní turnaje.
         </p>
         <h2>Krčský patriot</h2>
