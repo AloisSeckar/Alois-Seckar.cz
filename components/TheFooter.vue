@@ -1,7 +1,7 @@
 <template>
   <div id="footer">
     <p id="copy">
-      <strong>&copy; 2023 Alois Sečkár</strong>
+      <strong>&copy; {{ new Date().getFullYear() }} Alois Sečkár</strong>
     </p>
     <p id="attr">
       <a href="https://www.vecteezy.com/free-vector/social-media">Social Media Vectors by Vecteezy</a>

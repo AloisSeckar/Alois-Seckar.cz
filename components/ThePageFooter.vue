@@ -2,7 +2,7 @@
   <div id="footer">
     <hr>
     <p id="copy">
-      <strong>&copy; 2022 Alois Sečkár</strong>
+      <strong>&copy; {{ new Date().getFullYear() }} Alois Sečkár</strong>
     </p>
   </div>
 </template>
