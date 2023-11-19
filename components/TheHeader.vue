@@ -44,7 +44,7 @@
     border-radius: 50%;
     height: 200px;
     box-shadow:
-      0 0 48px 12px #009682;
+      0 0 50px 10px #38b2ac;
 }
 
 #header-content img.social {
@@ -52,7 +52,7 @@
     margin: 8px;
     border-radius: 30%;
     box-shadow:
-      0 0 6px 2px #009682;
+      0 0 6px 2px #38b2ac;
 }
 
 #header-content img.more {

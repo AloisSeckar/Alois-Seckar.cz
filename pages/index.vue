@@ -88,7 +88,7 @@
     border: 1px solid black;
     border-radius: 1em;
     box-shadow:
-      0 0 12px 3px #009682;
+      0 0 12px 3px #38b2ac;
 }
 
 .content-block img {
@@ -107,6 +107,6 @@ a:link,
 a:hover,
 a:active,
 a:visited {
-    color: #009682;
+    color: #38b2ac;
 }
 </style>

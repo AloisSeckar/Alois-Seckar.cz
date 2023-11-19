@@ -1,7 +1,7 @@
 <template>
   <div id="footer">
     <hr>
-    <p id="copy">
+    <p id="copy" style="color: #e1b400;">
       <strong>&copy; {{ new Date().getFullYear() }} Alois Sečkár</strong>
     </p>
   </div>
