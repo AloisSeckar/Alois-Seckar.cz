@@ -1,8 +1,10 @@
 <template>
-    <div id="footer">
-        <hr />
-        <p id="copy"><strong>&copy; 2022 Alois Sečkár</strong></p>
-    </div>
+  <div id="footer">
+    <hr>
+    <p id="copy">
+      <strong>&copy; 2022 Alois Sečkár</strong>
+    </p>
+  </div>
 </template>
 
 <style scoped>

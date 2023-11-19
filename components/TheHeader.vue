@@ -1,26 +1,26 @@
 <template>
-    <div id="header">
-        <div id="header-content">
-            <img class="logo" src="/as.webp" alt="AS" title="Alois Sečkár" />
-            <h1>Alois Sečkár</h1>
-            <p>Programátor / Sportovec / Krčský patriot</p>
-            <div id="social">
-                <a href="https://www.facebook.com/alois.seckar">
-                    <img class="social" src="/fb.webp" alt="FB" title="Facebook" />
-                </a>
-                <a href="https://www.instagram.com/alois.seckar/">
-                    <img class="social" src="/ig.webp" alt="IG" title="Instagram" />
-                </a>
-                <a href="https://twitter.com/AloisSeckar/">
-                    <img class="social" src="/tw.webp" alt="TW" title="Twitter" />
-                </a>
-                <a href="https://www.linkedin.com/in/alois-/">
-                    <img class="social" src="/ln.webp" alt="LN" title="LinkedIn" />
-                </a>
-            </div>
-            <a href="#content"><img class="more" src="/arrow.webp" alt="more" title="Více info..." /></a>
-        </div>
+  <div id="header">
+    <div id="header-content">
+      <img class="logo" src="/as.webp" alt="AS" title="Alois Sečkár">
+      <h1>Alois Sečkár</h1>
+      <p>Programátor / Sportovec / Krčský patriot</p>
+      <div id="social">
+        <a href="https://www.facebook.com/alois.seckar">
+          <img class="social" src="/fb.webp" alt="FB" title="Facebook">
+        </a>
+        <a href="https://www.instagram.com/alois.seckar/">
+          <img class="social" src="/ig.webp" alt="IG" title="Instagram">
+        </a>
+        <a href="https://twitter.com/AloisSeckar/">
+          <img class="social" src="/tw.webp" alt="TW" title="Twitter">
+        </a>
+        <a href="https://www.linkedin.com/in/alois-/">
+          <img class="social" src="/ln.webp" alt="LN" title="LinkedIn">
+        </a>
+      </div>
+      <a href="#content"><img class="more" src="/arrow.webp" alt="more" title="Více info..."></a>
     </div>
+  </div>
 </template>
 
 <style scoped>
