@@ -1,21 +1,21 @@
 <template>
   <div id="header">
     <div id="header-content">
-      <img class="logo" src="/as.webp" alt="AS" title="Alois Sečkár">
+      <img class="logo" src="/as.webp" alt="Face of Alois Sečkár" title="Alois Sečkár">
       <h1>Alois Sečkár</h1>
       <p>Programátor / Sportovec / Krčský patriot</p>
       <div id="social">
+        <a href="mailto:alois.seckar@gmail.com">
+          <img class="social" src="/em.webp" alt="Envelope icon" title="E-mail">
+        </a>
         <a href="https://www.facebook.com/alois.seckar">
-          <img class="social" src="/fb.webp" alt="FB" title="Facebook">
+          <img class="social" src="/fb.webp" alt="Facebook logo" title="Facebook">
         </a>
-        <a href="https://www.instagram.com/alois.seckar/">
-          <img class="social" src="/ig.webp" alt="IG" title="Instagram">
-        </a>
-        <a href="https://twitter.com/AloisSeckar/">
-          <img class="social" src="/tw.webp" alt="TW" title="Twitter">
+        <a href="https://github.com/AloisSeckar">
+          <img class="social" src="/gh.webp" alt="GitHub logo" title="GitHub">
         </a>
         <a href="https://www.linkedin.com/in/alois-/">
-          <img class="social" src="/ln.webp" alt="LN" title="LinkedIn">
+          <img class="social" src="/ln.webp" alt="LinkedIn logo" title="LinkedIn">
         </a>
       </div>
       <a href="#content"><img class="more" src="/arrow.webp" alt="more" title="Více info..."></a>
@@ -40,17 +40,24 @@
 }
 
 #header-content img.logo {
+    border: 1px solid black;
     border-radius: 50%;
     height: 200px;
+    box-shadow:
+      0 0 48px 12px #009682;
 }
 
 #header-content img.social {
     height: 32px;
-    margin: 4px;
+    margin: 8px;
+    border-radius: 30%;
+    box-shadow:
+      0 0 6px 2px #009682;
 }
 
 #header-content img.more {
-    height: 32px;
-    margin-top: 10px;
+    height: 24px;
+    width: 96px;
+    margin-top: 18px;
 }
 </style>

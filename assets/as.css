@@ -8,9 +8,11 @@ html {
 }
 
 body {
-    background-color: #009682;
+    background-color: #191925;
     color: white;
     text-align: center;
+    font-size: 1.1rem;
+    font-family: Verdana;
     margin: 0px;
     padding: 0px;
 }
