@@ -5,52 +5,54 @@
       <div class="content-block">
         <h2>Programátor</h2>
         <p>
-          Vystudoval jsem informatiku na VŠE v Praze. Od 1. února 2016 pracuju pro IT společnost
-          <a href="https://atos.net/cs/ceska-republika">Atos</a>. Věnuju se převážně světu Java programování +
-          vývoji webů pomocí JavaScriptu (Vue.js resp. Nuxt 3). Zajímá mě taky cloud-native, DevOps a moderní
-          trendy obecně.
+          Vystudoval jsem informatiku na VŠE v&nbsp;Praze. Věnuju se převážně světu Java programování +
+          vývoji webů pomocí JavaScriptu (framework Nuxt nad Vue.js). Zajímá mě taky cloud-native vývoj,
+          DevOps a&nbsp;moderní trendy obecně.
         </p>
-        <p class="center">
+        <div class="center">
           <a href="https://github.com/AloisSeckar">
-            <img src="/github.webp" alt="GitHub" title="GitHub - moje zdrojové kódy">
+            <img src="/github.webp" alt="GitHub - moje zdrojové kódy" title="GitHub - moje zdrojové kódy">
           </a>
           <a href="http://ellrohir.mzf.cz/">
-            <img
-              src="/web.webp"
-              alt="Webový koutek"
-              title="Webový koutek - kolekce jednoduchých webových programů"
-            >
+            <img src="/web.webp" alt="Webový koutek - kolekce jednoduchých webových programů" title="Webový koutek - kolekce jednoduchých webových programů">
           </a>
-        </p>
-        <p class="center">
-          <strong><u>Dokumenty</u></strong><br>
-          <a href="/pdf/cv.pdf">ŽIVOTOPIS</a><br>
-          Certifikát - <a href="/pdf/as-java-ocp-8.pdf">Java 8 OCP</a><br>
-          Potvrzení - <a href="/pdf/as-vuejs-master-class.pdf">Vue.js Master class</a>
-        </p>
+          <h3>Dokumenty</h3>
+          <ul class="doc-list">
+            <li><a href="/pdf/cv.pdf">ŽIVOTOPIS</a></li>
+            <li><a href="/pdf/as-java-ocp-8.pdf">Java 8 OCP</a></li>
+            <li><a href="/pdf/as-vuejs-master-class.pdf">Vue.js Master class</a></li>
+          </ul>
+        </div>
       </div>
       <div class="content-block">
         <h2>Sportovec</h2>
         <p>
-          Rád chodím běhat a jsem členem <a href="http://www.tjsokolprahakrc.cz/">TJ Sokol Praha-Krč</a>, kde
-          od roku 2019 vedu oddíl rekreačního běhu. Zde se můžete podívat na kompletní
+          Rád chodím běhat a&nbsp;jsem členem <a href="http://www.tjsokolprahakrc.cz/">TJ Sokol Praha-Krč</a>,
+          kde od roku 2019 vedu oddíl rekreačního běhu. Zde se můžete podívat na kompletní
           <a href="http://ellrohir.mzf.cz/run.php">přehled mých běžeckých výkonů</a>. Kromě toho rád hraju
           softbal, aktuálně za klub <a href="https://www.facebook.com/pikespraha">Pikes Praha</a>.
-          Věnuju se také zapisování softballu a baseballu, v ČR pomáhám udržovat a rozvíjet systém
-          zapisovatelů a přes zimu školit nové.
-          Od roku 2009 pravidelně jezdím zapisovat mezinárodní turnaje.
         </p>
+        <p>
+          Věnuju se také zapisování softballu a baseballu. Od roku 2009 pravidelně jezdím zapisovat mezinárodní
+          turnaje. v&nbsp;ČR pomáhám udržovat a&nbsp;rozvíjet systém zapisovatelů a&nbsp;přes zimu školit nové.
+          Na pomoc s&nbsp;výukou jsem vytvořil nástroj na vizualizaci systému zápisu organizace WBSC:
+        </p>
+        <div class="center">
+          <a href="https://wbsc-scoring.netlify.app/">
+            <img src="/wbsc.webp" alt="WBSC Scoring Creator - aplikace pro zapisovatele" title="WBSC Scoring Creator - aplikace pro zapisovatele">
+          </a>
+        </div>
       </div>
       <div class="content-block">
         <h2>Krčský patriot</h2>
         <p>
-          S tátou provozujeme web 'Stará Krč' o historii naší městské části Praha-Krč. Troufnu si tvrdit, že
-          ucelenější sbírku informací a fotografií nikdo jiný nemá. Pracujeme na tom, aby naše poznatky mohly
-          jednou vyjít i v tištěné podobě.
+          S tátou provozujeme web 'Stará Krč' o&nbsp;historii naší městské části Praha-Krč. Troufnu si tvrdit,
+          že ucelenější sbírku informací a&nbsp;fotografií nikdo jiný nemá. Pracujeme na tom, aby naše poznatky
+          mohly jednou vyjít i&nbsp;v&nbsp;tištěné podobě.
         </p>
         <p class="center">
           <a href="http://krc-historie.cz/">
-            <img src="/krc.webp" alt="Stará Krč" title="Stará Krč - historie městské části Praha-Krč">
+            <img src="/krc.webp" alt="Stará Krč - historie městské části Praha-Krč" title="Stará Krč - historie městské části Praha-Krč">
           </a>
         </p>
       </div>
@@ -62,10 +64,10 @@
           </p>
           <div>Fotografie a pokusy o ně:</div>
           <a href="https://www.deviantart.com/ellrohir">
-            <img src="/deviantart.webp" alt="DeviantArt" title="DeviantArt - accidental photography">
+            <img src="/deviantart.webp" alt="DeviantArt - moje fotografické pokusy" title="DeviantArt - accidental photography">
           </a>
           <a href="https://www.instagram.com/alois.seckar/">
-            <img src="/instagram.webp" alt="Instagram" title="Instagram - accidental photography">
+            <img src="/instagram.webp" alt="Instagram - moje fotografické pokusy" title="Instagram - accidental photography">
           </a>
         </div>
       </div>
@@ -101,6 +103,12 @@
 
 .content-block .center {
     text-align: center;
+}
+
+.doc-list {
+  text-align: justify;
+  margin: 0px auto;
+  max-width: 170px;
 }
 
 a:link,
