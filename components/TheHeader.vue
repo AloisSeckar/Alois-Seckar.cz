@@ -6,7 +6,7 @@
       <p>Programátor / Sportovec / Krčský patriot</p>
       <div id="social">
         <a href="mailto:alois.seckar@gmail.com">
-          <img class="social" src="/em.webp" alt="Envelope icon" title="E-mail">
+          <img class="social" src="/em.webp" alt="Email ikona" title="E-mail">
         </a>
         <a href="https://www.facebook.com/alois.seckar">
           <img class="social" src="/fb.webp" alt="Facebook logo" title="Facebook">
@@ -14,11 +14,14 @@
         <a href="https://github.com/AloisSeckar">
           <img class="social" src="/gh.webp" alt="GitHub logo" title="GitHub">
         </a>
-        <a href="https://www.linkedin.com/in/alois-/">
+        <a href="https://dev.to/aloisseckar">
+          <img class="social" src="/dev.webp" alt="DEV logo" title="DEV">
+        </a>
+        <a href="https://www.linkedin.com/in/alois-seckar/">
           <img class="social" src="/ln.webp" alt="LinkedIn logo" title="LinkedIn">
         </a>
       </div>
-      <a href="#content"><img class="more" src="/arrow.webp" alt="more" title="Více info..."></a>
+      <a href="#content"><img class="more" src="/arrow.webp" alt="Více informací" title="Více info..."></a>
     </div>
   </div>
 </template>
