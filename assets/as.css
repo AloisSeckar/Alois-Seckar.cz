@@ -21,7 +21,7 @@ a:link,
 a:hover,
 a:active,
 a:visited {
-    color: white;
+    color: #38b2ac;
 }
 
 h1 {
@@ -38,4 +38,108 @@ h2 {
     text-decoration: underline;
     text-align: center;
     color: #e1b400;
+}
+
+/* HEADER */
+
+.header {
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    width: 98%;
+    margin: 0 auto;
+    display: table;
+}
+
+.header-content {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.header-content img.logo {
+    border: 2px solid #e1b400;
+    border-radius: 50%;
+    height: 200px;
+    box-shadow:
+      0 0 50px 10px #38b2ac;
+}
+
+.header-content img.social {
+    height: 32px;
+    margin: 8px;
+    border-radius: 30%;
+    box-shadow:
+      0 0 6px 2px #38b2ac;
+}
+
+.header-content img.more {
+    height: 24px;
+    width: 96px;
+    margin-top: 18px;
+}
+
+.page-header {
+    margin: 1em;
+}
+
+/* CONTENT */
+
+.content-pane {
+    margin: 0 auto;
+    padding: 1em;
+    max-width: 1000px;
+    text-align: justify;
+}
+
+.content-block {
+    padding: 1em 1.5em;
+    margin-bottom: 3em;
+    border: 1px solid black;
+    border-radius: 1em;
+    box-shadow:
+      0 0 12px 3px #38b2ac;
+}
+
+.content-block img {
+    display: inline;
+    margin: 1em;
+    height: 160px;
+    border: 2px solid #e1b400;
+    border-radius: 50%;
+}
+
+.content-block .center {
+    text-align: center;
+}
+
+.doc-list {
+  text-align: justify;
+  margin: 0px auto;
+  max-width: 170px;
+}
+
+/* FOOTER */
+
+.footer {
+    font-size: 14px;
+    margin-bottom: 1em;
+}
+
+.page-footer {
+    width: 800px;
+    margin: 0px auto;
+    font-size: 14px;
+    margin-top: 1em;
+}
+
+.copy {
+    margin-top: -2px;
+    color: #e1b400;
+}
+
+.attr {
+    font-size: 11px;
+    margin-top: -10px;
+    margin-bottom: 5px;
 }
