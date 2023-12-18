@@ -13,8 +13,8 @@
           <a href="https://github.com/AloisSeckar">
             <img src="/github.webp" alt="GitHub - moje zdrojové kódy" title="GitHub - moje zdrojové kódy">
           </a>
-          <a href="http://ellrohir.mzf.cz/">
-            <img src="/web.webp" alt="Webový koutek - kolekce jednoduchých webových programů" title="Webový koutek - kolekce jednoduchých webových programů">
+          <a href="https://elven-ipsum.netlify.app/">
+            <img src="/ipsum.webp" alt="Elven Ipsum - generátor lorem ipsum v Elfštině" title="Elven Ipsum - generátor lorem ipsum v Elfštině">
           </a>
           <h3>Dokumenty</h3>
           <ul class="doc-list">
