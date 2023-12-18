@@ -19,8 +19,9 @@
           <h3>Dokumenty</h3>
           <ul class="doc-list">
             <li><a href="/pdf/cv.pdf">ŽIVOTOPIS</a></li>
-            <li><a href="/pdf/as-java-ocp-8.pdf">Java 8 OCP</a></li>
-            <li><a href="/pdf/as-vuejs-master-class.pdf">Vue.js Master class</a></li>
+            <li>Certifikace - <a href="/pdf/as-java-ocp-8.pdf">Java 8 OCP</a></li>
+            <li>Kurs - <a href="/pdf/as-vuejs-master-class.pdf">Vue.js Master class</a></li>
+            <li>Kurs - <a href="/pdf/as-es6-gopas.pdf">Pokročilé techniky ES6</a></li>
           </ul>
         </div>
       </div>
