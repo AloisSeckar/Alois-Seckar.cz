@@ -19,7 +19,7 @@
           <h3>Dokumenty</h3>
           <ul class="doc-list">
             <li>
-              <NuxtLink to="/pdf/github.webp" external no-prefetch>
+              <NuxtLink to="/pdf/CV.pdf" external no-prefetch>
                 ŽIVOTOPIS
               </NuxtLink>
             </li>
