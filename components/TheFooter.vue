@@ -4,8 +4,13 @@
       <strong>&copy; {{ new Date().getFullYear() }} Alois Sečkár</strong>
     </p>
     <p class="attr">
-      <a href="https://www.vecteezy.com/free-vector/social-media">Social Media Vectors by Vecteezy</a>
-      & <a href="https://www.vecteezy.com/free-vector/black">Black Vectors by Vecteezy</a>
+      <NuxtLink to="https://www.vecteezy.com/free-vector/social-media">
+        Social Media Vectors by Vecteezy
+      </NuxtLink>
+      &
+      <NuxtLink to="https://www.vecteezy.com/free-vector/black">
+        Black Vectors by Vecteezy
+      </NuxtLink>
     </p>
   </div>
 </template>
