@@ -30,13 +30,19 @@
               </NuxtLink>
             </li>
             <li>
-              Kurs -
+              Certifikace -
+              <NuxtLink to="/pdf/as-vuejs-dev.pdf" external no-prefetch>
+                Vue.js Developer Level I
+              </NuxtLink>
+            </li>
+            <li>
+              Kurz -
               <NuxtLink to="/pdf/as-vuejs-master-class.pdf" external no-prefetch>
                 Vue.js Master class
               </NuxtLink>
             </li>
             <li>
-              Kurs -
+              Kurz -
               <NuxtLink to="/pdf/as-es6-gopas.pdf" external no-prefetch>
                 Pokročilé techniky ES6
               </NuxtLink>
@@ -63,6 +69,8 @@
         <p>
           Věnuju se také zapisování softballu a baseballu. Od roku 2009 pravidelně jezdím zapisovat mezinárodní
           turnaje. v&nbsp;ČR pomáhám udržovat a&nbsp;rozvíjet systém zapisovatelů a&nbsp;přes zimu školit nové.
+        </p>
+        <p>
           Na pomoc s&nbsp;výukou jsem vytvořil nástroj na vizualizaci systému zápisu organizace WBSC:
         </p>
         <div class="center">
