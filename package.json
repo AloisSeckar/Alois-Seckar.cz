@@ -9,9 +9,9 @@
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "12.1.0",
-    "eslint": "8.56.0",
-    "node-html-parser": "6.1.12",
-    "nuxt": "3.10.0",
-    "nuxt-security": "1.1.0"
+    "eslint": "8.57.0",
+    "node-html-parser": "6.1.13",
+    "nuxt": "3.11.1",
+    "nuxt-security": "1.2.2"
   }
 }
