@@ -1,21 +1,21 @@
 import { parse } from 'node-html-parser'
 
-export type NewsItem = {
+export type ArticleItem = {
   date: string,
   title: string,
   link: string,
   dscr: string,
 }
 
-export type Last5News = {
-  item1: NewsItem,
-  item2: NewsItem,
-  item3: NewsItem,
-  item4: NewsItem,
-  item5: NewsItem,
+export type Last5Articles = {
+  item1: ArticleItem,
+  item2: ArticleItem,
+  item3: ArticleItem,
+  item4: ArticleItem,
+  item5: ArticleItem,
 }
 
-export async function getLast5News (url: string): Promise<Last5News> {
+export async function getLast5Articles (url: string): Promise<Last5Articles> {
   const htmlData = await $fetch<string>(url)
   const htmlPage = parse(htmlData)
   const markdown = htmlPage.innerText
@@ -29,7 +29,7 @@ export async function getLast5News (url: string): Promise<Last5News> {
   }
 }
 
-function parseMarkdown (entry: string): NewsItem {
+function parseMarkdown (entry: string): ArticleItem {
   return {
     date: entry.substring(entry.indexOf('*`') + 2, entry.indexOf('`*')),
     title: entry.substring(entry.indexOf('| [') + 3, entry.indexOf('](')),
