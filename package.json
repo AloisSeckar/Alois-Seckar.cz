@@ -3,8 +3,8 @@
   "scripts": {
     "eslint": "eslint .",
     "dev": "nuxt dev",
-    "build": "npm run eslint && nuxt build",
-    "generate": "npm run eslint && nuxt generate"
+    "build": "nuxt build",
+    "generate": "nuxt generate"
   },
   "devDependencies": {
     "@nuxt/eslint": "0.3.10",
