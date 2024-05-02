@@ -8,10 +8,10 @@
 useHead({
   title: 'Alois-seckar.cz',
   meta: [
-    { name: 'description', content: 'Personal page of Alois Sečkár, Prague, Czechia' }
+    { name: 'description', content: 'Personal page of Alois Sečkár, Prague, Czechia' },
   ],
   htmlAttrs: {
-    lang: 'cs'
-  }
+    lang: 'cs',
+  },
 })
 </script>
