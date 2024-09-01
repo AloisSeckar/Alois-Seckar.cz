@@ -7,9 +7,9 @@
     "generate": "nuxt generate"
   },
   "devDependencies": {
-    "@nuxt/eslint": "0.5.4",
+    "@nuxt/eslint": "0.3.13",
     "node-html-parser": "6.1.13",
     "nuxt": "3.13.0",
-    "nuxt-security": "1.4.3"
+    "nuxt-security": "2.0.0-rc.9"
   }
 }
