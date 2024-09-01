@@ -13,6 +13,9 @@
           <NuxtLink to="https://github.com/AloisSeckar">
             <img src="/github.webp" alt="GitHub - moje zdrojové kódy" title="GitHub - moje zdrojové kódy">
           </NuxtLink>
+          <NuxtLink to="https://master-coda.cz/">
+            <img src="/coda.webp" alt="Master Coda - nepravidelný blog o programování" title="Master Coda - nepravidelný blog o programování">
+          </NuxtLink>
           <NuxtLink to="https://elven-ipsum.netlify.app/">
             <img src="/ipsum.webp" alt="Elven Ipsum - generátor lorem ipsum v Elfštině" title="Elven Ipsum - generátor lorem ipsum v Elfštině">
           </NuxtLink>
