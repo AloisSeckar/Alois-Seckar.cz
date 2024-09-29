@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <p class="copy" style="color: #e1b400;">
+    <p class="copy mb-3" style="color: #e1b400;">
       <strong>&copy; {{ new Date().getFullYear() }} Alois Sečkár</strong>
     </p>
     <p class="attr">
