@@ -23,6 +23,7 @@ export default withNuxt([
           max: 3,
         },
       }],
+      '@stylistic/brace-style': 'off',
     },
   },
 

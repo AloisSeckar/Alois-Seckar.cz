@@ -12,6 +12,9 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/eslint',
+    '@nuxt/ui',
+    '@vueuse/nuxt',
+    'nuxt-neon',
     'nuxt-security',
   ],
 
