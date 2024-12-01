@@ -7,14 +7,14 @@
     "generate": "nuxt generate"
   },
   "devDependencies": {
-    "@nuxt/eslint": "0.6.1",
-    "@nuxt/ui": "2.18.7",
-    "@vueuse/core": "11.2.0",
-    "@vueuse/nuxt": "11.2.0",
+    "@nuxt/eslint": "0.7.2",
+    "@nuxt/ui": "2.19.2",
+    "@vueuse/core": "12.0.0",
+    "@vueuse/nuxt": "12.0.0",
     "node-html-parser": "6.1.13",
-    "nuxt": "3.13.2",
+    "nuxt": "3.14.1592",
     "nuxt-neon": "0.1.2",
-    "nuxt-security": "2.0.0",
+    "nuxt-security": "2.1.5",
     "typescript": "latest"
   }
 }
