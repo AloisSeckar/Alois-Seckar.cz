@@ -1,6 +1,7 @@
 export default defineNuxtConfig({
-
-  compatibilityDate: '2024-09-01',
+  extends: [
+    'nuxt-ignis'
+  ],
 
   devtools: {
     enabled: false,
@@ -8,14 +9,6 @@ export default defineNuxtConfig({
 
   css: [
     '@/assets/as.css',
-  ],
-
-  modules: [
-    '@nuxt/eslint',
-    '@nuxt/ui',
-    '@vueuse/nuxt',
-    'nuxt-neon',
-    'nuxt-security',
   ],
 
   eslint: {
@@ -29,5 +22,4 @@ export default defineNuxtConfig({
       origin: '*',
     },
   },
-
 })

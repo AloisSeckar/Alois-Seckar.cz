@@ -4,9 +4,13 @@
     <div class="text-justify">
       Přehled mých běžeckých výkonů. Uchovává se datum, vzdálenost, čas a průměrná rychlost.
       Je tu vidět kompletní historie od roku 2013, kdy jsem s běháním začal.
-      Tato stránka je zároveň oficiální referenční implementací mého integračního modulu
+      Tato stránka je zároveň hlavní referenční implementací mého integračního modulu
       <NuxtLink to="https://www.npmjs.com/package/nuxt-neon">
-        Nuxt-Neon
+       nuxt-neon
+      </NuxtLink>
+      poskytovaného jako volitelní DB modul v projektu
+      <NuxtLink to="https://www.npmjs.com/package/nuxt-ignis">
+        Nuxt Ignis
       </NuxtLink>
     </div>
     <div>
