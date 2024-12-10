@@ -47,7 +47,13 @@
             <li>
               Kurz -
               <NuxtLink to="/pdf/as-es6-gopas.pdf" external no-prefetch>
-                Pokročilé techniky ES6
+                Pokročilé techniky ES6 (Gopas)
+              </NuxtLink>
+            </li>
+            <li>
+              Kurz -
+              <NuxtLink to="/pdf/as-rust.pdf" external no-prefetch>
+                Rust pro začátečníky (CZ.NIC)
               </NuxtLink>
             </li>
           </ul>
