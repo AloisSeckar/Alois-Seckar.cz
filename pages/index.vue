@@ -16,6 +16,9 @@
           <NuxtLink to="https://master-coda.cz/">
             <img src="/coda.webp" alt="Master Coda - nepravidelný blog o programování" title="Master Coda - nepravidelný blog o programování">
           </NuxtLink>
+          <NuxtLink to="https://github.com/AloisSeckar/nuxt-ignis">
+            <img src="/ignis.webp" alt="Nuxt Ignis - template starter pro Nuxt" title="Nuxt Ignis - template starter pro Nuxt">
+          </NuxtLink>
           <NuxtLink to="https://elven-ipsum.netlify.app/">
             <img src="/ipsum.webp" alt="Elven Ipsum - generátor lorem ipsum v Elfštině" title="Elven Ipsum - generátor lorem ipsum v Elfštině">
           </NuxtLink>
