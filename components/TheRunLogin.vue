@@ -25,16 +25,16 @@
 </template>
 
 <script setup lang="ts">
-const myDialog = ref(null)
+const myDialog = useTemplateRef<HTMLDialogElement>('myDialog')
 const inputValue = ref('')
 
 function openDialog() {
-  myDialog.value.showModal()
+  myDialog.value?.showModal()
 }
 defineExpose({ openDialog })
 
 function closeDialog() {
-  myDialog.value.close()
+  myDialog.value?.close()
 }
 
 function submitValue() {

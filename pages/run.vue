@@ -41,18 +41,21 @@
     </div>
     <!-- my personal login -->
     <div v-if="useLoginStore().login">
-      Logged in
+      <TheRunForm />
     </div>
     <div v-else>
-      <div class="w-16 h-12 m-auto text-gray-800 cursor-pointer" @click="loginForm.openDialog">
+      <div class="w-16 h-12 m-auto text-gray-800 cursor-pointer" @click="loginForm?.openDialog">
         A
       </div>
-      <TheLogin ref="loginForm" />
+      <TheRunLogin ref="loginForm" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import type { ComponentExposed } from 'vue-component-type-helpers'
+import type TheRunLogin from '@/components/TheRunLogin.vue'
+
 // customize UTable
 const columns = [{
   key: 'rdate',
@@ -140,5 +143,5 @@ function parseTimeInfo(time: string) {
 }
 
 // login
-const loginForm = ref(null)
+const loginForm = useTemplateRef<ComponentExposed<typeof TheRunLogin>>('loginForm')
 </script>
