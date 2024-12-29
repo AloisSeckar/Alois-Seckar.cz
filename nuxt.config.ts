@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   extends: [
-    'nuxt-ignis'
+    'nuxt-ignis',
   ],
 
   devtools: {
@@ -10,6 +10,12 @@ export default defineNuxtConfig({
   css: [
     '@/assets/as.css',
   ],
+
+  runtimeConfig: {
+    public: {
+      key: 'a',
+    },
+  },
 
   eslint: {
     config: {
