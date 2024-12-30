@@ -25,9 +25,14 @@ export function getAVGSpeed(time: string, length: number): string {
 
   // 2. elaborate avg speed from time and length
   const speedMs = length / timeInSeconds
+  console.log(speedMs)
   const speedKmh = (speedMs * 3.6).toFixed(3)
 
-  return speedKmh
+  if (speedMs < 2.7777777777777777) {
+    return '0' + speedKmh
+  } else {
+    return speedKmh
+  }
 }
 
 /**
@@ -71,23 +76,4 @@ export function sumTimes(time1: string, time2: string): string {
   output[0] = timeChunks_1[0] + timeChunks_2[0] + temp
   //
   return `${output[0]}:${output[1].toFixed(2)}:${output[2].toFixed(2)}:${output[3]}`
-}
-
-/**
- * Replaces last ":" in [HH:]mm:ss:x string format with an ".".
- *
- * Used in run statistics page.
- */
-export function lreplace(originalString: string): string {
-  const lastColonIndex = originalString.lastIndexOf(':')
-
-  let modifiedString = originalString
-  if (lastColonIndex !== -1) {
-    modifiedString
-        = originalString.slice(0, lastColonIndex)
-        + '.'
-        + originalString.slice(lastColonIndex + 1)
-  }
-
-  return modifiedString
 }

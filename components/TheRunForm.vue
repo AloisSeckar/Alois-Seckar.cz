@@ -26,6 +26,7 @@
         id="rLength"
         v-model="inputLength"
         type="number"
+        :disabled="rLegthDisabled"
       />
     </div>
     <div>
@@ -53,7 +54,7 @@
 
 <script setup lang="ts">
 // read track data from Neon database
-const { neonClient } = useNeon()
+const { neonClient, insert } = useNeon()
 const { data } = await useAsyncData(() => neonClient`SELECT t.id as tId, t.name as tName, t.length as tLength FROM elrh_run_tracks t ORDER BY t.name`)
 
 const inputDate = ref(new Date().toISOString().slice(0, 10))
@@ -61,7 +62,6 @@ const inputLength = ref(0)
 const inputTime = ref('')
 const inputDscr = ref('')
 
-console.log(data.value)
 const tracks = data.value?.map((t) => {
   return {
     label: t.tname,
@@ -69,19 +69,39 @@ const tracks = data.value?.map((t) => {
     length: t.tlength,
   }
 })
-console.log(tracks)
-const inputTrack = ref(tracks?.[0]?.value || -1)
+const inputTrack = ref<number>(tracks?.[0]?.value || -1)
+
+const rLegthDisabled = ref(true)
 
 const updateLength = () => {
   if (inputTrack.value > -1) {
     inputLength.value = tracks?.find(t => t.value === inputTrack.value)?.length || 0
+    rLegthDisabled.value = true
   } else {
     inputLength.value = 0
+    rLegthDisabled.value = false
   }
 }
 updateLength()
 
-const submitRun = () => {
-  console.log('Submitted')
+const submitRun = async () => {
+  const columns = ['date', 'track', 'dscr', 'length', 'time', 'speed']
+  const values = [
+    inputDate.value,
+    inputTrack.value.toString(),
+    inputDscr.value,
+    inputLength.value.toString(),
+    inputTime.value,
+    getAVGSpeed(inputTime.value, inputLength.value).toString(),
+  ]
+  log.debug(values)
+
+  const result = await insert(neonClient, 'elrh_run_records', values, columns)
+
+  if (result.length === 0) {
+    log.debug('New record inserted')
+  } else {
+    log.error(result)
+  }
 }
 </script>
