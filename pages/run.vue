@@ -14,17 +14,17 @@
       </NuxtLink>
     </div>
     <div class="mb-2">
-      <TheRunTable />
+      <RunTable />
     </div>
     <!-- my personal login -->
     <div v-if="useLoginStore().login">
-      <TheRunForm />
+      <RunForm />
     </div>
     <div v-else>
       <div class="w-16 h-12 m-auto text-gray-800 cursor-pointer" @click="loginForm?.openDialog">
         A
       </div>
-      <TheRunLogin ref="loginForm" />
+      <RunLogin ref="loginForm" />
     </div>
     <ThePageFooter />
   </div>
@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import type { ComponentExposed } from 'vue-component-type-helpers'
-import type TheRunLogin from '@/components/TheRunLogin.vue'
+import type RunLogin from '~/components/run/Login.vue'
 
-const loginForm = useTemplateRef<ComponentExposed<typeof TheRunLogin>>('loginForm')
+const loginForm = useTemplateRef<ComponentExposed<typeof RunLogin>>('loginForm')
 </script>
