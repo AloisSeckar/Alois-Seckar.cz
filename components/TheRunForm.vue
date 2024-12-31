@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full m-4 sm:w-96 flex flex-col gap-2 border border-primary rounded px-4 py-2">
+  <div class="w-full m-4 sm:w-96 sm:mx-auto flex flex-col gap-2 border border-primary rounded px-4 py-2">
     <div class="font-bold">
       Nový běh
     </div>
