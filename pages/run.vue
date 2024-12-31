@@ -1,7 +1,7 @@
 <template>
   <div class="m-4 md:mx-auto w-full md:w-5/6 lg:w-3/4">
     <h2>Alois Sečkár - Běžecké statistiky</h2>
-    <div class="text-justify">
+    <div class="text-left sm:text-justify">
       Přehled mých běžeckých výkonů. Uchovává se datum, vzdálenost, čas a&nbsp;průměrná rychlost.
       Je tu vidět kompletní historie od roku 2013, kdy jsem s&nbsp;běháním začal.
       Tato stránka je zároveň hlavní referenční implementací mého integračního modulu
