@@ -110,6 +110,10 @@ type TableData = {
   row: RunRecord
 }
 
+type RunStats = {
+  [k: string]: number
+}
+
 // read data from Neon database
 const { neonClient } = useNeon()
 const { data, status } = await useAsyncData(() => neonClient`SELECT r.id as rId, r.date as rDate, t.id as tId, t.name as tName, t.dscr as tDscr, t.length as tLength, t.map_link as tMapLink, r.dscr as rDscr, r.length as rLength, r.time as rTime, r.speed as rSpeed FROM elrh_run_records r JOIN elrh_run_tracks t ON r.track = t.id ORDER BY r.date DESC`)
@@ -160,8 +164,8 @@ const aktualniMesic = aktualniDatum.slice(5, 7)
 const kmZaAktualniMesic = getCelkemZaObdobi(aktualniRok, aktualniMesic)
 const kmZaAktualniRok = getCelkemZaObdobi(aktualniRok)
 
-const kmZaKazdyRok = {}
-const kmZaKazdyMesic = {}
+const kmZaKazdyRok = {} as RunStats
+const kmZaKazdyMesic = {} as RunStats
 data.value?.forEach((run) => {
   const runRok = useDateFormat(run.rdate, 'YYYY').value
   const runMesic = useDateFormat(run.rdate, 'YYYY-MM').value
