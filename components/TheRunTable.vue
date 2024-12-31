@@ -42,20 +42,20 @@
         </div>
       </div>
       <UTable :rows :columns :ui>
-        <template #rdate-data="{ row }: TableData">
+        <template #rdate-data="{ row }: RunTableData">
           {{ useDateFormat(row.rdate, 'DD.MM.YYYY') }}
         </template>
-        <template #tname-data="{ row }: TableData">
+        <template #tname-data="{ row }: RunTableData">
           <!-- eslint-disable-next-line vue/no-v-html -->
           <div v-html="getTrackInfo(row)" />
         </template>
-        <template #rlength-data="{ row }: TableData">
+        <template #rlength-data="{ row }: RunTableData">
           {{ getLengthInfo(row) }} m
         </template>
-        <template #rtime-data="{ row }: TableData">
+        <template #rtime-data="{ row }: RunTableData">
           {{ parseTimeInfo(row.rtime) }}
         </template>
-        <template #rspeed-data="{ row }: TableData">
+        <template #rspeed-data="{ row }: RunTableData">
           {{ row.rspeed }} km/h
         </template>
       </UTable>
@@ -89,29 +89,6 @@ const ui = {
   th: {
     base: 'text-center',
   },
-}
-
-// custom data types
-type RunRecord = {
-  rid: number
-  rdate: string
-  tid: number
-  tname: string
-  tdscr: string
-  tlength: number
-  tmaplink: string
-  rdscr: string
-  rlength: number
-  rtime: string
-  rspeed: string
-}
-
-type TableData = {
-  row: RunRecord
-}
-
-type RunStats = {
-  [k: string]: number
 }
 
 // read data from Neon database
