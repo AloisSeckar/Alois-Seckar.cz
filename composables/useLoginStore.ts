@@ -1,4 +1,4 @@
-import CryptoJS from 'crypto-js' // TODO types
+import CryptoJS from 'crypto-js'
 
 export const useLoginStore = defineStore('login-store', () => {
   const login = ref(false)
