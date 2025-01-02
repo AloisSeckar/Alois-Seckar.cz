@@ -53,6 +53,8 @@
 </template>
 
 <script setup lang="ts">
+const emits = defineEmits(['add'])
+
 // read track data from Neon database
 const { neonClient, insert } = useNeon()
 const { data } = await useAsyncData(() => neonClient`SELECT t.id as tId, t.name as tName, t.length as tLength FROM elrh_run_tracks t ORDER BY t.name`)
@@ -100,6 +102,8 @@ const submitRun = async () => {
 
   if (result.length === 0) {
     log.debug('New record inserted')
+    emits('add')
+    alert('Vloženo')
   } else {
     log.error(result)
   }

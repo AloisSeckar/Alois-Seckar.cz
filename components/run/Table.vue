@@ -70,6 +70,12 @@
 </template>
 
 <script setup lang="ts">
+// TODO re-think the logic to avoid relying on exposing refresh function into page component...
+const updateRuns = async () => {
+  await refresh()
+}
+defineExpose({ updateRuns })
+
 const statsCircleClass = 'w-24 h-24 flex flex-col justify-center rounded-full'
 
 // customize UTable
@@ -101,7 +107,7 @@ const ui = {
 
 // read data from Neon database
 const { neonClient } = useNeon()
-const { data, status } = await useAsyncData(() => neonClient`SELECT r.id as rId, r.date as rDate, t.id as tId, t.name as tName, t.dscr as tDscr, t.length as tLength, t.map_link as tMapLink, r.dscr as rDscr, r.length as rLength, r.time as rTime, r.speed as rSpeed FROM elrh_run_records r JOIN elrh_run_tracks t ON r.track = t.id ORDER BY r.date DESC`)
+const { data, status, refresh } = await useAsyncData(() => neonClient`SELECT r.id as rId, r.date as rDate, t.id as tId, t.name as tName, t.dscr as tDscr, t.length as tLength, t.map_link as tMapLink, r.dscr as rDscr, r.length as rLength, r.time as rTime, r.speed as rSpeed FROM elrh_run_records r JOIN elrh_run_tracks t ON r.track = t.id ORDER BY r.date DESC`)
 
 // UTable pagination
 const page = ref(1)
@@ -239,6 +245,7 @@ async function deleteRun(id: number) {
     const result = await del(neonClient, 'elrh_run_records', [`id=${id}`])
     log.debug(result)
     alert('Smazáno')
+    await refresh()
   }
 }
 </script>
