@@ -58,6 +58,11 @@
         <template #rspeed-data="{ row }: RunTableData">
           {{ row.rspeed }} km/h
         </template>
+        <template #admin-data="{ row }: RunTableData">
+          <div v-if="useLoginStore().login" class="cursor-pointer" title="Smazat" @click="deleteRun(row.rid)">
+            X
+          </div>
+        </template>
       </UTable>
       <UPagination v-model="page" :page-count="pageCount" :total="data?.length || 0" class="justify-center" />
     </ClientOnly>
@@ -83,6 +88,9 @@ const columns = [{
 }, {
   key: 'rspeed',
   label: '⌀ rychlost',
+}, {
+  key: 'admin',
+  label: '',
 }]
 
 const ui = {
@@ -223,5 +231,14 @@ function getCelkem() {
     totalMeters += run.tid > 0 ? run.tlength : run.rlength
   })
   return (totalMeters / 1000).toFixed(1)
+}
+
+async function deleteRun(id: number) {
+  if (confirm(`Smazat běh ID ${id}?`) == true) {
+    const { neonClient, del } = useNeon()
+    const result = await del(neonClient, 'elrh_run_records', [`id=${id}`])
+    log.debug(result)
+    alert('Smazáno')
+  }
 }
 </script>
