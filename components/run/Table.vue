@@ -64,17 +64,18 @@
           </div>
         </template>
       </UTable>
-      <UPagination v-model="page" :page-count="pageCount" :total="data?.length || 0" class="justify-center" />
+      <UPagination v-model="page" :page-count="pageCount" :total="rows.length || 0" class="justify-center" />
     </ClientOnly>
   </div>
 </template>
 
 <script setup lang="ts">
-// TODO re-think the logic to avoid relying on exposing refresh function into page component...
-const updateRuns = async () => {
-  await refresh()
-}
-defineExpose({ updateRuns })
+const { rows, status } = defineProps({
+  rows: { type: Object as PropType<RunRecord[]>, required: true },
+  status: { type: String, required: true },
+})
+
+const emits = defineEmits(['list', 'delete'])
 
 const statsCircleClass = 'w-24 h-24 flex flex-col justify-center rounded-full'
 
@@ -105,21 +106,10 @@ const ui = {
   },
 }
 
-// read data from Neon database
-const { neonClient } = useNeon()
-const { data, status, refresh } = await useAsyncData(() => neonClient`SELECT r.id as rId, r.date as rDate, t.id as tId, t.name as tName, t.dscr as tDscr, t.length as tLength, t.map_link as tMapLink, r.dscr as rDscr, r.length as rLength, r.time as rTime, r.speed as rSpeed FROM elrh_run_records r JOIN elrh_run_tracks t ON r.track = t.id ORDER BY r.date DESC`)
-
 // UTable pagination
 const page = ref(1)
-const pageCount = data.value?.length ? data.value.length / 50 + 1 : 0
-
-const rows = computed(() => {
-  if (data.value) {
-    return data.value.slice((page.value - 1) * pageCount, (page.value) * pageCount) as RunRecord[]
-  } else {
-    return [] as RunRecord[]
-  }
-})
+watch(page, () => emits('list', page.value))
+const pageCount = computed(() => rows?.length ? rows.length / 50 + 1 : 0)
 
 // for regular tracks display their name with link+dscr
 // for "-1" track there is no link...
@@ -157,7 +147,7 @@ const kmZaAktualniRok = getCelkemZaObdobi(aktualniRok)
 
 const kmZaKazdyRok = {} as RunStats
 const kmZaKazdyMesic = {} as RunStats
-data.value?.forEach((run) => {
+rows.forEach((run) => {
   const runRok = useDateFormat(run.rdate, 'YYYY').value
   const runMesic = useDateFormat(run.rdate, 'YYYY-MM').value
 
@@ -195,7 +185,7 @@ const nejlepsiMesicKm = (maxZaMesic / 1000).toFixed(1)
 
 function getCelkemZaObdobi(rok: string, mesic?: string) {
   let totalYear = 0
-  data.value?.forEach((run) => {
+  rows.forEach((run) => {
     let runCounts = false
     const runRok = useDateFormat(run.rdate, 'YYYY').value
     if (runRok === rok) {
@@ -233,7 +223,7 @@ const prumerZaMesic = ((celkemZaVsechnyMesice / pocetMesicu) / 1000).toFixed(1)
 
 function getCelkem() {
   let totalMeters = 0
-  data.value?.forEach((run) => {
+  rows.forEach((run) => {
     totalMeters += run.tid > 0 ? run.tlength : run.rlength
   })
   return (totalMeters / 1000).toFixed(1)
@@ -245,7 +235,7 @@ async function deleteRun(id: number) {
     const result = await del(neonClient, 'elrh_run_records', [`id=${id}`])
     log.debug(result)
     alert('Smazáno')
-    await refresh()
+    emits('delete')
   }
 }
 </script>
