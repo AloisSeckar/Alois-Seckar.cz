@@ -25,7 +25,6 @@ export function getAVGSpeed(time: string, length: number): string {
 
   // 2. elaborate avg speed from time and length
   const speedMs = length / timeInSeconds
-  console.log(speedMs)
   const speedKmh = (speedMs * 3.6).toFixed(3)
 
   if (speedMs < 2.7777777777777777) {

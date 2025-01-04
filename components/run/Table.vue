@@ -64,7 +64,6 @@ const ui = {
 // UTable pagination
 const page = ref(1)
 const rows = computed(() => {
-  console.log('changed')
   return runs.slice((page.value - 1) * 30, (page.value) * 30)
 })
 
