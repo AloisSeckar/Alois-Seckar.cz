@@ -114,10 +114,11 @@ const pageCount = computed(() => rows?.length ? rows.length / 50 + 1 : 0)
 // for regular tracks display their name with link+dscr
 // for "-1" track there is no link...
 function getTrackInfo(row: RunRecord) {
+  const dscr = row.rdscr ? row.rdscr : row.tdscr
   if (row.tid > 0) {
-    return `<a href="${row.tmaplink}" title="${row.tdscr}">${row.tname}</a>`
+    return `<a href="${row.tmaplink}" title="${dscr}">${row.tname}</a>`
   } else {
-    return `<span title="${row.rdscr}">Jednorázové</a>`
+    return `<span title="${dscr}">Jednorázové</a>`
   }
 }
 
