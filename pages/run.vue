@@ -14,9 +14,15 @@
       </NuxtLink>
     </div>
     <div class="mb-2">
+      <RunStats :runs />
+    </div>
+    <div class="mb-2">
+      <div v-if="status === 'pending'">
+        Načítání...
+      </div>
       <RunTable
-        ref="runTable" :rows :status
-        @delete="refresh()" @list="$e => page = $e"
+        v-else ref="runTable" :runs
+        @delete="refresh()"
       />
     </div>
     <!-- my personal login -->
@@ -44,13 +50,12 @@ const runTable = useTemplateRef<ComponentExposed<typeof RunTable>>('runTable')
 const { neonClient } = useNeon()
 const { data, status, refresh } = await useAsyncData(() => neonClient`SELECT r.id as rId, r.date as rDate, t.id as tId, t.name as tName, t.dscr as tDscr, t.length as tLength, t.map_link as tMapLink, r.dscr as rDscr, r.length as rLength, r.time as rTime, r.speed as rSpeed FROM elrh_run_records r JOIN elrh_run_tracks t ON r.track = t.id ORDER BY r.date DESC`)
 
-const page: Ref<number> = ref(1)
-const rows: ComputedRef<RunRecord[]> = computed(() => {
+const runs = ref([] as RunRecord[])
+watch(data, () => {
+  runs.value.length = 0
   if (data.value) {
-    const pageCount = data.value?.length ? data.value.length / 50 + 1 : 0
-    return data.value.slice((page.value - 1) * pageCount, (page.value) * pageCount) as RunRecord[]
-  } else {
-    return [] as RunRecord[]
+    const all = data.value as RunRecord[]
+    runs.value.push(...all)
   }
-})
+}, { immediate: true })
 </script>
