@@ -25,7 +25,7 @@
       </div>
       <RunTable
         v-else ref="runTable" :runs="displayedRuns"
-        @delete="refresh()"
+        @filter="$e => filterRuns({ track: $e })" @delete="refresh()"
       />
     </div>
     <!-- my personal login -->

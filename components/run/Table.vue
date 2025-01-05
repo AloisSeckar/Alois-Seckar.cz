@@ -6,7 +6,14 @@
       </template>
       <template #tname-data="{ row }: RunTableData">
         <!-- eslint-disable-next-line vue/no-v-html -->
-        <div v-html="getTrackInfo(row)" />
+        <div class="inline" v-html="getTrackInfo(row)" />
+        <div
+          v-if="row.tid > 0"
+          class="inline cursor-pointer hover:text-amber-300"
+          title="Filtrovat" @click="filterTrack(row.tid)"
+        >
+          &#9660;
+        </div>
       </template>
       <template #rlength-data="{ row }: RunTableData">
         {{ getLengthInfo(row) }} m
@@ -32,7 +39,10 @@ const { runs } = defineProps({
   runs: { type: Object as PropType<RunRecord[]>, required: true },
 })
 
-const emits = defineEmits(['delete'])
+const emits = defineEmits<{
+  filter: [tid: number]
+  delete: []
+}>()
 
 // customize UTable
 const columns = [{
@@ -93,6 +103,10 @@ function getLengthInfo(row: RunRecord) {
 function parseTimeInfo(time: string) {
   const index = time.lastIndexOf(':')
   return time.slice(0, index) + '.' + time.slice(index + 1)
+}
+
+function filterTrack(tid: number) {
+  emits('filter', tid)
 }
 
 async function deleteRun(id: number) {
