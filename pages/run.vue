@@ -14,14 +14,17 @@
       </NuxtLink>
     </div>
     <div class="mb-2">
-      <RunStats :runs />
+      <RunStats :runs="allRuns" />
+    </div>
+    <div class="mb-2">
+      <RunFilter @filter="filterRuns" />
     </div>
     <div class="mb-2">
       <div v-if="status === 'pending'">
         Načítání...
       </div>
       <RunTable
-        v-else ref="runTable" :runs
+        v-else ref="runTable" :runs="displayedRuns"
         @delete="refresh()"
       />
     </div>
@@ -50,12 +53,49 @@ const runTable = useTemplateRef<ComponentExposed<typeof RunTable>>('runTable')
 const { neonClient } = useNeon()
 const { data, status, refresh } = await useAsyncData(() => neonClient`SELECT r.id as rId, r.date as rDate, t.id as tId, t.name as tName, t.dscr as tDscr, t.length as tLength, t.map_link as tMapLink, r.dscr as rDscr, r.length as rLength, r.time as rTime, r.speed as rSpeed FROM elrh_run_records r JOIN elrh_run_tracks t ON r.track = t.id ORDER BY r.date DESC`)
 
-const runs = ref([] as RunRecord[])
+const allRuns = ref([] as RunRecord[])
+const displayedRuns = ref([] as RunRecord[])
 watch(data, () => {
-  runs.value.length = 0
+  allRuns.value.length = 0
   if (data.value) {
     const all = data.value as RunRecord[]
-    runs.value.push(...all)
+    allRuns.value.push(...all)
+    filterRuns({})
   }
 }, { immediate: true })
+
+async function filterRuns(filter: RunFilter) {
+  let sql = `SELECT r.id as rId, r.date as rDate, t.id as tId, t.name as tName, t.dscr as tDscr, t.length as tLength, t.map_link as tMapLink, r.dscr as rDscr, r.length as rLength, r.time as rTime, r.speed as rSpeed FROM elrh_run_records r JOIN elrh_run_tracks t ON r.track = t.id`
+  const where = [] as string[]
+
+  if (filter.track && filter.track > 0) {
+    where.push(`t.id = ${filter.track}`)
+  }
+
+  if (filter.year && filter.year > 0) {
+    where.push(getSQLForDatePeriod(filter.year, filter.month))
+  }
+
+  if (where.length > 0) {
+    sql += ' WHERE ' + where.join(' AND ')
+  }
+
+  sql += ` ORDER BY r.date DESC`
+
+  log.debug('filtering runs using:')
+  log.debug(sql)
+
+  const filteredRuns = await neonClient(sql) as RunRecord[]
+
+  displayedRuns.value.length = 0
+  displayedRuns.value.push(...filteredRuns)
+}
+
+function getSQLForDatePeriod(year: number, month?: number): string {
+  const lastDay = new Date(year, month || 12, 0).getDate()
+  const monthStr = String(month).padStart(2, '0')
+  const fromDate = `${year}-${month ? monthStr : '01'}-01`
+  const toDate = `${year}-${month ? monthStr : '12'}-${lastDay}`
+  return `r.date BETWEEN '${fromDate}' AND '${toDate}'`
+}
 </script>

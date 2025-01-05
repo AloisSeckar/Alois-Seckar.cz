@@ -22,3 +22,16 @@ export type RunTableData = {
 export type RunStats = {
   [k: string]: number
 }
+
+/** Object for filtering records */
+export type RunFilter = {
+  track?: number
+  month?: number
+  year?: number
+}
+
+/** Type for Nuxt UI USelect options */
+export type SelectValue = {
+  label: string
+  value: number
+}
