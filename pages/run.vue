@@ -13,10 +13,10 @@
         Nuxt Ignis
       </NuxtLink>
     </div>
-    <div class="mb-2">
+    <div class="mb-6">
       <RunStats :runs="allRuns" />
     </div>
-    <div class="mb-2">
+    <div class="mb-4">
       <RunFilter @filter="filterRuns" />
     </div>
     <div class="mb-2">

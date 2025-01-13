@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto my-4 grid grid-cols-3 min-[400px]:grid-cols-4 min-[860px]:grid-cols-7 gap-4 text-sm text-black justify-center">
+  <div class="mx-auto my-4 grid grid-cols-3 min-[400px]:grid-cols-4 min-[861px]:grid-cols-7 max-[860px]:max-w-[500px] gap-4 text-sm text-black justify-center">
     <div :class="`${statsCircleClass} bg-yellow-300`" title="Uběhnuté kilometry v aktuálním měsíci">
       {{ aktualniMesic }}/{{ aktualniRok }}
       <br>

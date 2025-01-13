@@ -1,6 +1,6 @@
 <template>
-  <div class="flex sm:flex-row gap-2 justify-center">
-    <div class="flex flex-row">
+  <div class="flex flex-col min-[725px]:flex-row gap-2 justify-center max-[724px]:items-center">
+    <div class="flex gap-1">
       <label for="rTrack" class="mr-1">Trasa:</label>
       <USelect
         id="fTrack"
@@ -8,7 +8,7 @@
         :options="tracks"
       />
     </div>
-    <div class="flex flex-row">
+    <div class="flex gap-1">
       <label for="rTrack" class="mr-1">Období:</label>
       <USelect
         id="fMonth"
@@ -22,12 +22,14 @@
         :options="years"
       />
     </div>
-    <UButton @click="doFilter">
-      Filtrovat
-    </UButton>
-    <UButton color="gray" variant="outline" @click="doReset">
-      Obnovit výchozí
-    </UButton>
+    <div class="flex gap-2">
+      <UButton @click="doFilter">
+        Filtrovat
+      </UButton>
+      <UButton color="gray" variant="outline" @click="doReset">
+        Obnovit výchozí
+      </UButton>
+    </div>
   </div>
 </template>
 
