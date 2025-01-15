@@ -1,6 +1,6 @@
 <template>
   <div>
-    <UTable :rows :columns :ui>
+    <UTable :rows :columns :sort :ui>
       <template #rdate-data="{ row }: RunTableData">
         {{ useDateFormat(row.rdate, 'DD.MM.YYYY') }}
       </template>
@@ -48,6 +48,7 @@ const emits = defineEmits<{
 const columns = [{
   key: 'rdate',
   label: 'Datum',
+  sortable: true,
 }, {
   key: 'tname',
   label: 'Trasa',
@@ -60,10 +61,16 @@ const columns = [{
 }, {
   key: 'rspeed',
   label: '⌀ rychlost',
+  sortable: true,
 }, {
   key: 'admin',
   label: '',
 }]
+
+const sort = ref({
+  column: 'rdate',
+  direction: 'desc' as 'asc' | 'desc',
+})
 
 const ui = {
   th: {
