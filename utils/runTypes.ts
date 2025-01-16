@@ -28,6 +28,8 @@ export type RunFilter = {
   track?: number
   month?: number
   year?: number
+  sortColumn?: string
+  sortDirection?: 'asc' | 'desc'
 }
 
 /** Type for Nuxt UI USelect options */

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <UTable :rows :columns :sort :ui>
+    <UTable v-model:sort="sort" :rows :columns :ui>
       <template #rdate-data="{ row }: RunTableData">
         {{ useDateFormat(row.rdate, 'DD.MM.YYYY') }}
       </template>
@@ -41,6 +41,7 @@ const { runs } = defineProps({
 
 const emits = defineEmits<{
   filter: [tid: number]
+  sort: [column: string, direction: 'asc' | 'desc']
   delete: []
 }>()
 
@@ -71,6 +72,7 @@ const sort = ref({
   column: 'rdate',
   direction: 'desc' as 'asc' | 'desc',
 })
+watch(sort, () => emits('sort', sort.value.column, sort.value.direction), { deep: true })
 
 const ui = {
   th: {

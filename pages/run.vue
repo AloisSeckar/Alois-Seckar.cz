@@ -17,7 +17,7 @@
       <RunStats :runs="allRuns" />
     </div>
     <div class="mb-4">
-      <RunFilter @filter="filterRuns" />
+      <RunFilter @filter="doFilter" />
     </div>
     <div class="mb-2">
       <div v-if="status === 'pending'">
@@ -25,7 +25,7 @@
       </div>
       <RunTable
         v-else ref="runTable" :runs="displayedRuns"
-        @filter="$e => filterRuns({ track: $e })" @delete="refresh()"
+        @filter="doFilterTrack" @sort="doSort" @delete="refresh"
       />
     </div>
     <!-- my personal login -->
@@ -55,16 +55,33 @@ const { data, status, refresh } = await useAsyncData(() => neonClient`SELECT r.i
 
 const allRuns = ref([] as RunRecord[])
 const displayedRuns = ref([] as RunRecord[])
-watch(data, () => {
-  allRuns.value.length = 0
-  if (data.value) {
-    const all = data.value as RunRecord[]
-    allRuns.value.push(...all)
-    filterRuns({})
-  }
-}, { immediate: true })
 
-async function filterRuns(filter: RunFilter) {
+const runFilter = ref({
+  sortColumn: 'rdate',
+  sortDirection: 'desc',
+} as RunFilter)
+
+function doFilter(filter: RunFilter) {
+  runFilter.value.track = filter?.track
+  runFilter.value.year = filter?.year
+  runFilter.value.month = filter?.month
+  filterRuns()
+}
+
+function doFilterTrack(tid: number) {
+  runFilter.value.track = tid
+  filterRuns()
+}
+
+function doSort(column: string, direction: 'asc' | 'desc') {
+  runFilter.value.sortColumn = column
+  runFilter.value.sortDirection = direction
+  filterRuns()
+}
+
+async function filterRuns() {
+  const filter = runFilter.value
+
   let sql = `SELECT r.id as rId, r.date as rDate, t.id as tId, t.name as tName, t.dscr as tDscr, t.length as tLength, t.map_link as tMapLink, r.dscr as rDscr, r.length as rLength, r.time as rTime, r.speed as rSpeed FROM elrh_run_records r JOIN elrh_run_tracks t ON r.track = t.id`
   const where = [] as string[]
 
@@ -80,16 +97,35 @@ async function filterRuns(filter: RunFilter) {
     sql += ' WHERE ' + where.join(' AND ')
   }
 
-  sql += ` ORDER BY r.date DESC`
+  if (filter.sortColumn) {
+    if (filter.sortColumn === 'rdate') {
+      sql += ` ORDER BY r.date`
+    } else if (filter.sortColumn === 'rspeed') {
+      sql += ` ORDER BY r.speed`
+    }
+
+    if (filter.sortDirection === 'desc') {
+      sql += ` DESC`
+    }
+  }
 
   log.debug('filtering runs using:')
-  log.debug(sql)
+  log.info(sql)
 
   const filteredRuns = await neonClient(sql) as RunRecord[]
 
   displayedRuns.value.length = 0
   displayedRuns.value.push(...filteredRuns)
 }
+
+watch(data, () => {
+  allRuns.value.length = 0
+  if (data.value) {
+    const all = data.value as RunRecord[]
+    allRuns.value.push(...all)
+    filterRuns()
+  }
+}, { immediate: true })
 
 function getSQLForDatePeriod(year: number, month?: number): string {
   const lastDay = new Date(year, month || 12, 0).getDate()
