@@ -1,5 +1,7 @@
 <template>
   <div>
+    <div>Celkem: {{ runs.length }}</div>
+    <UPagination v-model="page" :page-count="30" :total="runs.length || 0" class="justify-center mt-2" />
     <UTable v-model:sort="sort" :rows :columns :ui>
       <template #rdate-data="{ row }: RunTableData">
         {{ useDateFormat(row.rdate, 'DD.MM.YYYY') }}
@@ -30,7 +32,8 @@
         </div>
       </template>
     </UTable>
-    <UPagination v-model="page" :page-count="30" :total="runs.length || 0" class="justify-center" />
+    <UPagination v-model="page" :page-count="30" :total="runs.length || 0" class="justify-center mb-2" />
+    <div>Celkem: {{ runs.length }}</div>
   </div>
 </template>
 
