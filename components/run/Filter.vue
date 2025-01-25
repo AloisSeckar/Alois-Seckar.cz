@@ -6,6 +6,7 @@
         id="fTrack"
         v-model="inputTrack"
         :options="tracks"
+        @change="doFilter"
       />
     </div>
     <div class="flex gap-1">
@@ -15,21 +16,18 @@
         v-model="inputMonth"
         :options="months"
         :disabled="inputMonthDisabled"
+        @change="doFilter"
       />
       <USelect
         id="fYear"
         v-model="inputYear"
         :options="years"
+        @change="doFilter"
       />
     </div>
-    <div class="flex gap-2">
-      <UButton @click="doFilter">
-        Filtrovat
-      </UButton>
-      <UButton color="gray" variant="outline" @click="doReset">
-        Obnovit výchozí
-      </UButton>
-    </div>
+    <UButton color="gray" variant="outline" @click="doReset">
+      Obnovit výchozí
+    </UButton>
   </div>
 </template>
 
