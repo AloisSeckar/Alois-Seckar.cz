@@ -8,8 +8,8 @@
   },
   "devDependencies": {
     "crypto-js": "4.2.0",
-    "node-html-parser": "6.1.13",
-    "nuxt-ignis": "0.1.6",
+    "node-html-parser": "7.0.1",
+    "nuxt-ignis": "0.1.7",
     "vue": "latest",
     "vue-component-type-helpers": "latest",
     "vue-router": "latest"
