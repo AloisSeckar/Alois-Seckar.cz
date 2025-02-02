@@ -66,8 +66,8 @@ const runFilter = ref({
 
 function doFilter(filter: RunFilter) {
   runFilter.value.track = filter?.track
-  runFilter.value.year = filter?.year
-  runFilter.value.month = filter?.month
+  runFilter.value.year = filter?.year && filter.year > 0 ? filter?.year : undefined
+  runFilter.value.month = filter?.month && filter.month > 0 ? filter?.month : undefined
   filterRuns()
 }
 
