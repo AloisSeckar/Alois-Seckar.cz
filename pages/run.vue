@@ -50,8 +50,11 @@ import type RunTable from '~/components/run/Table.vue'
 const loginForm = useTemplateRef<ComponentExposed<typeof RunLogin>>('loginForm')
 const runTable = useTemplateRef<ComponentExposed<typeof RunTable>>('runTable')
 
-const { neonClient } = useNeon()
-const { data, status, refresh } = await useAsyncData(() => neonClient`SELECT r.id as rId, r.date as rDate, t.id as tId, t.name as tName, t.dscr as tDscr, t.length as tLength, t.map_link as tMapLink, r.dscr as rDscr, r.length as rLength, r.time as rTime, r.speed as rSpeed FROM elrh_run_records r JOIN elrh_run_tracks t ON r.track = t.id ORDER BY r.date DESC`)
+const { select, raw } = useNeon()
+const columns = ['r.id as rId', 'r.date as rDate', 't.id as tId', 't.name as tName', 't.dscr as tDscr', 't.length as tLength', 't.map_link as tMapLink', 'r.dscr as rDscr', 'r.length as rLength', 'r.time as rTime', 'r.speed as rSpeed']
+const tables = ['elrh_run_records r', 'elrh_run_tracks t ON r.track = t.id'] // TODO fix JOIN in upstream
+const order = 'r.date DESC' // TODO implement more columns when possible
+const { data, status, refresh } = await useAsyncData(() => select(columns, tables, undefined, order))
 
 const allRuns = ref([] as RunRecord[])
 const displayedRuns = ref([] as RunRecord[])
@@ -82,6 +85,7 @@ function doSort(column: string, direction: 'asc' | 'desc') {
 async function filterRuns() {
   const filter = runFilter.value
 
+  // TODO rewrite into `select` wrapper
   let sql = `SELECT r.id as rId, r.date as rDate, t.id as tId, t.name as tName, t.dscr as tDscr, t.length as tLength, t.map_link as tMapLink, r.dscr as rDscr, r.length as rLength, r.time as rTime, r.speed as rSpeed FROM elrh_run_records r JOIN elrh_run_tracks t ON r.track = t.id`
   const where = [] as string[]
 
@@ -110,9 +114,9 @@ async function filterRuns() {
   }
 
   log.debug('filtering runs using:')
-  log.info(sql)
+  log.debug(sql)
 
-  const filteredRuns = await neonClient(sql) as RunRecord[]
+  const filteredRuns = await raw(sql) as RunRecord[]
 
   displayedRuns.value.length = 0
   displayedRuns.value.push(...filteredRuns)

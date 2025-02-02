@@ -123,11 +123,16 @@ function filterTrack(tid: number) {
 
 async function deleteRun(id: number) {
   if (confirm(`Smazat běh ID ${id}?`) == true) {
-    const { neonClient, del } = useNeon()
-    const result = await del(neonClient, 'elrh_run_records', [`id=${id}`])
-    log.debug(result)
-    alert('Smazáno')
-    emits('delete')
+    const { del } = useNeon()
+    const result = await del('elrh_run_records', [`id=${id}`])
+
+    if (result === 'OK') {
+      log.debug(`Record ${id} deleted`)
+      alert('Smazáno')
+      emits('delete')
+    } else {
+      log.error(result)
+    }
   }
 }
 </script>

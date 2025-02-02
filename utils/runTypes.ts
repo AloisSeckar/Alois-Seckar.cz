@@ -33,6 +33,13 @@ export type RunFilter = {
 }
 
 /** Type for Nuxt UI USelect options */
+export type TrackInfo = {
+  tid: number
+  tname: string
+  tlength: number
+}
+
+/** Type for Nuxt UI USelect options */
 export type SelectValue = {
   label: string
   value: number

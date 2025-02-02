@@ -56,15 +56,18 @@
 const emits = defineEmits(['add'])
 
 // read track data from Neon database
-const { neonClient, insert } = useNeon()
-const { data } = await useAsyncData(() => neonClient`SELECT t.id as tId, t.name as tName, t.length as tLength FROM elrh_run_tracks t ORDER BY t.name`)
+const { select, insert } = useNeon()
+const columns = ['t.id as tId', 't.name as tName', 't.length as tLength']
+const tables = ['elrh_run_tracks t']
+const order = 't.name'
+const { data } = await useAsyncData(() => select(columns, tables, undefined, order))
 
 const inputDate = ref(new Date().toISOString().slice(0, 10))
 const inputLength = ref(0)
 const inputTime = ref('')
 const inputDscr = ref('')
 
-const tracks = data.value?.map((t) => {
+const tracks = data.value?.map((t: TrackInfo) => {
   return {
     label: t.tname,
     value: t.tid.toString(),
@@ -77,7 +80,7 @@ const rLegthDisabled = ref(true)
 
 const updateLength = () => {
   if (inputTrack.value > -1) {
-    inputLength.value = tracks?.find(t => t.value === inputTrack.value)?.length || 0
+    inputLength.value = tracks?.find((t: SelectValue) => t.value === inputTrack.value)?.length || 0
     rLegthDisabled.value = true
   } else {
     inputLength.value = 0
@@ -97,10 +100,11 @@ const submitRun = async () => {
     getAVGSpeed(inputTime.value, inputLength.value).toString(),
   ]
   log.debug(values)
+  log.debug(columns)
 
-  const result = await insert(neonClient, 'elrh_run_records', values, columns)
+  const result = await insert('elrh_run_records', values, columns)
 
-  if (result.length === 0) {
+  if (result === 'OK') {
     log.debug('New record inserted')
     emits('add')
     alert('Vloženo')
