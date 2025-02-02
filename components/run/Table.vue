@@ -49,6 +49,9 @@ const totalLenth = computed(() => {
   })
   return (total / 1000).toFixed(1)
 })
+watch(totalLenth, () => {
+  page.value = 1
+})
 
 const emits = defineEmits<{
   filter: [tid: number]
