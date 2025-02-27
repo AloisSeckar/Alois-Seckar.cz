@@ -52,8 +52,15 @@ const runTable = useTemplateRef<ComponentExposed<typeof RunTable>>('runTable')
 
 const { select, raw } = useNeon()
 const columns = ['r.id as rId', 'r.date as rDate', 't.id as tId', 't.name as tName', 't.dscr as tDscr', 't.length as tLength', 't.map_link as tMapLink', 'r.dscr as rDscr', 'r.length as rLength', 'r.time as rTime', 'r.speed as rSpeed']
-const tables = ['elrh_run_records r', 'elrh_run_tracks t ON r.track = t.id'] // TODO fix JOIN in upstream
-const order = 'r.date DESC' // TODO implement more columns when possible
+const tables = [
+  { table: 'elrh_run_records', alias: 'r' },
+  { table: 'elrh_run_tracks', alias: 't', joinColumn1: 'r.track', joinColumn2: 't.id' },
+]
+const order = [
+  // TODO better typing for "direction" in nuxt-neon
+  { column: 'r.date', direction: 'DESC' as 'DESC' | 'ASC' | undefined },
+  { column: 'r.id', direction: 'DESC' as 'DESC' | 'ASC' | undefined },
+]
 const { data, status, refresh } = await useAsyncData(() => select(columns, tables, undefined, order))
 
 const allRuns = ref([] as RunRecord[])
