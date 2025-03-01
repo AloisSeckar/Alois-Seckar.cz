@@ -50,18 +50,7 @@ import type RunTable from '~/components/run/Table.vue'
 const loginForm = useTemplateRef<ComponentExposed<typeof RunLogin>>('loginForm')
 const runTable = useTemplateRef<ComponentExposed<typeof RunTable>>('runTable')
 
-const { select, raw } = useNeon()
-const columns = ['r.id as rId', 'r.date as rDate', 't.id as tId', 't.name as tName', 't.dscr as tDscr', 't.length as tLength', 't.map_link as tMapLink', 'r.dscr as rDscr', 'r.length as rLength', 'r.time as rTime', 'r.speed as rSpeed']
-const tables = [
-  { table: 'elrh_run_records', alias: 'r' },
-  { table: 'elrh_run_tracks', alias: 't', joinColumn1: 'r.track', joinColumn2: 't.id' },
-]
-const order = [
-  // TODO better typing for "direction" in nuxt-neon
-  { column: 'r.date', direction: 'DESC' as 'DESC' | 'ASC' | undefined },
-  { column: 'r.id', direction: 'DESC' as 'DESC' | 'ASC' | undefined },
-]
-const { data, status, refresh } = await useAsyncData(() => select(columns, tables, undefined, order))
+const { data, status, refresh } = await useAsyncData(() => getRuns())
 
 const allRuns = ref([] as RunRecord[])
 const displayedRuns = ref([] as RunRecord[])
@@ -90,41 +79,7 @@ function doSort(column: string, direction: 'asc' | 'desc') {
 }
 
 async function filterRuns() {
-  const filter = runFilter.value
-
-  // TODO rewrite into `select` wrapper
-  let sql = `SELECT r.id as rId, r.date as rDate, t.id as tId, t.name as tName, t.dscr as tDscr, t.length as tLength, t.map_link as tMapLink, r.dscr as rDscr, r.length as rLength, r.time as rTime, r.speed as rSpeed FROM elrh_run_records r JOIN elrh_run_tracks t ON r.track = t.id`
-  const where = [] as string[]
-
-  if (filter.track && filter.track > 0) {
-    where.push(`t.id = ${filter.track}`)
-  }
-
-  if (filter.year && filter.year > 0) {
-    where.push(getSQLForDatePeriod(filter.year, filter.month))
-  }
-
-  if (where.length > 0) {
-    sql += ' WHERE ' + where.join(' AND ')
-  }
-
-  if (filter.sortColumn) {
-    if (filter.sortColumn === 'rdate') {
-      sql += ` ORDER BY r.date`
-    } else if (filter.sortColumn === 'rspeed') {
-      sql += ` ORDER BY r.speed`
-    }
-
-    if (filter.sortDirection === 'desc') {
-      sql += ` DESC`
-    }
-  }
-
-  log.debug('filtering runs using:')
-  log.debug(sql)
-
-  const filteredRuns = await raw(sql) as RunRecord[]
-
+  const filteredRuns = await getRuns(runFilter.value)
   displayedRuns.value.length = 0
   displayedRuns.value.push(...filteredRuns)
 }
@@ -137,12 +92,4 @@ watch(data, () => {
     filterRuns()
   }
 }, { immediate: true })
-
-function getSQLForDatePeriod(year: number, month?: number): string {
-  const lastDay = new Date(year, month || 12, 0).getDate()
-  const monthStr = String(month).padStart(2, '0')
-  const fromDate = `${year}-${month ? monthStr : '01'}-01`
-  const toDate = `${year}-${month ? monthStr : '12'}-${lastDay}`
-  return `r.date BETWEEN '${fromDate}' AND '${toDate}'`
-}
 </script>
