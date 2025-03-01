@@ -66,7 +66,7 @@ const celkemKm = computed(() => {
   return (totalMeters / 1000).toFixed(1)
 })
 watch(celkemKm, () => {
-  console.log('celkem km changed to ' + celkemKm.value)
+  // console.debug('celkem km changed to ' + celkemKm.value)
 
   kmZaAktualniMesic.value = getCelkemZaObdobi(aktualniRok, aktualniMesic)
   kmZaAktualniRok.value = getCelkemZaObdobi(aktualniRok)
