@@ -48,14 +48,8 @@ const doReset = () => {
   emits('filter', {})
 }
 
-// TODO this should be re-usable component (used both in Filter and Form)
-// read track data from Neon database
-const { select } = useNeon()
-const columns = ['t.id as tId', 't.name as tName', 't.length as tLength']
-const tables = ['elrh_run_tracks t']
-const order = 't.name'
-const { data } = await useAsyncData(() => select(columns, tables, undefined, order))
-
+// get list of my running tracks
+const { data } = await useAsyncData(() => getTracks())
 const tracks = data.value?.map((t: TrackInfo) => {
   return {
     label: t.tname,

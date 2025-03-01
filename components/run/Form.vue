@@ -55,14 +55,8 @@
 <script setup lang="ts">
 const emits = defineEmits(['add'])
 
-// read track data from Neon database
-const { select, insert } = useNeon()
-const { data } = await useAsyncData(() => select(
-  ['id as tId', 'name as tName', 'length as tLength'],
-  'elrh_run_tracks',
-  undefined,
-  'name',
-))
+// get list of my running tracks
+const { data } = await useAsyncData(() => getTracks())
 
 const inputDate = ref(new Date().toISOString().slice(0, 10))
 const inputLength = ref(0)
@@ -104,6 +98,7 @@ const submitRun = async () => {
   log.debug(values)
   log.debug(columns)
 
+  const { insert } = useNeon()
   const result = await insert('elrh_run_records', values, columns)
 
   if (result === 'OK') {
