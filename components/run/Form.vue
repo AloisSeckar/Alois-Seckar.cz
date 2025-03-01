@@ -57,10 +57,12 @@ const emits = defineEmits(['add'])
 
 // read track data from Neon database
 const { select, insert } = useNeon()
-const columns = ['t.id as tId', 't.name as tName', 't.length as tLength']
-const tables = ['elrh_run_tracks t']
-const order = 't.name'
-const { data } = await useAsyncData(() => select(columns, tables, undefined, order))
+const { data } = await useAsyncData(() => select(
+  ['id as tId', 'name as tName', 'length as tLength'],
+  'elrh_run_tracks',
+  undefined,
+  'name',
+))
 
 const inputDate = ref(new Date().toISOString().slice(0, 10))
 const inputLength = ref(0)
