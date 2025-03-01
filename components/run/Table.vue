@@ -135,7 +135,7 @@ function filterTrack(tid: number) {
 async function deleteRun(id: number) {
   if (confirm(`Smazat běh ID ${id}?`) == true) {
     const { del } = useNeon()
-    const result = await del('elrh_run_records', [`id=${id}`])
+    const result = await del('elrh_run_records', `id=${id}`)
 
     if (result === 'OK') {
       log.debug(`Record ${id} deleted`)
