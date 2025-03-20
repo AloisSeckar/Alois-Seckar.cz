@@ -6,19 +6,22 @@
       <p>Programátor / Sportovec / Krčský patriot</p>
       <div class="social flex flex-row justify-center mt-2">
         <NuxtLink to="mailto:alois.seckar@gmail.com">
-          <img class="social" src="/em.webp" alt="Email ikona" title="E-mail">
+          <img class="social" src="/em.png" alt="Email ikona" title="E-mail">
         </NuxtLink>
         <NuxtLink to="https://www.facebook.com/alois.seckar">
-          <img class="social" src="/fb.webp" alt="Facebook logo" title="Facebook">
+          <img class="social" src="/fb.png" alt="Facebook logo" title="Facebook">
+        </NuxtLink>
+        <NuxtLink to="https://bsky.app/profile/alois-seckar.cz">
+          <img class="social" src="/bs.png" alt="Bluesky logo" title="Bluesky">
         </NuxtLink>
         <NuxtLink to="https://github.com/AloisSeckar">
-          <img class="social" src="/gh.webp" alt="GitHub logo" title="GitHub">
+          <img class="social" src="/gh.png" alt="GitHub logo" title="GitHub">
         </NuxtLink>
         <NuxtLink to="https://dev.to/aloisseckar">
-          <img class="social" src="/dev.webp" alt="DEV logo" title="DEV">
+          <img class="social" src="/dev.png" alt="DEV logo" title="DEV">
         </NuxtLink>
         <NuxtLink to="https://www.linkedin.com/in/alois-seckar/">
-          <img class="social" src="/ln.webp" alt="LinkedIn logo" title="LinkedIn">
+          <img class="social" src="/ln.png" alt="LinkedIn logo" title="LinkedIn">
         </NuxtLink>
       </div>
       <NuxtLink to="#content" class="mx-auto">

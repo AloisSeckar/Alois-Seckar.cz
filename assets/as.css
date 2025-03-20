@@ -67,9 +67,10 @@ h2 {
 }
 
 .header-content img.social {
-    height: 32px;
-    width: 32px;
+    height: 40px;
+    width: 40px;
     margin: 8px;
+    padding: 8px;
     border-radius: 30%;
     box-shadow:
       0 0 6px 2px #38b2ac;
