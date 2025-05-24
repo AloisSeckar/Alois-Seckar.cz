@@ -2,37 +2,25 @@
   <div>
     <div>Celkem: {{ runs.length }} ({{ totalLenth }} km)</div>
     <UPagination v-model="page" :page-count="30" :total="runs.length || 0" class="justify-center mt-2" />
-    <UTable v-model:sort="sort" :rows :columns :ui>
-      <template #rdate-data="{ row }: RunTableData">
-        {{ useDateFormat(row.rdate, 'DD.MM.YYYY') }}
-      </template>
-      <template #tname-data="{ row }: RunTableData">
+    <UTable v-model:sort="sort" :data="rows" :columns>
+      <template #tname-cell="{ row }: RunTableData">
         <!-- eslint-disable-next-line vue/no-v-html -->
         <div class="inline" v-html="getTrackInfo(row)" />
         <div
-          v-if="row.tid > 0"
+          v-if="row.original.tid > 0"
           class="inline cursor-pointer hover:text-amber-300"
-          title="Filtrovat" @click="filterTrack(row.tid)"
+          title="Filtrovat" @click="filterTrack(row.original.tid)"
         >
           &#9660;
         </div>
       </template>
-      <template #rlength-data="{ row }: RunTableData">
-        {{ getLengthInfo(row) }} m
-      </template>
-      <template #rtime-data="{ row }: RunTableData">
-        {{ parseTimeInfo(row.rtime) }}
-      </template>
-      <template #rspeed-data="{ row }: RunTableData">
-        {{ row.rspeed }} km/h
-      </template>
-      <template #admin-data="{ row }: RunTableData">
-        <div v-if="useLoginStore().login" class="cursor-pointer" title="Smazat" @click="deleteRun(row.rid)">
+      <template #admin-cell="{ row }: RunTableData">
+        <div v-if="useLoginStore().login" class="cursor-pointer" title="Smazat" @click="deleteRun(row.original.rid)">
           X
         </div>
       </template>
     </UTable>
-    <UPagination v-model="page" :page-count="30" :total="runs.length || 0" class="justify-center mb-2" />
+    <UPagination v-model="page" :items-per-page="30" :total="runs.length || 0" class="justify-center mb-2" />
     <div>Celkem: {{ runs.length }} ({{ totalLenth }} km)</div>
   </div>
 </template>
@@ -61,25 +49,28 @@ const emits = defineEmits<{
 
 // customize UTable
 const columns = [{
-  key: 'rdate',
-  label: 'Datum',
+  accessorKey: 'rdate',
+  header: 'Datum',
   sortable: true,
+  cell: ({ row }: RunTableData) => useDateFormat(row.getValue<string>('rdate'), 'DD.MM.YYYY').value,
 }, {
-  key: 'tname',
-  label: 'Trasa',
+  accessorKey: 'tname',
+  header: 'Trasa',
 }, {
-  key: 'rlength',
-  label: 'Vzdálenost',
+  accessorKey: 'rlength',
+  header: 'Vzdálenost',
+  cell: ({ row }: RunTableData) => `${getLengthInfo(row)} m`,
 }, {
-  key: 'rtime',
-  label: 'Čas',
+  accessorKey: 'rtime',
+  header: 'Čas',
+  cell: ({ row }: RunTableData) => parseTimeInfo(row.original.rtime),
 }, {
-  key: 'rspeed',
-  label: '⌀ rychlost',
-  sortable: true,
+  accessorKey: 'rspeed',
+  header: '⌀ rychlost',
+  cell: ({ row }: RunTableData) => `${row.original.rspeed} km/h`,
 }, {
-  key: 'admin',
-  label: '',
+  accessorKey: 'admin',
+  header: '',
 }]
 
 const sort = ref({
@@ -87,12 +78,6 @@ const sort = ref({
   direction: 'desc' as 'asc' | 'desc',
 })
 watch(sort, () => emits('sort', sort.value.column, sort.value.direction), { deep: true })
-
-const ui = {
-  th: {
-    base: 'text-center',
-  },
-}
 
 // UTable pagination
 const page = ref(1)
@@ -102,10 +87,10 @@ const rows = computed(() => {
 
 // for regular tracks display their name with link+dscr
 // for "-1" track there is no link...
-function getTrackInfo(row: RunRecord) {
-  const dscr = row.rdscr ? row.rdscr : row.tdscr
-  if (row.tid > 0) {
-    return `<a href="${row.tmaplink}" title="${dscr}">${row.tname}</a>`
+function getTrackInfo(row: RunTableRow) {
+  const dscr = row.original.rdscr || row.original.tdscr
+  if (row.original.tid > 0) {
+    return `<a href="${row.original.tmaplink}" title="${dscr}">${row.original.tname}</a>`
   } else {
     return `<span title="${dscr}">Jednorázové</a>`
   }
@@ -113,11 +98,11 @@ function getTrackInfo(row: RunRecord) {
 
 // for regular tracks the length is stored in elrh_run_tracks
 // for "-1" track the length is directly in elrh_run_records
-function getLengthInfo(row: RunRecord) {
-  if (row.tid > 0) {
-    return row.tlength
+function getLengthInfo(row: RunTableRow) {
+  if (row.original.tid > 0) {
+    return row.original.tlength
   } else {
-    return row.rlength
+    return row.original.rlength
   }
 }
 
@@ -135,7 +120,10 @@ function filterTrack(tid: number) {
 async function deleteRun(id: number) {
   if (confirm(`Smazat běh ID ${id}?`) == true) {
     const { del } = useNeon()
-    const result = await del('elrh_run_records', `id=${id}`)
+    const result = await del({
+      table: 'elrh_run_records',
+      where: { column: 'id', condition: '=', value: id },
+    })
 
     if (result === 'OK') {
       log.debug(`Record ${id} deleted`)

@@ -5,7 +5,8 @@
       <USelect
         id="fTrack"
         v-model="inputTrack"
-        :options="tracks"
+        :items="tracks"
+        class="w-36"
         @change="doFilter"
       />
     </div>
@@ -14,18 +15,18 @@
       <USelect
         id="fMonth"
         v-model="inputMonth"
-        :options="months"
+        :items="months"
         :disabled="inputMonthDisabled"
         @change="doFilter"
       />
       <USelect
         id="fYear"
         v-model="inputYear"
-        :options="years"
+        :items="years"
         @change="doFilter"
       />
     </div>
-    <UButton color="gray" variant="outline" @click="doReset">
+    <UButton color="neutral" variant="outline" @click="doReset">
       Obnovit výchozí
     </UButton>
   </div>

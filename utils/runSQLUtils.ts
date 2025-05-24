@@ -3,12 +3,11 @@
  */
 export async function getTracks() {
   const { select } = useNeon()
-  return await select(
-    ['id as tId', 'name as tName', 'length as tLength'],
-    'elrh_run_tracks',
-    undefined,
-    'name',
-  )
+  return await select<TrackInfo>({
+    columns: ['id as tId', 'name as tName', 'length as tLength'],
+    from: 'elrh_run_tracks',
+    order: { column: 'name' },
+  })
 }
 
 /**
@@ -46,12 +45,17 @@ export async function getRuns(filter?: RunFilter): Promise<RunRecord[]> {
 
   // TODO better typing for "direction" in nuxt-neon
   type SortDirection = 'DESC' | 'ASC' | undefined
-  const order = [
+  const order: NeonOrderObject = [
     { column: filter?.sortColumn === 'rspeed' ? 'r.speed' : 'r.date', direction: filter?.sortDirection as SortDirection ?? 'DESC' as SortDirection },
     { column: 'r.id', direction: 'DESC' as SortDirection },
   ]
 
-  return await select(columns, tables, sql, order)
+  return await select({
+    columns: columns,
+    from: tables,
+    where: sql,
+    order: order,
+  })
 }
 
 function getSQLForDatePeriod(year: number, month?: number): string {

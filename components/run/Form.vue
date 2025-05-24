@@ -86,20 +86,21 @@ const updateLength = () => {
 updateLength()
 
 const submitRun = async () => {
-  const columns = ['date', 'track', 'dscr', 'length', 'time', 'speed']
-  const values = [
-    inputDate.value,
-    inputTrack.value.toString(),
-    inputDscr.value,
-    inputLength.value.toString(),
-    inputTime.value,
-    getAVGSpeed(inputTime.value, inputLength.value).toString(),
-  ]
-  log.debug(values)
-  log.debug(columns)
+  const run = {
+    date: inputDate.value,
+    track: inputTrack.value.toString(),
+    dscr: inputDscr.value,
+    length: inputLength.value.toString(),
+    time: inputTime.value,
+    speed: getAVGSpeed(inputTime.value, inputLength.value).toString(),
+  }
+  log.debug(run)
 
   const { insert } = useNeon()
-  const result = await insert('elrh_run_records', values, columns)
+  const result = await insert({
+    table: 'elrh_run_records',
+    values: run,
+  })
 
   if (result === 'OK') {
     log.debug('New record inserted')

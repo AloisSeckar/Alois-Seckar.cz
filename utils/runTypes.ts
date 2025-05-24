@@ -1,3 +1,5 @@
+import type { Row } from '@tanstack/table-core'
+
 /** Info about single run based on the database tables */
 export type RunRecord = {
   rid: number
@@ -15,8 +17,11 @@ export type RunRecord = {
 
 /** Wrapper to allow typing in UTable component slots */
 export type RunTableData = {
-  row: RunRecord
+  row: Row<RunRecord>
 }
+
+/** Wrapper to avoid importing Row from @tanstack elsewhere */
+export type RunTableRow = Row<RunRecord>
 
 /** Helper object for calculating historical best/average distances by years/months */
 export type RunStats = {

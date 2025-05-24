@@ -10,7 +10,18 @@
   "devDependencies": {
     "crypto-js": "4.2.0",
     "node-html-parser": "7.0.1",
-    "nuxt-ignis": "0.2.5",
-    "vue-component-type-helpers": "latest"
+    "nuxt-ignis": "0.3.1",
+    "vue-component-type-helpers": "2.2.10"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "@tailwindcss/oxide",
+      "better-sqlite3",
+      "esbuild",
+      "sharp",
+      "unrs-resolver",
+      "vue-demi"
+    ]
   }
 }
