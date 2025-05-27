@@ -1,8 +1,8 @@
 <template>
   <ClientOnly>
-    <dialog ref="myDialog" class="border border-1 border-primary rounded p-2">
+    <dialog ref="myDialog" class="border border-primary rounded p-2 m-auto">
       <form method="dialog">
-        <p class="m-2">
+        <p class="m-2 flex flex-row gap-2">
           <label for="userInput">Secret phrase:</label>
           <UInput
             id="userInput"
@@ -15,7 +15,7 @@
           <UButton @click="submitValue">
             Login
           </UButton>
-          <UButton color="amber" @click="closeDialog">
+          <UButton color="warning" @click="closeDialog">
             Close
           </UButton>
         </div>

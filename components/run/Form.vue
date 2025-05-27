@@ -3,45 +3,42 @@
     <div class="font-bold">
       Nový běh
     </div>
-    <div>
+    <div class="grid grid-cols-3 gap-2 text-left">
       <label for="rDate">Datum:</label>
       <UInput
         id="rDate"
         v-model="inputDate"
         type="text"
+        class="col-span-2"
       />
-    </div>
-    <div>
       <label for="rTrack">Trasa:</label>
       <USelect
         id="rTrack"
         v-model="inputTrack"
-        :options="tracks"
+        :items="tracks"
+        class="col-span-2"
         @change="updateLength"
       />
-    </div>
-    <div>
       <label for="rLength">Vzdálenost:</label>
       <UInput
         id="rLength"
         v-model="inputLength"
         type="number"
+        class="col-span-2"
         :disabled="rLegthDisabled"
       />
-    </div>
-    <div>
       <label for="rTime">Čas:</label>
       <UInput
         id="rTime"
         v-model="inputTime"
         type="text"
+        class="col-span-2"
       />
-    </div>
-    <div>
       <label for="rDscr">Popis:</label>
       <UTextarea
         id="rDscr"
         v-model="inputDscr"
+        class="col-span-2"
       />
     </div>
     <div>

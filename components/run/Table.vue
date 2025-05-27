@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>Celkem: {{ runs.length }} ({{ totalLenth }} km)</div>
-    <UPagination v-model="page" :page-count="30" :total="runs.length || 0" class="justify-center mt-2" />
+    <UPagination v-model="page" :page-count="30" :total="runs.length || 0" class="flex flex-row justify-center mt-2" />
     <UTable v-model:sort="sort" :data="rows" :columns>
       <template #tname-cell="{ row }: RunTableData">
         <!-- eslint-disable-next-line vue/no-v-html -->
@@ -20,12 +20,17 @@
         </div>
       </template>
     </UTable>
-    <UPagination v-model="page" :items-per-page="30" :total="runs.length || 0" class="justify-center mb-2" />
+    <UPagination v-model="page" :items-per-page="30" :total="runs.length || 0" class="flex flex-row justify-center mb-2" />
     <div>Celkem: {{ runs.length }} ({{ totalLenth }} km)</div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { h, resolveComponent } from 'vue'
+import type { TableColumn } from '@nuxt/ui'
+
+const UButton = resolveComponent('UButton')
+
 const { runs } = defineProps({
   runs: { type: Object as PropType<RunRecord[]>, required: true },
 })
@@ -48,10 +53,23 @@ const emits = defineEmits<{
 }>()
 
 // customize UTable
-const columns = [{
+const columns: TableColumn<RunRecord>[] = [{
   accessorKey: 'rdate',
-  header: 'Datum',
-  sortable: true,
+  header: ({ column }) => {
+    const isSorted = column.getIsSorted()
+    return h(UButton, {
+      color: 'neutral',
+      variant: 'ghost',
+      label: 'Datum',
+      icon: isSorted
+        ? isSorted === 'asc'
+          ? 'i-lucide-arrow-up-narrow-wide'
+          : 'i-lucide-arrow-down-wide-narrow'
+        : 'i-lucide-arrow-up-down',
+      class: '-mx-2.5',
+      onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
+    })
+  },
   cell: ({ row }: RunTableData) => useDateFormat(row.getValue<string>('rdate'), 'DD.MM.YYYY').value,
 }, {
   accessorKey: 'tname',
@@ -66,13 +84,28 @@ const columns = [{
   cell: ({ row }: RunTableData) => parseTimeInfo(row.original.rtime),
 }, {
   accessorKey: 'rspeed',
-  header: '⌀ rychlost',
+  header: ({ column }) => {
+    const isSorted = column.getIsSorted()
+    return h(UButton, {
+      color: 'neutral',
+      variant: 'ghost',
+      label: '⌀ rychlost',
+      icon: isSorted
+        ? isSorted === 'asc'
+          ? 'i-lucide-arrow-up-narrow-wide'
+          : 'i-lucide-arrow-down-wide-narrow'
+        : 'i-lucide-arrow-up-down',
+      class: '-mx-2.5',
+      onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
+    })
+  },
   cell: ({ row }: RunTableData) => `${row.original.rspeed} km/h`,
 }, {
   accessorKey: 'admin',
   header: '',
 }]
 
+// TODO only sorts current page now...
 const sort = ref({
   column: 'rdate',
   direction: 'desc' as 'asc' | 'desc',
