@@ -1,52 +1,63 @@
 <template>
-  <div class="w-full m-4 sm:w-96 sm:mx-auto flex flex-col gap-2 border border-primary rounded px-4 py-2">
-    <div class="font-bold">
-      Nový běh
-    </div>
-    <div class="grid grid-cols-3 gap-2 text-left">
-      <label for="rDate">Datum:</label>
-      <UInput
-        id="rDate"
-        v-model="inputDate"
-        type="text"
-        class="col-span-2"
-      />
-      <label for="rTrack">Trasa:</label>
-      <USelect
-        id="rTrack"
-        v-model="inputTrack"
-        :items="tracks"
-        class="col-span-2"
-        @change="updateLength"
-      />
-      <label for="rLength">Vzdálenost:</label>
-      <UInput
-        id="rLength"
-        v-model="inputLength"
-        type="number"
-        class="col-span-2"
-        :disabled="rLegthDisabled"
-      />
-      <label for="rTime">Čas:</label>
-      <UInput
-        id="rTime"
-        v-model="inputTime"
-        type="text"
-        class="col-span-2"
-      />
-      <label for="rDscr">Popis:</label>
-      <UTextarea
-        id="rDscr"
-        v-model="inputDscr"
-        class="col-span-2"
-      />
-    </div>
-    <div>
-      <UButton @click="submitRun">
-        Odeslat
-      </UButton>
-    </div>
-  </div>
+  <Vueform
+    ref="form$"
+    :endpoint="submitRun"
+    method="post"
+    @response="vueformResponse"
+    @error="vueformError"
+  >
+    <StaticElement
+      name="title"
+      tag="h2"
+      content="Nový běh"
+    />
+    <TextElement
+      name="inputDate"
+      label="Datum:"
+      description="Datum ve formátu DDDD-MM-YY"
+      placeholder="DDDD-MM-YY"
+      :rules="[
+        'required',
+      ]"
+    />
+    <SelectElement
+      name="inputTrack"
+      label="Trasa:"
+      description="Vybrete trasu, kterou jste běželi"
+      :rules="[
+        'required',
+      ]"
+      :items="tracks"
+      @change="updateLength"
+    />
+    <TextElement
+      v-model="inputLength"
+      name="inputLength"
+      label="Vzdálenost:"
+      description="Délkaby běhu v metrech"
+      :disabled="rLegthDisabled"
+    />
+    <TextElement
+      name="inputTime"
+      label="Čas:"
+      description="Čas ve formátu [HH]:MM:SS:sss"
+      :rules="[
+        'required',
+      ]"
+    />
+    <TextareaElement
+      name="inputDscr"
+      label="Popis"
+      description="Popis běhu (nepovinný)"
+    />
+    <ButtonElement
+      name="submit"
+      button-label="Odeslat"
+      :submits="true"
+      :full="true"
+      align="center"
+    />
+  </Vueform>
 </template>
 
 <script setup lang="ts">
@@ -55,10 +66,12 @@ const emits = defineEmits(['add'])
 // get list of my running tracks
 const { data } = await useAsyncData(() => getTracks())
 
-const inputDate = ref(new Date().toISOString().slice(0, 10))
-const inputLength = ref(0)
-const inputTime = ref('')
-const inputDscr = ref('')
+const form = useTemplateRef('form$')
+onMounted(() => {
+  form.value?.update({
+    inputDate: new Date().toISOString().slice(0, 10),
+  })
+})
 
 const tracks = data.value?.map((t: TrackInfo) => {
   return {
@@ -68,30 +81,47 @@ const tracks = data.value?.map((t: TrackInfo) => {
   }
 })
 const inputTrack = ref<number>(tracks?.[0]?.value || -1)
+const inputLength = ref(0)
 
 const rLegthDisabled = ref(true)
 
 const updateLength = () => {
+  const data = form.value?.data as RunData
+  inputTrack.value = parseInt(data?.inputTrack || '-1')
   if (inputTrack.value > -1) {
-    inputLength.value = tracks?.find((t: SelectValue) => t.value === inputTrack.value)?.length || 0
+    inputLength.value = tracks?.find((t: SelectValue) => t.value === inputTrack.value.toString())?.length || 0
     rLegthDisabled.value = true
   } else {
-    inputLength.value = 0
+    inputLength.value = 1
     rLegthDisabled.value = false
   }
+  form.value?.update({
+    inputLength: inputLength.value,
+  })
 }
 updateLength()
 
-const submitRun = async () => {
+type RunData = {
+  inputDate: string
+  inputTrack: string
+  inputLength: number
+  inputTime: string
+  inputDscr: string
+}
+type VueformData = { data: RunData }
+
+const submitRun = async (_FormData: unknown, form$: VueformData) => {
+  const data = form$.data
+
   const run = {
-    date: inputDate.value,
-    track: inputTrack.value.toString(),
-    dscr: inputDscr.value,
-    length: inputLength.value.toString(),
-    time: inputTime.value,
-    speed: getAVGSpeed(inputTime.value, inputLength.value).toString(),
+    date: data.inputDate,
+    track: data.inputTrack.toString(),
+    dscr: data.inputDscr || '',
+    length: data.inputLength.toString(),
+    time: data.inputTime,
+    speed: getAVGSpeed(data.inputTime, data.inputLength).toString(),
   }
-  log.debug(run)
+  console.log(run)
 
   const { insert } = useNeon()
   const result = await insert({
@@ -100,11 +130,32 @@ const submitRun = async () => {
   })
 
   if (result === 'OK') {
+    return {
+      status: 200,
+      statusText: 'OK',
+    }
+  } else {
+    return {
+      status: 500,
+      // statusText: formatNeonError(result as NeonError),¨
+      statusText: result,
+    }
+  }
+}
+
+// @ts-expect-error noImplictAny
+const vueformResponse = (response, _form$) => {
+  if (response.status === 200) {
     log.debug('New record inserted')
     emits('add')
     alert('Vloženo')
-  } else {
-    log.error(result)
   }
+}
+
+// @ts-expect-error noImplictAny
+const vueformError = (error, details, _form$) => {
+  log.error(error) // Error or AxiosError
+  log.error(details) // Vueform's additional info
+  alert('Error occured! (see logs for details)')
 }
 </script>

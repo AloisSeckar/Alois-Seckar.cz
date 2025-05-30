@@ -44,8 +44,8 @@ export type TrackInfo = {
   tlength: number
 }
 
-/** Type for Nuxt UI USelect options */
+/** Type for Vueform Select options */
 export type SelectValue = {
   label: string
-  value: number
+  value: string
 }
