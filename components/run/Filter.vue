@@ -1,35 +1,68 @@
 <template>
-  <div class="flex flex-col min-[725px]:flex-row gap-2 justify-center max-[724px]:items-center">
-    <div class="flex gap-1">
-      <label for="rTrack" class="mr-1">Trasa:</label>
-      <USelect
-        id="fTrack"
-        v-model="inputTrack"
-        :items="tracks"
-        class="w-36"
-        @change="doFilter"
-      />
-    </div>
-    <div class="flex gap-1">
-      <label for="rTrack" class="mr-1">Období:</label>
-      <USelect
-        id="fMonth"
-        v-model="inputMonth"
-        :items="months"
-        :disabled="inputMonthDisabled"
-        @change="doFilter"
-      />
-      <USelect
-        id="fYear"
-        v-model="inputYear"
-        :items="years"
-        @change="doFilter"
-      />
-    </div>
-    <UButton color="neutral" variant="outline" @click="doReset">
-      Obnovit výchozí
-    </UButton>
-  </div>
+  <Vueform
+    ref="filterForm"
+    class="sm:max-w-[800px] mx-auto flex flex-row items-center justify-center"
+  >
+    <StaticElement
+      name="trackLabel"
+      tag="div"
+      style="margin-top: 5px;"
+      content="Trasa:"
+      :columns="{
+        default: { container: 2 },
+        lg: { container: 1 },
+      }"
+    />
+    <SelectElement
+      name="track"
+      :items="tracks"
+      :columns="{
+        default: { container: 10 },
+        lg: { container: 4 },
+      }"
+      @change="doFilter"
+    />
+    <StaticElement
+      name="timeLabel"
+      tag="div"
+      style="margin-top: 5px;"
+      content="Období:"
+      :columns="{
+        default: { container: 2 },
+        lg: { container: 1 },
+      }"
+    />
+    <SelectElement
+      name="month"
+      :items="months"
+      :columns="{
+        default: { container: 5 },
+        lg: { container: 2 },
+      }"
+      :disabled="inputMonthDisabled"
+      @change="doFilter"
+    />
+    <SelectElement
+      name="year"
+      :items="years"
+      :columns="{
+        default: { container: 5 },
+        lg: { container: 2 },
+      }"
+      @change="doFilter"
+    />
+    <ButtonElement
+      name="reset"
+      button-label="Výchozí"
+      :submits="false"
+      :columns="{
+        default: { container: 12 },
+        lg: { container: 2 },
+      }"
+      align="center"
+      @click="doReset"
+    />
+  </Vueform>
 </template>
 
 <script setup lang="ts">
@@ -37,16 +70,31 @@ const emits = defineEmits<{
   filter: [id: RunFilter]
 }>()
 
+const inputMonthDisabled = ref(true)
+const filterForm = useTemplateRef('filterForm')
 const doFilter = () => {
-  emits('filter', {
-    track: inputTrack.value,
-    month: inputMonth.value,
-    year: inputYear.value,
-  })
+  const data = filterForm.value?.data as RunFilter
+  console.log('doFilter', data)
+  emits('filter', data)
+  // month is disabled if year is not set
+  if (data.year! > 0) {
+    inputMonthDisabled.value = false
+  } else {
+    inputMonthDisabled.value = true
+    filterForm.value?.update({
+      month: null,
+    })
+  }
 }
 
 const doReset = () => {
   emits('filter', {})
+  // also reset form values
+  filterForm.value?.update({
+    track: null,
+    month: null,
+    year: null,
+  })
 }
 
 // get list of my running tracks
@@ -58,31 +106,21 @@ const tracks = data.value?.map((t: TrackInfo) => {
   }
 })
 tracks?.unshift({ label: 'Vše', value: 0 })
-const inputTrack = ref<number>(tracks?.[0]?.value || -1)
 
+// months 01 - 12
 const months = [] as SelectValue[]
 for (let i = 1; i <= 12; i++) {
   const val = i.toString().padStart(2, '0')
-  months.push({ label: val, value: i })
+  months.push({ label: val, value: i.toString() })
 }
-months?.unshift({ label: 'Vše', value: 0 })
-const inputMonth = ref(0)
-const inputMonthDisabled = ref(true)
+months?.unshift({ label: 'Vše', value: '0' })
 
+// years since 2013
 const years = [] as SelectValue[]
 const thisYear = new Date().getFullYear()
 for (let i = thisYear; i >= 2013; i--) {
   const val = i.toString()
-  years.push({ label: val, value: i })
+  years.push({ label: val, value: i.toString() })
 }
-years?.unshift({ label: 'Vše', value: 0 })
-const inputYear = ref(0)
-watch(inputYear, () => {
-  if (inputYear.value > 0) {
-    inputMonthDisabled.value = false
-  } else {
-    inputMonthDisabled.value = true
-    inputMonth.value = 0
-  }
-})
+years?.unshift({ label: 'Vše', value: '0' })
 </script>
