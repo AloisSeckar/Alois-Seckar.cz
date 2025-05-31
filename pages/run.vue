@@ -13,31 +13,33 @@
         Nuxt Ignis
       </NuxtLink>
     </div>
-    <div class="mb-6">
-      <RunStats :runs="allRuns" />
-    </div>
-    <div class="mb-4">
-      <RunFilter @filter="doFilter" />
-    </div>
-    <div class="mb-2">
-      <div v-if="status === 'pending'">
-        Načítání...
+    <UApp>
+      <div class="mb-6">
+        <RunStats :runs="allRuns" />
       </div>
-      <RunTable
-        v-else ref="runTable" :runs="displayedRuns"
-        @filter="doFilterTrack" @sort="doSort" @delete="refresh"
-      />
-    </div>
-    <!-- my personal login -->
-    <div v-if="useLoginStore().login">
-      <RunForm @add="refresh()" />
-    </div>
-    <div v-else>
-      <div class="w-16 h-12 m-auto text-gray-800 cursor-pointer" @click="loginForm?.openDialog">
-        A
+      <div class="mb-4">
+        <RunFilter @filter="doFilter" />
       </div>
-      <RunLogin ref="loginForm" />
-    </div>
+      <div class="mb-2">
+        <div v-if="status === 'pending'">
+          Načítání...
+        </div>
+        <RunTable
+          v-else ref="runTable" :runs="displayedRuns"
+          @filter="doFilterTrack" @sort="doSort" @delete="refresh"
+        />
+      </div>
+      <!-- my personal login -->
+      <div v-if="useLoginStore().login">
+        <RunForm @add="refresh()" />
+      </div>
+      <div v-else>
+        <div class="w-16 h-12 m-auto text-gray-800 cursor-pointer" @click="loginForm?.openDialog">
+          A
+        </div>
+        <RunLogin ref="loginForm" />
+      </div>
+    </UApp>
     <ThePageFooter />
   </div>
 </template>
