@@ -1,68 +1,70 @@
 <template>
-  <Vueform
-    ref="filterForm"
-    class="sm:max-w-[800px] mx-auto flex flex-row items-center justify-center"
-  >
-    <StaticElement
-      name="trackLabel"
-      tag="div"
-      style="margin-top: 5px;"
-      content="Trasa:"
-      :columns="{
-        default: { container: 2 },
-        lg: { container: 1 },
-      }"
-    />
-    <SelectElement
-      name="track"
-      :items="tracks"
-      :columns="{
-        default: { container: 10 },
-        lg: { container: 4 },
-      }"
-      @change="doFilter"
-    />
-    <StaticElement
-      name="timeLabel"
-      tag="div"
-      style="margin-top: 5px;"
-      content="Období:"
-      :columns="{
-        default: { container: 2 },
-        lg: { container: 1 },
-      }"
-    />
-    <SelectElement
-      name="month"
-      :items="months"
-      :columns="{
-        default: { container: 5 },
-        lg: { container: 2 },
-      }"
-      :disabled="inputMonthDisabled"
-      @change="doFilter"
-    />
-    <SelectElement
-      name="year"
-      :items="years"
-      :columns="{
-        default: { container: 5 },
-        lg: { container: 2 },
-      }"
-      @change="doFilter"
-    />
-    <ButtonElement
-      name="reset"
-      button-label="Výchozí"
-      :submits="false"
-      :columns="{
-        default: { container: 12 },
-        lg: { container: 2 },
-      }"
-      align="center"
-      @click="doReset"
-    />
-  </Vueform>
+  <ClientOnly>
+    <Vueform
+      ref="filterForm"
+      class="sm:max-w-[800px] mx-auto flex flex-row items-center justify-center"
+    >
+      <StaticElement
+        name="trackLabel"
+        tag="div"
+        style="margin-top: 5px;"
+        content="Trasa:"
+        :columns="{
+          default: { container: 2 },
+          lg: { container: 1 },
+        }"
+      />
+      <SelectElement
+        name="track"
+        :items="tracks"
+        :columns="{
+          default: { container: 10 },
+          lg: { container: 4 },
+        }"
+        @change="doFilter"
+      />
+      <StaticElement
+        name="timeLabel"
+        tag="div"
+        style="margin-top: 5px;"
+        content="Období:"
+        :columns="{
+          default: { container: 2 },
+          lg: { container: 1 },
+        }"
+      />
+      <SelectElement
+        name="month"
+        :items="months"
+        :columns="{
+          default: { container: 5 },
+          lg: { container: 2 },
+        }"
+        :disabled="inputMonthDisabled"
+        @change="doFilter"
+      />
+      <SelectElement
+        name="year"
+        :items="years"
+        :columns="{
+          default: { container: 5 },
+          lg: { container: 2 },
+        }"
+        @change="doFilter"
+      />
+      <ButtonElement
+        name="reset"
+        button-label="Výchozí"
+        :submits="false"
+        :columns="{
+          default: { container: 12 },
+          lg: { container: 2 },
+        }"
+        align="center"
+        @click="doReset"
+      />
+    </Vueform>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">
