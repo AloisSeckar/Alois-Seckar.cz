@@ -15,7 +15,6 @@
       name="inputDate"
       label="Datum:"
       description="Datum ve formátu DDDD-MM-YY"
-      placeholder="DDDD-MM-YY"
       :rules="[
         'required',
       ]"
