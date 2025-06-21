@@ -1,6 +1,6 @@
 <template>
   <Vueform
-    ref="form$"
+    ref="runForm"
     :endpoint="submitRun"
     method="post"
     @response="vueformResponse"
@@ -65,7 +65,7 @@ const emits = defineEmits(['add'])
 // get list of my running tracks
 const { data } = await useAsyncData(() => getTracks())
 
-const form = useTemplateRef('form$')
+const form = useTemplateRef('runForm')
 onMounted(() => {
   form.value?.update({
     inputDate: new Date().toISOString().slice(0, 10),
@@ -120,7 +120,6 @@ const submitRun = async (_FormData: unknown, form$: VueformData) => {
     time: data.inputTime,
     speed: getAVGSpeed(data.inputTime, data.inputLength).toString(),
   }
-  console.log(run)
 
   const { insert } = useNeon()
   const result = await insert({

@@ -76,7 +76,6 @@ const inputMonthDisabled = ref(true)
 const filterForm = useTemplateRef('filterForm')
 const doFilter = () => {
   const data = filterForm.value?.data as RunFilter
-  console.log('doFilter', data)
   emits('filter', data)
   // month is disabled if year is not set
   if (data.year! > 0) {
