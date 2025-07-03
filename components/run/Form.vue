@@ -33,13 +33,13 @@
       v-model="inputLength"
       name="inputLength"
       label="Vzdálenost:"
-      description="Délkaby běhu v metrech"
+      description="Délka běhu v metrech"
       :disabled="rLegthDisabled"
     />
     <TextElement
       name="inputTime"
       label="Čas:"
-      description="Čas ve formátu [HH]:MM:SS:sss"
+      description="Čas ve formátu [HH]:MM:SS:x"
       :rules="[
         'required',
       ]"
