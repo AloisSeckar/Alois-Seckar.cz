@@ -11,7 +11,6 @@ body {
     background-color: rgb(15 23 42);
     color: white;
     text-align: center;
-    font-size: 1.1rem;
     font-family: Verdana;
     margin: 0px;
     padding: 0px;
@@ -120,7 +119,7 @@ h2 {
 .doc-list {
   text-align: justify;
   margin: 0px auto;
-  max-width: 350px;
+  max-width: 400px;
 }
 
 /* FOOTER */

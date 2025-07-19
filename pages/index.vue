@@ -4,7 +4,7 @@
     <div id="content" class="content-pane">
       <div class="content-block">
         <h2>Programátor</h2>
-        <p class="text-left sm:text-justify">
+        <p class="text-left sm:text-justify mb-2">
           Vystudoval jsem informatiku na VŠE v&nbsp;Praze. Věnuju se převážně světu Java programování +
           vývoji webů pomocí JavaScriptu (framework Nuxt nad Vue.js). Zajímá mě taky cloud-native vývoj,
           DevOps a&nbsp;moderní trendy obecně.
@@ -64,25 +64,19 @@
       </div>
       <div class="content-block">
         <h2>Sportovec</h2>
-        <p class="text-left sm:text-justify">
+        <p class="text-left sm:text-justify mb-2">
           Rád chodím běhat a&nbsp;jsem členem
-          <NuxtLink to="http://tjsokolprahakrc.cz/">
-            TJ Sokol Praha-Krč
-          </NuxtLink>,
+          <NuxtLink to="http://tjsokolprahakrc.cz/">TJ Sokol Praha-Krč</NuxtLink>,
           kde od roku 2019 vedu oddíl rekreačního běhu. Zde se můžete podívat na kompletní
-          <NuxtLink to="/run">
-            přehled mých běžeckých výkonů
-          </NuxtLink>.
+          <NuxtLink to="/run">přehled mých běžeckých výkonů</NuxtLink>.
           Kromě toho rád hraju softbal, aktuálně za klub
-          <NuxtLink to="https://www.facebook.com/pikespraha">
-            Pikes Praha
-          </NuxtLink>.
+          <NuxtLink to="https://www.facebook.com/pikespraha">Pikes Praha</NuxtLink>.
         </p>
-        <p class="text-left sm:text-justify">
+        <p class="text-left sm:text-justify mb-2">
           Věnuju se také zapisování softballu a&nbsp;baseballu. Od roku 2009 pravidelně jezdím zapisovat mezinárodní
           turnaje. v&nbsp;ČR pomáhám udržovat a&nbsp;rozvíjet systém zapisovatelů a&nbsp;přes zimu školit nové.
         </p>
-        <p class="text-left sm:text-justify">
+        <p class="text-left sm:text-justify mb-2">
           Na pomoc s&nbsp;výukou jsem vytvořil nástroj na vizualizaci systému zápisu organizace WBSC:
         </p>
         <div class="center">
@@ -93,7 +87,7 @@
       </div>
       <div class="content-block">
         <h2>Krčský patriot</h2>
-        <p class="text-left sm:text-justify">
+        <p class="text-left sm:text-justify mb-2">
           S tátou provozujeme web 'Stará Krč' o&nbsp;historii naší městské části Praha-Krč. Troufnu si tvrdit,
           že ucelenější sbírku informací a&nbsp;fotografií nikdo jiný nemá. Pracujeme na tom, aby naše poznatky
           mohly jednou vyjít i&nbsp;v&nbsp;tištěné podobě.
@@ -107,7 +101,7 @@
       <div class="content-block">
         <div class="center">
           <h2>Ostatní</h2>
-          <p>
+          <p class="mb-2">
             Aktuality a zajímavosti z Prahy 4 -
             <NuxtLink to="https://www.facebook.com/praha4zive">
               Praha 4 Živě
