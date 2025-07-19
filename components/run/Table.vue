@@ -9,8 +9,7 @@
         <div
           v-if="row.original.tid > 0"
           class="inline cursor-pointer hover:text-amber-300"
-          title="Filtrovat" @click="filterTrack(row.original.tid)"
-        >
+          title="Filtrovat" @click="filterTrack(row.original.tid)">
           &#9660;
         </div>
       </template>
@@ -37,7 +36,7 @@ const { runs } = defineProps({
 
 const totalLenth = computed(() => {
   let total = 0
-  runs.forEach((r) => {
+  runs.forEach((r: RunRecord) => {
     total += (r.tid > 0 ? r.tlength : r.rlength)
   })
   return (total / 1000).toFixed(1)

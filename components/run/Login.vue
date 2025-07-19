@@ -8,8 +8,7 @@
             id="userInput"
             v-model="inputValue"
             type="password"
-            autocomplete="on"
-          />
+            autocomplete="on" />
         </p>
         <div class="m-2 flex flex-row gap-2 justify-center">
           <UButton @click="submitValue">

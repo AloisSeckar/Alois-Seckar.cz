@@ -60,7 +60,7 @@ const prumerZaRok = ref('0')
 
 const celkemKm = computed(() => {
   let totalMeters = 0
-  runs.forEach((run) => {
+  runs.forEach((run: RunRecord) => {
     totalMeters += run.tid > 0 ? run.tlength : run.rlength
   })
   return (totalMeters / 1000).toFixed(1)
@@ -116,7 +116,7 @@ watch(celkemKm, () => {
 function sumRuns() {
   const kmZaKazdyRok = {} as RunStats
   const kmZaKazdyMesic = {} as RunStats
-  runs.forEach((run) => {
+  runs.forEach((run: RunRecord) => {
     const runRok = useDateFormat(run.rdate, 'YYYY').value
     const runMesic = useDateFormat(run.rdate, 'YYYY-MM').value
 
@@ -139,7 +139,7 @@ function sumRuns() {
 
 function getCelkemZaObdobi(rok: string, mesic?: string) {
   let totalYear = 0
-  runs.forEach((run) => {
+  runs.forEach((run: RunRecord) => {
     let runCounts = false
     const runRok = useDateFormat(run.rdate, 'YYYY').value
     if (runRok === rok) {

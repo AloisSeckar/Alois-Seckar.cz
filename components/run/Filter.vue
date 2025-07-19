@@ -2,8 +2,7 @@
   <ClientOnly>
     <Vueform
       ref="filterForm"
-      class="sm:max-w-[800px] mx-auto flex flex-row items-center justify-center"
-    >
+      class="sm:max-w-[800px] mx-auto flex flex-row items-center justify-center">
       <StaticElement
         name="trackLabel"
         tag="div"
@@ -12,8 +11,7 @@
         :columns="{
           default: { container: 2 },
           lg: { container: 1 },
-        }"
-      />
+        }" />
       <SelectElement
         name="track"
         :items="tracks"
@@ -21,8 +19,7 @@
           default: { container: 10 },
           lg: { container: 4 },
         }"
-        @change="doFilter"
-      />
+        @change="doFilter" />
       <StaticElement
         name="timeLabel"
         tag="div"
@@ -31,8 +28,7 @@
         :columns="{
           default: { container: 2 },
           lg: { container: 1 },
-        }"
-      />
+        }" />
       <SelectElement
         name="month"
         :items="months"
@@ -41,8 +37,7 @@
           lg: { container: 2 },
         }"
         :disabled="inputMonthDisabled"
-        @change="doFilter"
-      />
+        @change="doFilter" />
       <SelectElement
         name="year"
         :items="years"
@@ -50,8 +45,7 @@
           default: { container: 5 },
           lg: { container: 2 },
         }"
-        @change="doFilter"
-      />
+        @change="doFilter" />
       <ButtonElement
         name="reset"
         button-label="Výchozí"
@@ -61,8 +55,7 @@
           lg: { container: 2 },
         }"
         align="center"
-        @click="doReset"
-      />
+        @click="doReset" />
     </Vueform>
   </ClientOnly>
 </template>

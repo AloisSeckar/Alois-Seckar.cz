@@ -26,8 +26,7 @@
         </div>
         <RunTable
           v-else ref="runTable" :runs="displayedRuns"
-          @filter="doFilterTrack" @sort="doSort" @delete="refresh"
-        />
+          @filter="doFilterTrack" @sort="doSort" @delete="refresh" />
       </div>
       <!-- my personal login -->
       <div v-if="useLoginStore().login">

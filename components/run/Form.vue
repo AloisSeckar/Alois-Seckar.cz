@@ -4,21 +4,18 @@
     :endpoint="submitRun"
     method="post"
     @response="vueformResponse"
-    @error="vueformError"
-  >
+    @error="vueformError">
     <StaticElement
       name="title"
       tag="h2"
-      content="Nový běh"
-    />
+      content="Nový běh" />
     <TextElement
       name="inputDate"
       label="Datum:"
       description="Datum ve formátu DDDD-MM-YY"
       :rules="[
         'required',
-      ]"
-    />
+      ]" />
     <SelectElement
       name="inputTrack"
       label="Trasa:"
@@ -27,35 +24,30 @@
         'required',
       ]"
       :items="tracks"
-      @change="updateLength"
-    />
+      @change="updateLength" />
     <TextElement
       v-model="inputLength"
       name="inputLength"
       label="Vzdálenost:"
       description="Délka běhu v metrech"
-      :disabled="rLegthDisabled"
-    />
+      :disabled="rLegthDisabled" />
     <TextElement
       name="inputTime"
       label="Čas:"
       description="Čas ve formátu [HH]:MM:SS:x"
       :rules="[
         'required',
-      ]"
-    />
+      ]" />
     <TextareaElement
       name="inputDscr"
       label="Popis"
-      description="Popis běhu (nepovinný)"
-    />
+      description="Popis běhu (nepovinný)" />
     <ButtonElement
       name="submit"
       button-label="Odeslat"
       :submits="true"
       :full="true"
-      align="center"
-    />
+      align="center" />
   </Vueform>
 </template>
 
