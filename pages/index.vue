@@ -11,16 +11,16 @@
         </p>
         <div class="center">
           <NuxtLink to="https://github.com/AloisSeckar">
-            <img src="/github.webp" alt="GitHub - moje zdrojové kódy" title="GitHub - moje zdrojové kódy">
+            <NuxtImg src="/github.webp" alt="GitHub - moje zdrojové kódy" title="GitHub - moje zdrojové kódy" loading="lazy" />
           </NuxtLink>
           <NuxtLink to="https://master-coda.cz/">
-            <img src="/coda.webp" alt="Master Coda - nepravidelný blog o programování" title="Master Coda - nepravidelný blog o programování">
+            <NuxtImg src="/coda.webp" alt="Master Coda - nepravidelný blog o programování" title="Master Coda - nepravidelný blog o programování" loading="lazy" />
           </NuxtLink>
           <NuxtLink to="https://github.com/AloisSeckar/nuxt-ignis">
-            <img src="/ignis.webp" alt="Nuxt Ignis - template starter pro Nuxt" title="Nuxt Ignis - template starter pro Nuxt">
+            <NuxtImg src="/ignis.webp" alt="Nuxt Ignis - template starter pro Nuxt" title="Nuxt Ignis - template starter pro Nuxt" loading="lazy" />
           </NuxtLink>
           <NuxtLink to="https://elven-ipsum.netlify.app/">
-            <img src="/ipsum.webp" alt="Elven Ipsum - generátor lorem ipsum v Elfštině" title="Elven Ipsum - generátor lorem ipsum v Elfštině">
+            <NuxtImg src="/ipsum.webp" alt="Elven Ipsum - generátor lorem ipsum v Elfštině" title="Elven Ipsum - generátor lorem ipsum v Elfštině" loading="lazy" />
           </NuxtLink>
           <h3>Dokumenty</h3>
           <ul class="doc-list">
@@ -81,7 +81,7 @@
         </p>
         <div class="center">
           <NuxtLink to="https://wbsc-scoring.netlify.app/">
-            <img src="/wbsc.webp" alt="WBSC Scoring Creator - aplikace pro zapisovatele" title="WBSC Scoring Creator - aplikace pro zapisovatele">
+            <NuxtImg src="/wbsc.webp" alt="WBSC Scoring Creator - aplikace pro zapisovatele" title="WBSC Scoring Creator - aplikace pro zapisovatele" loading="lazy" />
           </NuxtLink>
         </div>
       </div>
@@ -94,7 +94,7 @@
         </p>
         <p class="center">
           <NuxtLink to="http://krc-historie.cz/">
-            <img src="/krc.webp" alt="Stará Krč - historie městské části Praha-Krč" title="Stará Krč - historie městské části Praha-Krč">
+            <NuxtImg src="/krc.webp" alt="Stará Krč - historie městské části Praha-Krč" title="Stará Krč - historie městské části Praha-Krč" loading="lazy" />
           </NuxtLink>
         </p>
       </div>
@@ -109,10 +109,10 @@
           </p>
           <div>Fotografie a pokusy o ně:</div>
           <NuxtLink to="https://www.deviantart.com/ellrohir">
-            <img src="/deviantart.webp" alt="DeviantArt - moje fotografické pokusy" title="DeviantArt - accidental photography">
+            <NuxtImg src="/deviantart.webp" alt="DeviantArt - moje fotografické pokusy" title="DeviantArt - accidental photography" loading="lazy" />
           </NuxtLink>
           <NuxtLink to="https://www.instagram.com/alois.seckar/">
-            <img src="/instagram.webp" alt="Instagram - moje fotografické pokusy" title="Instagram - accidental photography">
+            <NuxtImg src="/instagram.webp" alt="Instagram - moje fotografické pokusy" title="Instagram - accidental photography" loading="lazy" />
           </NuxtLink>
         </div>
       </div>
