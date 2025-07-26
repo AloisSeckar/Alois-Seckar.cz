@@ -6,7 +6,9 @@
         title="Alois Sečkár" alt="Profile photo of Alois Sečkár"
         fetchpriority="high" />
       <h1>Alois Sečkár</h1>
-      <p>Programátor / Sportovec / Krčský patriot</p>
+      <p class="mb-4">
+        Programátor / Sportovec / Krčský patriot
+      </p>
       <div class="social flex flex-row justify-center mt-2">
         <NuxtLink to="mailto:alois.seckar@gmail.com">
           <NuxtImg class="social" src="/em.png" alt="Email ikona" title="E-mail" />
