@@ -1,38 +1,31 @@
 <template>
-  <div class="mx-4 min-[400px]:mx-auto my-4 grid grid-cols-3 min-[400px]:grid-cols-4 min-[861px]:grid-cols-7 max-[860px]:max-w-[500px] gap-4 text-sm text-black justify-center">
+  <div class="mx-auto my-4 grid grid-cols-2 min-[401px]:grid-cols-3 min-[521px]:grid-cols-4 min-[876px]:grid-cols-7 max-[400px]:max-w-[225px] max-[520px]:max-w-[350px] max-[875px]:max-w-[475px] gap-2 text-sm text-black justify-center items-center">
     <div :class="`${statsCircleClass} bg-yellow-300`" title="Uběhnuté kilometry v aktuálním měsíci">
-      {{ aktualniMesic }}/{{ aktualniRok }}
-      <br>
-      {{ kmZaAktualniMesic }}  km
+      <strong>{{ aktualniMesic }}/{{ aktualniRok }}</strong>
+      <span class="text-xs">{{ kmZaAktualniMesic }}  km</span>
     </div>
     <div :class="`${statsCircleClass} bg-yellow-300`" title="Uběhnuté kilometry v aktuálním roce">
-      {{ aktualniRok }}
-      <br>
-      {{ kmZaAktualniRok }} km
+      <strong>{{ aktualniRok }}</strong>
+      <span class="text-xs">{{ kmZaAktualniRok }} km</span>
     </div>
     <div :class="`${statsCircleClass} bg-green-300`" title="Nejvíc kilometrů za jeden měsíc">
-      {{ nejlepsiMesic }}
-      <br>
-      {{ nejlepsiMesicKm }}
+      <strong>{{ nejlepsiMesic }}</strong>
+      <span class="text-xs">{{ nejlepsiMesicKm }} km</span>
     </div>
     <div :class="`${statsCircleClass} bg-green-300`" title="Nejvíc kilometrů za jeden rok">
-      {{ nejlepsiRok }}
-      <br>
-      {{ nejlepsiRokKm }} km
+      <strong>{{ nejlepsiRok }}</strong>
+      <span class="text-xs">{{ nejlepsiRokKm }} km</span>
     </div>
     <div :class="`${statsCircleClass} bg-sky-300`" title="Průměrně v tomto měsíci (od 2013)">
-      ⌀ Měsíc
-      <br>
-      {{ prumerZaMesic }} km
+      <strong>⌀ Měsíc</strong>
+      <span class="text-xs">{{ prumerZaMesic }} km</span>
     </div>
     <div :class="`${statsCircleClass} bg-sky-300`" title="Průměrně v jednom roce (od 2013)">
-      ⌀ Rok
-      <br>
-      {{ prumerZaRok }} km
+      <strong>⌀ Rok</strong>
+      <span class="text-xs">{{ prumerZaRok }} km</span>
     </div>
-    <div :class="`${statsCircleClass} bg-red-300 hidden min-[400px]:flex`" title="Celkem uběhnutých kilometrů (od 2013)">
-      Celkem
-      <br>
+    <div :class="`${statsCircleClass} bg-red-300 hidden min-[520px]:flex`" title="Celkem uběhnutých kilometrů (od 2013)">
+      <strong>Celkem</strong>
       <span class="text-xs">{{ celkemKm }} km</span>
     </div>
   </div>
@@ -43,7 +36,7 @@ const { runs } = defineProps({
   runs: { type: Object as PropType<RunRecord[]>, required: true },
 })
 
-const statsCircleClass = 'w-24 h-24 flex flex-col justify-center rounded-full'
+const statsCircleClass = 'w-22 h-22 flex flex-col justify-center rounded-full'
 
 const aktualniDatum = new Date().toISOString()
 const aktualniRok = aktualniDatum.slice(0, 4)

@@ -2,59 +2,43 @@
   <ClientOnly>
     <Vueform
       ref="filterForm"
-      class="sm:max-w-[800px] mx-auto flex flex-row items-center justify-center">
-      <StaticElement
-        name="trackLabel"
-        tag="div"
-        style="margin-top: 5px;"
-        content="Trasa:"
-        :columns="{
-          default: { container: 2 },
-          lg: { container: 1 },
-        }" />
+      class="border lg:border-0 border-[#2dd4bf] px-4 py-2">
       <SelectElement
         name="track"
+        label="Trasa:"
         :items="tracks"
         :columns="{
-          default: { container: 10 },
-          lg: { container: 4 },
+          sm: { container: 6 },
+          lg: { container: 6 },
         }"
         @change="doFilter" />
-      <StaticElement
-        name="timeLabel"
-        tag="div"
-        style="margin-top: 5px;"
-        content="Období:"
-        :columns="{
-          default: { container: 2 },
-          lg: { container: 1 },
-        }" />
       <SelectElement
         name="month"
+        label="Období:"
         :items="months"
+        :disabled="inputMonthDisabled"
         :columns="{
-          default: { container: 5 },
+          sm: { container: 3 },
           lg: { container: 2 },
         }"
-        :disabled="inputMonthDisabled"
         @change="doFilter" />
       <SelectElement
         name="year"
+        class="align-bottom"
         :items="years"
         :columns="{
-          default: { container: 5 },
+          sm: { container: 3 },
           lg: { container: 2 },
         }"
         @change="doFilter" />
       <ButtonElement
         name="reset"
         button-label="Výchozí"
-        :submits="false"
+        class="align-bottom"
         :columns="{
-          default: { container: 12 },
           lg: { container: 2 },
         }"
-        align="center"
+        :submits="false"
         @click="doReset" />
     </Vueform>
   </ClientOnly>
@@ -118,3 +102,9 @@ for (let i = thisYear; i >= 2013; i--) {
 }
 years?.unshift({ label: 'Vše', value: '0' })
 </script>
+
+<style scoped>
+.align-bottom {
+  align-self: flex-end; /* Works in flex/grid parent */
+}
+</style>

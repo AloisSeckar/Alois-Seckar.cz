@@ -1,7 +1,7 @@
 <template>
   <div class="m-4 md:mx-auto">
     <h2>Alois Sečkár - Běžecké statistiky</h2>
-    <div class="text-left sm:text-justify">
+    <div class="text-left sm:text-justify mx-2">
       Přehled mých běžeckých výkonů. Uchovává se datum, vzdálenost, čas a&nbsp;průměrná rychlost.
       Je tu vidět kompletní historie od roku 2013, kdy jsem s&nbsp;běháním začal.
       Tato stránka je zároveň hlavní referenční implementací mého integračního modulu
@@ -17,7 +17,7 @@
       <div class="mb-6">
         <RunStats :runs="allRuns" />
       </div>
-      <div class="mb-4">
+      <div class="mx-2 mb-4">
         <RunFilter @filter="doFilter" />
       </div>
       <div class="mb-2">

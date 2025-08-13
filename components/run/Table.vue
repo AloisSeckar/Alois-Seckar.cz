@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>Celkem: {{ runs.length }} ({{ totalLenth }} km)</div>
-    <UPagination v-model="page" :page-count="30" :total="runs.length || 0" class="flex flex-row justify-center mt-2" />
+    <UPagination v-model="page" :page-count="30" :total="runs.length || 0" :sibling-count="1" class="flex flex-row justify-center mt-2" />
     <UTable v-model:sort="sort" :data="rows" :columns>
       <template #tname-cell="{ row }: RunTableData">
         <!-- eslint-disable-next-line vue/no-v-html -->
@@ -19,7 +19,7 @@
         </div>
       </template>
     </UTable>
-    <UPagination v-model="page" :items-per-page="30" :total="runs.length || 0" class="flex flex-row justify-center mb-2" />
+    <UPagination v-model="page" :items-per-page="30" :total="runs.length || 0" :sibling-count="1" class="flex flex-row justify-center my-2" />
     <div>Celkem: {{ runs.length }} ({{ totalLenth }} km)</div>
   </div>
 </template>
