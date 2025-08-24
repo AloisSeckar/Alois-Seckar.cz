@@ -13,6 +13,7 @@ export type RunRecord = {
   rlength: number
   rtime: string
   rspeed: string
+  admin?: unknown // artificial record to allow admin-action column in run table
 }
 
 /** Wrapper to allow typing in UTable component slots */

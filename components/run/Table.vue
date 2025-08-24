@@ -1,8 +1,19 @@
 <template>
   <div>
     <div>Celkem: {{ runs.length }} ({{ totalLenth }} km)</div>
-    <UPagination v-model="page" :page-count="30" :total="runs.length || 0" :sibling-count="1" class="flex flex-row justify-center mt-2" />
-    <UTable v-model:sort="sort" :data="rows" :columns>
+    <UPagination
+      :default-page="(table?.tableApi?.getState().pagination.pageIndex || 0) + 1"
+      :items-per-page="table?.tableApi?.getState().pagination.pageSize"
+      :total="table?.tableApi?.getFilteredRowModel().rows.length"
+      :sibling-count="1" class="flex flex-row justify-center mt-2"
+      @update:page="(p) => table?.tableApi?.setPageIndex(p - 1)" />
+    <UTable
+      ref="table"
+      v-model:sort="sort" v-model:pagination="pagination"
+      :data="runs" :columns
+      :pagination-options="{
+        getPaginationRowModel: getPaginationRowModel(),
+      }">
       <template #tname-cell="{ row }: RunTableData">
         <!-- eslint-disable-next-line vue/no-v-html -->
         <div class="inline" v-html="getTrackInfo(row)" />
@@ -19,7 +30,6 @@
         </div>
       </template>
     </UTable>
-    <UPagination v-model="page" :items-per-page="30" :total="runs.length || 0" :sibling-count="1" class="flex flex-row justify-center my-2" />
     <div>Celkem: {{ runs.length }} ({{ totalLenth }} km)</div>
   </div>
 </template>
@@ -27,6 +37,9 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
+import { getPaginationRowModel } from '@tanstack/vue-table'
+
+const table = useTemplateRef('table')
 
 const UButton = resolveComponent('UButton')
 
@@ -40,9 +53,6 @@ const totalLenth = computed(() => {
     total += (r.tid > 0 ? r.tlength : r.rlength)
   })
   return (total / 1000).toFixed(1)
-})
-watch(totalLenth, () => {
-  page.value = 1
 })
 
 const emits = defineEmits<{
@@ -104,17 +114,17 @@ const columns: TableColumn<RunRecord>[] = [{
   header: '',
 }]
 
-// TODO only sorts current page now...
+// UTable sorting
 const sort = ref({
   column: 'rdate',
   direction: 'desc' as 'asc' | 'desc',
 })
 watch(sort, () => emits('sort', sort.value.column, sort.value.direction), { deep: true })
 
-// UTable pagination
-const page = ref(1)
-const rows = computed(() => {
-  return runs.slice((page.value - 1) * 30, (page.value) * 30)
+// UTable pagination model
+const pagination = ref({
+  pageIndex: 0,
+  pageSize: 30,
 })
 
 // for regular tracks display their name with link+dscr
