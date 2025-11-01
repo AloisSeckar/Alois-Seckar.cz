@@ -10,8 +10,8 @@
   "devDependencies": {
     "crypto-js": "4.2.0",
     "node-html-parser": "7.0.1",
-    "nuxt-ignis": "0.5.0",
-    "vue-component-type-helpers": "3.1.1"
+    "nuxt-ignis": "0.5.1",
+    "vue-component-type-helpers": "3.1.2"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
