@@ -42,6 +42,18 @@
               </NuxtLink>
             </li>
             <li>
+              Certifikace -
+              <NuxtLink to="/pdf/as-mastering-nuxt.pdf" external no-prefetch>
+                Certified Nuxt Master
+              </NuxtLink>
+            </li>
+            <li>
+              Certifikace -
+              <NuxtLink to="/pdf/as-mastering-pinia.pdf" external no-prefetch>
+                Certified Pinia Master
+              </NuxtLink>
+            </li>
+            <li>
               Kurz -
               <NuxtLink to="/pdf/as-vuejs-master-class.pdf" external no-prefetch>
                 Vue.js Master class
