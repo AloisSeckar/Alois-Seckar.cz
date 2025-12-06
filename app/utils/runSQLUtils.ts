@@ -1,3 +1,5 @@
+import type { NeonOrderObject } from '#build/types/neon'
+
 /**
  * Reads data from `elrh_run_tracks` table
  */
@@ -43,9 +45,8 @@ export async function getRuns(filter?: RunFilter): Promise<RunRecord[]> {
     log.debug(sql)
   }
 
-  // TODO better typing for "direction" in nuxt-neon
   type SortDirection = 'DESC' | 'ASC' | undefined
-  const order: NeonOrderObject = [
+  const order: NeonOrderObject[] = [
     { column: filter?.sortColumn === 'rspeed' ? 'r.speed' : 'r.date', direction: filter?.sortDirection as SortDirection ?? 'DESC' as SortDirection },
     { column: 'r.id', direction: 'DESC' as SortDirection },
   ]

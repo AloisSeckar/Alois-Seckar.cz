@@ -21,11 +21,11 @@ export async function getLast5Articles(url: string): Promise<Last5Articles> {
   const markdown = htmlPage.innerText
   const mdLines = markdown.split('\n').filter(l => l.startsWith('| **`'))
   return {
-    item1: parseMarkdown(mdLines[0]),
-    item2: parseMarkdown(mdLines[1]),
-    item3: parseMarkdown(mdLines[2]),
-    item4: parseMarkdown(mdLines[3]),
-    item5: parseMarkdown(mdLines[4]),
+    item1: parseMarkdown(mdLines[0] || ''),
+    item2: parseMarkdown(mdLines[1] || ''),
+    item3: parseMarkdown(mdLines[2] || ''),
+    item4: parseMarkdown(mdLines[3] || ''),
+    item5: parseMarkdown(mdLines[4] || ''),
   }
 }
 

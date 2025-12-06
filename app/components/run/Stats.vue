@@ -69,8 +69,8 @@ watch(celkemKm, () => {
   nejlepsiRok.value = ''
   let maxZaRok = 0
   for (const rok in kmZaKazdyRok) {
-    if (kmZaKazdyRok[rok] > maxZaRok) {
-      maxZaRok = kmZaKazdyRok[rok]
+    if (kmZaKazdyRok[rok]! > maxZaRok) {
+      maxZaRok = kmZaKazdyRok[rok]!
       nejlepsiRok.value = rok
     }
   }
@@ -79,8 +79,8 @@ watch(celkemKm, () => {
   nejlepsiMesic.value = ''
   let maxZaMesic = 0
   for (const mesic in kmZaKazdyMesic) {
-    if (kmZaKazdyMesic[mesic] > maxZaMesic) {
-      maxZaMesic = kmZaKazdyMesic[mesic]
+    if (kmZaKazdyMesic[mesic]! > maxZaMesic) {
+      maxZaMesic = kmZaKazdyMesic[mesic]!
       nejlepsiMesic.value = mesic
     }
   }
@@ -90,7 +90,7 @@ watch(celkemKm, () => {
   let celkemZaVsechnyRoky = 0
   let pocetLet = 0
   for (const year in kmZaKazdyRok) {
-    celkemZaVsechnyRoky += kmZaKazdyRok[year]
+    celkemZaVsechnyRoky += kmZaKazdyRok[year]!
     pocetLet++
   }
   prumerZaRok.value = ((celkemZaVsechnyRoky / pocetLet) / 1000).toFixed(1)
@@ -99,7 +99,7 @@ watch(celkemKm, () => {
   let pocetMesicu = 0
   for (const mesic in kmZaKazdyMesic) {
     if (mesic.endsWith(aktualniMesic)) {
-      celkemZaVsechnyMesice += kmZaKazdyMesic[mesic]
+      celkemZaVsechnyMesice += kmZaKazdyMesic[mesic]!
       pocetMesicu++
     }
   }
