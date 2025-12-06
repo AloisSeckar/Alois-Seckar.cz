@@ -55,7 +55,7 @@
 const emits = defineEmits(['add'])
 
 // get list of my running tracks
-const { data } = await useAsyncData(() => getTracks())
+const { data } = useAsyncData<TrackInfo[]>(() => getTracks())
 
 const form = useTemplateRef('runForm')
 onMounted(() => {
@@ -71,7 +71,7 @@ const tracks = data.value?.map((t: TrackInfo) => {
     length: t.tlength,
   }
 })
-const inputTrack = ref<number>(tracks?.[0]?.value || -1)
+const inputTrack = ref<number>(parseInt(tracks?.[0]?.value || '-1'))
 const inputLength = ref(0)
 
 const rLegthDisabled = ref(true)

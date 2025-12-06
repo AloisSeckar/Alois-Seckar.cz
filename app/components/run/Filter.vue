@@ -76,14 +76,18 @@ const doReset = () => {
 }
 
 // get list of my running tracks
-const { data } = await useAsyncData(() => getTracks())
-const tracks = data.value?.map((t: TrackInfo) => {
-  return {
-    label: t.tname,
-    value: t.tid.toString(),
-  }
-})
-tracks?.unshift({ label: 'Vše', value: 0 })
+const { data } = useAsyncData<TrackInfo[]>(() => getTracks())
+const tracks = ref([] as SelectValue[])
+watch(() => data.value, () => {
+  tracks.value.length = 0
+  data.value?.forEach((t: TrackInfo) => {
+    tracks.value.push({
+      label: t.tname,
+      value: t.tid.toString(),
+    })
+  })
+  tracks.value?.unshift({ label: 'Vše', value: '0' })
+}, { immediate: true, deep: true })
 
 // months 01 - 12
 const months = [] as SelectValue[]

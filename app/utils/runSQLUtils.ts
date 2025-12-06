@@ -3,7 +3,7 @@ import type { NeonOrderObject } from '#build/types/neon'
 /**
  * Reads data from `elrh_run_tracks` table
  */
-export async function getTracks() {
+export async function getTracks(): Promise<TrackInfo[]> {
   const { select } = useNeon()
   return await select<TrackInfo>({
     columns: ['id as tId', 'name as tName', 'length as tLength'],
