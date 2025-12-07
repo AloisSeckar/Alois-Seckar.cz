@@ -26,7 +26,7 @@
             Načítání...
           </div>
           <RunTable
-            v-else ref="runTable" :runs="displayedRuns"
+            v-else ref="runTable" :runs="data!"
             @filter="doFilterTrack" @sort="doSort" @delete="refresh" />
         </div>
         <!-- my personal login -->
@@ -55,15 +55,22 @@ import type RunTable from '~/components/run/Table.vue'
 const loginForm = useTemplateRef<ComponentExposed<typeof RunLogin>>('loginForm')
 const runTable = useTemplateRef<ComponentExposed<typeof RunTable>>('runTable')
 
-const { data, status, refresh } = useAsyncData<RunRecord[]>(() => getRuns())
-
-const allRuns = ref([] as RunRecord[])
-const displayedRuns = ref([] as RunRecord[])
-
 const runFilter = ref({
   sortColumn: 'rdate',
   sortDirection: 'DESC',
 } as RunFilter)
+
+const { data, status, refresh } = useAsyncData<RunRecord[]>(() => getRuns(runFilter.value))
+
+const allRuns = ref([] as RunRecord[])
+watch(() => data.value, () => {
+  if (data.value) {
+    // init runs for stats once
+    if (allRuns.value.length === 0) {
+      allRuns.value = data.value
+    }
+  }
+}, { immediate: true, deep: true })
 
 function doFilter(filter: RunFilter) {
   runFilter.value.track = filter?.track
@@ -84,17 +91,6 @@ function doSort(column: string, direction: SortDirection) {
 }
 
 async function filterRuns() {
-  const filteredRuns = await getRuns(runFilter.value)
-  displayedRuns.value.length = 0
-  displayedRuns.value.push(...filteredRuns)
+  await refresh()
 }
-
-watch(() => data.value, () => {
-  allRuns.value.length = 0
-  if (data.value) {
-    const all = data.value as RunRecord[]
-    allRuns.value.push(...all)
-    filterRuns()
-  }
-}, { immediate: true, deep: true })
 </script>
