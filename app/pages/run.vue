@@ -46,6 +46,8 @@
 </template>
 
 <script setup lang="ts">
+// import type { NeonSortDirection } from '#build/types/neon'
+import type { SortDirection } from '@tanstack/vue-table'
 import type { ComponentExposed } from 'vue-component-type-helpers'
 import type RunLogin from '~/components/run/Login.vue'
 import type RunTable from '~/components/run/Table.vue'
@@ -60,7 +62,7 @@ const displayedRuns = ref([] as RunRecord[])
 
 const runFilter = ref({
   sortColumn: 'rdate',
-  sortDirection: 'desc',
+  sortDirection: 'DESC',
 } as RunFilter)
 
 function doFilter(filter: RunFilter) {
@@ -75,9 +77,9 @@ function doFilterTrack(tid: number) {
   filterRuns()
 }
 
-function doSort(column: string, direction: 'asc' | 'desc') {
+function doSort(column: string, direction: SortDirection) {
   runFilter.value.sortColumn = column
-  runFilter.value.sortDirection = direction
+  runFilter.value.sortDirection = direction === 'asc' ? 'ASC' : 'DESC' // TODO fix once solved in nuxt-neon (issue opened https://github.com/AloisSeckar/nuxt-neon/issues/46)
   filterRuns()
 }
 

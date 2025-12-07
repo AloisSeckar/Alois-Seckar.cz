@@ -1,3 +1,4 @@
+import type { NeonSortDirection } from '#build/types/neon'
 import type { Row } from '@tanstack/table-core'
 
 /** Info about single run based on the database tables */
@@ -35,7 +36,7 @@ export type RunFilter = {
   month?: number
   year?: number
   sortColumn?: string
-  sortDirection?: 'asc' | 'desc'
+  sortDirection?: NeonSortDirection
 }
 
 /** Type for Nuxt UI USelect options */

@@ -54,9 +54,6 @@
 <script setup lang="ts">
 const emits = defineEmits(['add'])
 
-// get list of my running tracks
-const { data } = useAsyncData<TrackInfo[]>(() => getTracks())
-
 const form = useTemplateRef('runForm')
 onMounted(() => {
   form.value?.update({
@@ -64,14 +61,21 @@ onMounted(() => {
   })
 })
 
-const tracks = data.value?.map((t: TrackInfo) => {
-  return {
-    label: t.tname,
-    value: t.tid.toString(),
-    length: t.tlength,
-  }
-})
-const inputTrack = ref<number>(parseInt(tracks?.[0]?.value || '-1'))
+// get list of my running tracks
+const { data } = useAsyncData<TrackInfo[]>(() => getTracks())
+const tracks = ref([] as (SelectValue & { length: number })[])
+watch(() => data.value, () => {
+  tracks.value.length = 0
+  data.value?.forEach((t: TrackInfo) => {
+    tracks.value.push({
+      label: t.tname,
+      value: t.tid.toString(),
+      length: t.tlength,
+    })
+  })
+}, { immediate: true, deep: true })
+
+const inputTrack = ref<number>(parseInt(tracks.value?.[0]?.value || '-1'))
 const inputLength = ref(0)
 
 const rLegthDisabled = ref(true)
@@ -80,7 +84,7 @@ const updateLength = () => {
   const data = form.value?.data as RunData
   inputTrack.value = parseInt(data?.inputTrack || '-1')
   if (inputTrack.value > -1) {
-    inputLength.value = tracks?.find((t: SelectValue) => t.value === inputTrack.value.toString())?.length || 0
+    inputLength.value = tracks.value?.find((t: SelectValue) => t.value === inputTrack.value.toString())?.length || 0
     rLegthDisabled.value = true
   } else {
     inputLength.value = 1

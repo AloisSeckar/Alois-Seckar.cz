@@ -37,7 +37,8 @@
 <script setup lang="ts">
 import { h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
-import { getPaginationRowModel } from '@tanstack/vue-table'
+import { getPaginationRowModel, type SortDirection } from '@tanstack/vue-table'
+// import type { NeonSortDirection } from '#build/types/neon'
 
 const table = useTemplateRef('table')
 
@@ -57,7 +58,7 @@ const totalLenth = computed(() => {
 
 const emits = defineEmits<{
   filter: [tid: number]
-  sort: [column: string, direction: 'asc' | 'desc']
+  sort: [column: string, direction: SortDirection]
   delete: []
 }>()
 
@@ -117,7 +118,7 @@ const columns: TableColumn<RunRecord>[] = [{
 // UTable sorting
 const sort = ref({
   column: 'rdate',
-  direction: 'desc' as 'asc' | 'desc',
+  direction: 'desc' as SortDirection,
 })
 watch(sort, () => emits('sort', sort.value.column, sort.value.direction), { deep: true })
 
@@ -134,7 +135,7 @@ function getTrackInfo(row: RunTableRow) {
   if (row.original.tid > 0) {
     return `<a href="${row.original.tmaplink}" title="${dscr}">${row.original.tname}</a>`
   } else {
-    return `<span title="${dscr}">Jednorázové</a>`
+    return `<span title="${dscr}">Jednorázové</span>`
   }
 }
 
