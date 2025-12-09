@@ -3,15 +3,17 @@
     Moje články na dev.to
   </h3>
   <div class="h-[300px] mb-4 overflow-auto">
-    <dev-to
-      v-if="isLoaded"
-      id="dev" author="aloisseckar" theme="classic"
-      itemsperpage="5" links="external"
-      lang="cs" i18n="{&quot;cs&quot;:{&quot;more&quot;:&quot;Další články&quot;}}"
-      style="width: 100%; margin-top: 20px; background-color: rgb(15, 23, 42);" />
-    <div v-else class="text-slate-400 text-center py-8">
-      Načítání článků...
-    </div>
+    <ClientOnly>
+      <dev-to
+        v-if="isLoaded"
+        id="dev" author="aloisseckar" theme="classic"
+        itemsperpage="5" links="external"
+        lang="cs" i18n="{&quot;cs&quot;:{&quot;more&quot;:&quot;Další články&quot;}}"
+        style="width: 100%; margin-top: 20px; background-color: rgb(15, 23, 42);" />
+      <div v-else class="text-slate-400 text-center py-8">
+        Načítání článků...
+      </div>
+    </ClientOnly>
   </div>
 </template>
 
