@@ -7,9 +7,27 @@ export default defineNuxtConfig({
     enabled: false,
   },
 
+  // solution for 'adoptedStyleSheets' issue on Netlify
+  app: {
+    head: {
+      script: [
+        {
+          src: 'https://unpkg.com/construct-style-sheets-polyfill',
+          defer: true,
+        },
+      ],
+    },
+  },
+
   css: [
     '@/assets/as.css',
   ],
+
+  vue: {
+    compilerOptions: {
+      isCustomElement: tag => tag.startsWith('dev-to'),
+    },
+  },
 
   runtimeConfig: {
     public: {
@@ -22,18 +40,4 @@ export default defineNuxtConfig({
       stylistic: true,
     },
   },
-
-  /*
-  security: {
-    corsHandler: {
-      origin: '*',
-    },
-  },
-  */
-
-  vue: {
-    compilerOptions: {
-      isCustomElement: (tag) => tag.startsWith('dev-to'),
-    },
-  }
 })
