@@ -2,7 +2,7 @@
   <div>
     <TheHeader />
     <div id="content" class="content-pane">
-      <div class="content-block">
+      <section class="content-block">
         <h2>Programátor</h2>
         <p class="text-left sm:text-justify mb-2">
           Vystudoval jsem informatiku na VŠE v&nbsp;Praze. Věnuju se převážně světu Java programování +
@@ -25,8 +25,8 @@
         </div>
         <WidgetDevDocuments />
         <WidgetDevTo />
-      </div>
-      <div class="content-block">
+      </section>
+      <section class="content-block">
         <h2>Sportovec</h2>
         <p class="text-left sm:text-justify mb-2">
           Rád chodím běhat a&nbsp;jsem členem
@@ -48,8 +48,8 @@
             <NuxtImg src="/wbsc.webp" alt="WBSC Scoring Creator - aplikace pro zapisovatele" title="WBSC Scoring Creator - aplikace pro zapisovatele" loading="lazy" />
           </NuxtLink>
         </div>
-      </div>
-      <div class="content-block">
+      </section>
+      <section class="content-block">
         <h2>Krčský patriot</h2>
         <p class="text-left sm:text-justify mb-2">
           S tátou provozujeme web 'Stará Krč' o&nbsp;historii naší městské části Praha-Krč. Troufnu si tvrdit,
@@ -61,8 +61,8 @@
             <NuxtImg src="/krc.webp" alt="Stará Krč - historie městské části Praha-Krč" title="Stará Krč - historie městské části Praha-Krč" loading="lazy" />
           </NuxtLink>
         </p>
-      </div>
-      <div class="content-block">
+      </section>
+      <section class="content-block">
         <div class="center">
           <h2>Ostatní</h2>
           <p class="mb-2">
@@ -79,7 +79,7 @@
             <NuxtImg src="/instagram.webp" alt="Instagram - moje fotografické pokusy" title="Instagram - accidental photography" loading="lazy" />
           </NuxtLink>
         </div>
-      </div>
+      </section>
     </div>
     <TheFooter />
   </div>

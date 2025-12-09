@@ -1,12 +1,12 @@
 <template>
   <div>
     <ThePageHeader />
-    <div id="content">
+    <section id="content">
       Aplikaci "Svobodné rámečky" nyní naleznete na
       <NuxtLink to="http://ellrohir.mzf.cz/ramecky/">
         http://ellrohir.mzf.cz/ramecky/
       </NuxtLink>
-    </div>
+    </section>
     <ThePageFooter />
   </div>
 </template>
