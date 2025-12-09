@@ -24,7 +24,7 @@
           </NuxtLink>
         </div>
         <WidgetDevDocuments />
-        <TheDevToWidget />
+        <WidgetDevTo />
       </div>
       <div class="content-block">
         <h2>Sportovec</h2>

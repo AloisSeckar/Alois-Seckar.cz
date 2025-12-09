@@ -1,14 +1,16 @@
 <template>
-  <h3 class="text-[#e1b400] text-2xl text-center mt-8 mb-2">Moje články na dev.to</h3>
+  <h3 class="text-[#e1b400] text-2xl text-center mt-6 mb-2">
+    Moje články na dev.to
+  </h3>
   <div class="h-[300px] mb-4 overflow-auto">
-    <dev-to 
-      id="dev" author="aloisseckar" theme="classic" 
+    <dev-to
+      id="dev" author="aloisseckar" theme="classic"
       itemsperpage="5" links="external"
-      lang="cs" i18n='{"cs":{"more":"Další články"}}'
+      lang="cs" i18n="{&quot;cs&quot;:{&quot;more&quot;:&quot;Další články&quot;}}"
       style="width: 100%; margin-top: 20px; background-color: rgb(15, 23, 42);" />
   </div>
 </template>
-        
+
 <script setup lang="ts">
 onMounted(async () => {
   await import('@browser.style/dev-to')
