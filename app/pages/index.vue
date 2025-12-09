@@ -22,57 +22,8 @@
           <NuxtLink to="https://elven-ipsum.netlify.app/">
             <NuxtImg src="/ipsum.webp" alt="Elven Ipsum - generátor lorem ipsum v Elfštině" title="Elven Ipsum - generátor lorem ipsum v Elfštině" loading="lazy" />
           </NuxtLink>
-          <h3>Dokumenty</h3>
-          <ul class="doc-list">
-            <li>
-              <NuxtLink to="/pdf/CV.pdf" external no-prefetch>
-                ŽIVOTOPIS
-              </NuxtLink>
-            </li>
-            <li>
-              Certifikace -
-              <NuxtLink to="/pdf/as-java-ocp-8.pdf" external no-prefetch>
-                Java 8 OCP
-              </NuxtLink>
-            </li>
-            <li>
-              Certifikace -
-              <NuxtLink to="/pdf/as-vuejs-dev.pdf" external no-prefetch>
-                Vue.js Developer Level I
-              </NuxtLink>
-            </li>
-            <li>
-              Certifikace -
-              <NuxtLink to="/pdf/as-mastering-nuxt.pdf" external no-prefetch>
-                Certified Nuxt Master
-              </NuxtLink>
-            </li>
-            <li>
-              Certifikace -
-              <NuxtLink to="/pdf/as-mastering-pinia.pdf" external no-prefetch>
-                Certified Pinia Master
-              </NuxtLink>
-            </li>
-            <li>
-              Kurz -
-              <NuxtLink to="/pdf/as-vuejs-master-class.pdf" external no-prefetch>
-                Vue.js Master class
-              </NuxtLink>
-            </li>
-            <li>
-              Kurz -
-              <NuxtLink to="/pdf/as-es6-gopas.pdf" external no-prefetch>
-                Pokročilé techniky ES6 (Gopas)
-              </NuxtLink>
-            </li>
-            <li>
-              Kurz -
-              <NuxtLink to="/pdf/as-rust.pdf" external no-prefetch>
-                Rust pro začátečníky (CZ.NIC)
-              </NuxtLink>
-            </li>
-          </ul>
         </div>
+        <WidgetDevDocuments />
         <TheDevToWidget />
       </div>
       <div class="content-block">

@@ -5,6 +5,7 @@
 
 html {
     scroll-behavior: smooth;
+    max-width: 900px;
 }
 
 body {
@@ -91,7 +92,7 @@ h2 {
 .content-pane {
     margin: 0 auto;
     padding: 1em;
-    max-width: 1000px;
+    max-width: 900px;
     text-align: justify;
 }
 
@@ -122,13 +123,6 @@ h2 {
 
 .content-block .center {
     text-align: center;
-}
-
-.doc-list {
-  text-align: justify;
-  margin: 0px auto;
-  padding-bottom: 12px;
-  max-width: 400px;
 }
 
 /* FOOTER */
