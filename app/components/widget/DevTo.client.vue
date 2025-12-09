@@ -23,7 +23,7 @@ const isLoaded = ref(false)
 onMounted(async () => {
   try {
     await new Promise(resolve => setTimeout(resolve, 100))
-    await import('@browser.style/dev-to')
+    await import('./devto.js')
     await customElements.whenDefined('dev-to')
     isLoaded.value = true
   } catch (error) {
