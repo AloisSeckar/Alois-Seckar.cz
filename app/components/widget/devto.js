@@ -47,8 +47,7 @@ export default class DevTo extends HTMLElement {
 
   async #loadStyles() {
     try {
-      const styleSheet = await import('./index.css', { with: { type: 'css' } })
-        .catch(() => null)
+      const styleSheet = await import('/css/devto.style').catch(() => null)
 
       if (styleSheet && styleSheet.default instanceof CSSStyleSheet) {
         this.#root.adoptedStyleSheets = [styleSheet.default]
@@ -56,7 +55,7 @@ export default class DevTo extends HTMLElement {
       }
 
       // Fallback: fetch and create stylesheet
-      const response = await fetch('./index.css')
+      const response = await fetch('/css/devto.style')
       const css = await response.text()
 
       // Check if adoptedStyleSheets is supported
