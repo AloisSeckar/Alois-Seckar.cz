@@ -23,9 +23,17 @@ export default defineNuxtConfig({
     },
   },
 
+  /*
   security: {
     corsHandler: {
       origin: '*',
     },
   },
+  */
+
+  vue: {
+    compilerOptions: {
+      isCustomElement: (tag) => tag.startsWith('dev-to'),
+    },
+  }
 })

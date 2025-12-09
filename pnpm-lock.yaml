@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@browser.style/dev-to':
+        specifier: 1.0.4
+        version: 1.0.4
       crypto-js:
         specifier: 4.2.0
         version: 4.2.0
@@ -16,7 +19,7 @@ importers:
         version: 7.0.1
       nuxt-ignis:
         specifier: 0.5.1
-        version: 0.5.1(f7cdb86f8da4d661cc05adc7ce937bfb)
+        version: 0.5.1(d0f0c293ecf6ec93a9591c911627357a)
       vue-component-type-helpers:
         specifier: 3.1.2
         version: 3.1.2
@@ -175,6 +178,12 @@ packages:
   '@babel/types@7.28.5':
     resolution: {integrity: sha512-qQ5m48eI/MFLQ5PxQj4PFaprjyCTLI37ElWMmNs0K8Lk3dVeOdNpB3ks8jc7yM5CDmVC73eMVk/trk3fgmrUpA==}
     engines: {node: '>=6.9.0'}
+
+  '@browser.style/common@1.0.12':
+    resolution: {integrity: sha512-ceMCcZbkM3uF0siwM3MzHYmTZzCq/57Q2TjH8YkDRGIJxC0HbBmVljYx1y/laIAYlYwJsSvijiIr46RrP6byPQ==}
+
+  '@browser.style/dev-to@1.0.4':
+    resolution: {integrity: sha512-S1Lk5AF4+k5ap76JnLuukQv/v45KEVT6MVB2SezK1UWhII79V7we3NUB4x+a/4UK0ikHX5qmDTNTjZDkUkaf2A==}
 
   '@capsizecss/metrics@3.5.0':
     resolution: {integrity: sha512-Ju2I/Qn3c1OaU8FgeW4Tc22D4C9NwyVfKzNmzst59bvxBjPoLYNZMqFYn+HvCtn4MpXwiaDtCE8fNuQLpdi9yA==}
@@ -7770,6 +7779,12 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
 
+  '@browser.style/common@1.0.12': {}
+
+  '@browser.style/dev-to@1.0.4':
+    dependencies:
+      '@browser.style/common': 1.0.12
+
   '@capsizecss/metrics@3.5.0': {}
 
   '@capsizecss/unpack@2.4.0':
@@ -8108,11 +8123,11 @@ snapshots:
       '@formkit/core': 1.6.9
       '@formkit/utils': 1.6.9
 
-  '@formkit/nuxt@1.6.9(esbuild@0.25.11)(magicast@0.5.1)(rollup@4.52.5)(tailwindcss@3.4.18(yaml@2.8.1))(vite@7.1.12(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.22(typescript@5.9.3))':
+  '@formkit/nuxt@1.6.9(esbuild@0.25.11)(magicast@0.5.1)(rollup@4.52.5)(tailwindcss@4.1.16)(vite@7.1.12(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.22(typescript@5.9.3))':
     dependencies:
       '@formkit/core': 1.6.9
       '@formkit/i18n': 1.6.9
-      '@formkit/vue': 1.6.9(tailwindcss@3.4.18(yaml@2.8.1))(vue@3.5.22(typescript@5.9.3))
+      '@formkit/vue': 1.6.9(tailwindcss@4.1.16)(vue@3.5.22(typescript@5.9.3))
       '@nuxt/kit': 3.20.0(magicast@0.5.1)
       chokidar: 3.6.0
       pathe: 1.1.2
@@ -8140,11 +8155,11 @@ snapshots:
       '@formkit/utils': 1.6.9
       '@formkit/validation': 1.6.9
 
-  '@formkit/themes@1.6.9(tailwindcss@3.4.18(yaml@2.8.1))':
+  '@formkit/themes@1.6.9(tailwindcss@4.1.16)':
     dependencies:
       '@formkit/core': 1.6.9
     optionalDependencies:
-      tailwindcss: 3.4.18(yaml@2.8.1)
+      tailwindcss: 4.1.16
 
   '@formkit/utils@1.6.9': {}
 
@@ -8154,7 +8169,7 @@ snapshots:
       '@formkit/observer': 1.6.9
       '@formkit/utils': 1.6.9
 
-  '@formkit/vue@1.6.9(tailwindcss@3.4.18(yaml@2.8.1))(vue@3.5.22(typescript@5.9.3))':
+  '@formkit/vue@1.6.9(tailwindcss@4.1.16)(vue@3.5.22(typescript@5.9.3))':
     dependencies:
       '@formkit/core': 1.6.9
       '@formkit/dev': 1.6.9
@@ -8162,7 +8177,7 @@ snapshots:
       '@formkit/inputs': 1.6.9
       '@formkit/observer': 1.6.9
       '@formkit/rules': 1.6.9
-      '@formkit/themes': 1.6.9(tailwindcss@3.4.18(yaml@2.8.1))
+      '@formkit/themes': 1.6.9(tailwindcss@4.1.16)
       '@formkit/utils': 1.6.9
       '@formkit/validation': 1.6.9
       vue: 3.5.22(typescript@5.9.3)
@@ -14235,9 +14250,9 @@ snapshots:
 
   nuxt-define@1.0.0: {}
 
-  nuxt-ignis@0.5.1(f7cdb86f8da4d661cc05adc7ce937bfb):
+  nuxt-ignis@0.5.1(d0f0c293ecf6ec93a9591c911627357a):
     dependencies:
-      '@formkit/nuxt': 1.6.9(esbuild@0.25.11)(magicast@0.5.1)(rollup@4.52.5)(tailwindcss@3.4.18(yaml@2.8.1))(vite@7.1.12(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.22(typescript@5.9.3))
+      '@formkit/nuxt': 1.6.9(esbuild@0.25.11)(magicast@0.5.1)(rollup@4.52.5)(tailwindcss@4.1.16)(vite@7.1.12(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.22(typescript@5.9.3))
       '@maas/vue-equipment': 1.0.0-beta.37(94e533504477c76daa6c306299e2f8db)
       '@nuxt/content': 3.7.1(better-sqlite3@12.2.0)(magicast@0.5.1)(valibot@1.1.0(typescript@5.9.3))
       '@nuxt/eslint': 1.9.0(@typescript-eslint/utils@8.46.2(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.22)(eslint@9.38.0(jiti@2.6.1))(magicast@0.5.1)(typescript@5.9.3)(vite@7.1.12(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))

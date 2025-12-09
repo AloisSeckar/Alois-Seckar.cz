@@ -1,0 +1,1 @@
+declare module '@browser.style/dev-to'
