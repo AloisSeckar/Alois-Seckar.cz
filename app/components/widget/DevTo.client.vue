@@ -4,16 +4,29 @@
   </h3>
   <div class="h-[300px] mb-4 overflow-auto">
     <dev-to
+      v-if="isLoaded"
       id="dev" author="aloisseckar" theme="classic"
       itemsperpage="5" links="external"
       lang="cs" i18n="{&quot;cs&quot;:{&quot;more&quot;:&quot;Další články&quot;}}"
       style="width: 100%; margin-top: 20px; background-color: rgb(15, 23, 42);" />
+    <div v-else class="text-slate-400 text-center py-8">
+      Načítání článků...
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+const isLoaded = ref(false)
+
 onMounted(async () => {
-  await import('@browser.style/dev-to')
+  try {
+    await new Promise(resolve => setTimeout(resolve, 100))
+    await import('@browser.style/dev-to')
+    await customElements.whenDefined('dev-to')
+    isLoaded.value = true
+  } catch (error) {
+    console.error('Failed to load dev-to component:', error)
+  }
 })
 </script>
 
