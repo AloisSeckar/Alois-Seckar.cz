@@ -16,7 +16,7 @@
     <ClientOnly>
       <UApp>
         <div class="mb-6">
-          <RunStats :runs="allRuns" />
+          <RunStats ref="runStats" />
         </div>
         <div class="mx-2 mb-4">
           <RunFilter @filter="doFilter" />
@@ -31,7 +31,7 @@
         </div>
         <!-- my personal login -->
         <div v-if="useLoginStore().login">
-          <RunForm @add="refresh()" />
+          <RunForm @add="refreshRuns" />
         </div>
         <div v-else>
           <div class="w-16 h-12 m-auto text-gray-800 cursor-pointer" @click="loginForm?.openDialog">
@@ -50,10 +50,10 @@
 import type { SortDirection } from '@tanstack/vue-table'
 import type { ComponentExposed } from 'vue-component-type-helpers'
 import type RunLogin from '~/components/run/Login.vue'
-import type RunTable from '~/components/run/Table.vue'
+import type RunStats from '~/components/run/Stats.vue'
 
 const loginForm = useTemplateRef<ComponentExposed<typeof RunLogin>>('loginForm')
-const runTable = useTemplateRef<ComponentExposed<typeof RunTable>>('runTable')
+const runStats = useTemplateRef<ComponentExposed<typeof RunStats>>('runStats')
 
 const runFilter = ref({
   sortColumn: 'rdate',
@@ -61,16 +61,6 @@ const runFilter = ref({
 } as RunFilter)
 
 const { data, status, refresh } = useAsyncData<RunRecord[]>(() => getRuns(runFilter.value))
-
-const allRuns = ref([] as RunRecord[])
-watch(() => data.value, () => {
-  if (data.value) {
-    // init runs for stats once
-    if (allRuns.value.length === 0) {
-      allRuns.value = data.value
-    }
-  }
-}, { immediate: true, deep: true })
 
 function doFilter(filter: RunFilter) {
   runFilter.value.track = filter?.track
@@ -92,5 +82,10 @@ function doSort(column: string, direction: SortDirection) {
 
 async function filterRuns() {
   await refresh()
+}
+
+async function refreshRuns() {
+  await refresh()
+  runStats.value?.refreshStats()
 }
 </script>

@@ -32,9 +32,12 @@
 </template>
 
 <script setup lang="ts">
-const { runs } = defineProps({
-  runs: { type: Object as PropType<RunRecord[]>, required: true },
-})
+const { data: runs, refresh } = useAsyncData<RunRecord[]>(() => getRuns())
+
+const refreshStats = () => {
+  refresh()
+}
+defineExpose({ refreshStats })
 
 const statsCircleClass = 'w-22 h-22 flex flex-col justify-center rounded-full'
 
@@ -53,7 +56,7 @@ const prumerZaRok = ref('0')
 
 const celkemKm = computed(() => {
   let totalMeters = 0
-  runs.forEach((run: RunRecord) => {
+  runs.value?.forEach((run: RunRecord) => {
     totalMeters += run.tid > 0 ? run.tlength : run.rlength
   })
   return (totalMeters / 1000).toFixed(1)
@@ -109,7 +112,7 @@ watch(celkemKm, () => {
 function sumRuns() {
   const kmZaKazdyRok = {} as RunStats
   const kmZaKazdyMesic = {} as RunStats
-  runs.forEach((run: RunRecord) => {
+  runs.value?.forEach((run: RunRecord) => {
     const runRok = useDateFormat(run.rdate, 'YYYY').value
     const runMesic = useDateFormat(run.rdate, 'YYYY-MM').value
 
@@ -132,7 +135,7 @@ function sumRuns() {
 
 function getCelkemZaObdobi(rok: string, mesic?: string) {
   let totalYear = 0
-  runs.forEach((run: RunRecord) => {
+  runs.value?.forEach((run: RunRecord) => {
     let runCounts = false
     const runRok = useDateFormat(run.rdate, 'YYYY').value
     if (runRok === rok) {
