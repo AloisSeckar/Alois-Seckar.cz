@@ -13,6 +13,9 @@
         Nuxt Ignis
       </NuxtLink>
     </div>
+    <div v-if="loading" class="mt-4 mb-8 text-[#e1b400]">
+      Načítání...
+    </div>
     <ClientOnly>
       <UApp>
         <div class="mb-6">
@@ -88,4 +91,11 @@ async function refreshRuns() {
   await refresh()
   runStats.value?.refreshStats()
 }
+
+const loading = ref(true)
+onMounted(() => {
+  if (import.meta.client) {
+    loading.value = false
+  }
+})
 </script>
