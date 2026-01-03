@@ -117,7 +117,7 @@ const submitRun = async (_FormData: unknown, form$: VueformData) => {
     speed: getAVGSpeed(data.inputTime, data.inputLength).toString(),
   }
 
-  const { insert } = useNeon()
+  const { insert } = useNeonClient()
   const result = await insert({
     table: 'elrh_run_records',
     values: run,

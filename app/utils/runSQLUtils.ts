@@ -1,43 +1,63 @@
-import type { NeonOrderObject } from '#build/types/neon'
+import type { NeonError, NeonOrderObject, NeonWhereObject } from 'nuxt-neon'
 
 /**
  * Reads data from `elrh_run_tracks` table
  */
 export async function getTracks(): Promise<TrackInfo[]> {
-  const { select } = useNeon()
-  return await select<TrackInfo>({
-    columns: ['id as tId', 'name as tName', 'length as tLength'],
+  const { select } = useNeonClient()
+  const ret = await select<TrackInfo>({
+    // TODO remove workaround once https://github.com/AloisSeckar/nuxt-neon/issues/76 fixed and new module version added into Nuxt Ignis
+    // columns: ['id as tId', 'name as tName', 'length as tLength'],
+    columns: ['id', 'name', 'length'],
     from: 'elrh_run_tracks',
     order: { column: 'name' },
   })
+  if (isNeonSuccess(ret)) {
+    // TODO remove workaround once https://github.com/AloisSeckar/nuxt-neon/issues/76 fixed and new module version added into Nuxt Ignis
+    const tracks = [] as TrackInfo[]
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    (ret as Record<string, any>[]).forEach((el) => {
+      tracks.push({
+        tid: el['id'],
+        tname: el['name'],
+        tlength: el['length'],
+      })
+    })
+    return tracks
+  } else {
+    log.error('Error fetching tracks')
+    log.error(formatNeonError(ret as NeonError))
+    return []
+  }
 }
 
 /**
  * Reads (filtered) data from `elrh_run_records` table
  */
 export async function getRuns(filter?: RunFilter): Promise<RunRecord[]> {
-  const { select } = useNeon()
+  const { select } = useNeonClient()
 
-  const columns = ['r.id as rId', 'r.date as rDate', 't.id as tId', 't.name as tName', 't.dscr as tDscr', 't.length as tLength', 't.map_link as tMapLink', 'r.dscr as rDscr', 'r.length as rLength', 'r.time as rTime', 'r.speed as rSpeed']
+  // TODO remove workaround once https://github.com/AloisSeckar/nuxt-neon/issues/76 fixed and new module version added into Nuxt Ignis
+  // const columns = ['r.id as rId', 'r.date as rDate', 't.id as tId', 't.name as tName', 't.dscr as tDscr', 't.length as tLength', 't.map_link as tMapLink', 'r.dscr as rDscr', 'r.length as rLength', 'r.time as rTime', 'r.speed as rSpeed']
+  const columns = ['r.id', 'r.date', 't.id', 't.name', 't.dscr', 't.length', 't.map_link', 'r.dscr', 'r.length', 'r.time', 'r.speed']
 
   const from = [
     { table: 'elrh_run_records', alias: 'r' },
     { table: 'elrh_run_tracks', alias: 't', joinColumn1: 'r.track', joinColumn2: 't.id' },
   ]
 
-  // TODO transfer into NeonWhereQuery after issue with ">" and "<" is fixed
-  // (issue opened https://github.com/AloisSeckar/nuxt-neon/issues/45)
-  const where = [] as string[]
+  const where = [] as NeonWhereObject[]
   if (filter) {
     if (filter.track && filter.track > 0) {
-      // where.push({ column: 't.id', condition: '=', value: filter.track.toString() })
-      where.push(`t.id = ${filter.track}`)
+      where.push({ column: 't.id', operator: '=', value: filter.track.toString() })
     }
 
     if (filter.year && filter.year > 0) {
-      // TODO replace with "BETWEEN" once when supported by nuxt-neon
-      // (issue opened https://github.com/AloisSeckar/nuxt-neon/issues/43)
-      where.push(getSQLForDatePeriod(filter.year, filter.month))
+      const lastDay = new Date(filter.year, filter.month || 12, 0).getDate()
+      const monthStr = String(filter.month).padStart(2, '0')
+      const fromDate = `${filter.year}-${filter.month ? monthStr : '01'}-01`
+      const toDate = `${filter.year}-${filter.month ? monthStr : '12'}-${lastDay}`
+      where.push({ column: 'r.date', operator: 'BETWEEN', value: `'${fromDate}','${toDate}'`, relation: where.length > 0 ? 'AND' : undefined })
     }
 
     log.debug('filtering runs using:')
@@ -49,15 +69,31 @@ export async function getRuns(filter?: RunFilter): Promise<RunRecord[]> {
     { column: 'r.id', direction: 'DESC' },
   ]
 
-  // TODO nuxt-neon should detect empty "where" object itself
-  // (issue opened https://github.com/AloisSeckar/nuxt-neon/issues/44)
-  return await select({ columns, from, where: where.length > 0 ? where.join(' AND ') : undefined, order })
-}
-
-function getSQLForDatePeriod(year: number, month?: number): string {
-  const lastDay = new Date(year, month || 12, 0).getDate()
-  const monthStr = String(month).padStart(2, '0')
-  const fromDate = `${year}-${month ? monthStr : '01'}-01`
-  const toDate = `${year}-${month ? monthStr : '12'}-${lastDay}`
-  return `r.date BETWEEN '${fromDate}' AND '${toDate}'`
+  const ret = await select({ columns, from, where, order })
+  if (isNeonSuccess(ret)) {
+    // TODO remove workaround once https://github.com/AloisSeckar/nuxt-neon/issues/76 fixed and new module version added into Nuxt Ignis
+    const records = [] as RunRecord[]
+    let rid = 0;
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    (ret as Record<string, any>[]).forEach((el) => {
+      records.push({
+        rid: rid++,
+        rdate: el['date'],
+        tid: el['id'],
+        tname: el['name'],
+        tdscr: el['dscr'],
+        tlength: el['length'],
+        tmaplink: el['map_link'],
+        rdscr: el['dscr'],
+        rlength: el['length'],
+        rtime: el['time'],
+        rspeed: el['speed'],
+      })
+    })
+    return records
+  } else {
+    log.error('Error fetching records')
+    log.error(formatNeonError(ret as NeonError))
+    return []
+  }
 }

@@ -38,7 +38,6 @@
 import { h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
 import { getPaginationRowModel, type SortDirection } from '@tanstack/vue-table'
-// import type { NeonSortDirection } from '#build/types/neon'
 
 const table = useTemplateRef('table')
 
@@ -162,10 +161,10 @@ function filterTrack(tid: number) {
 
 async function deleteRun(id: number) {
   if (confirm(`Smazat běh ID ${id}?`) == true) {
-    const { del } = useNeon()
+    const { del } = useNeonClient()
     const result = await del({
       table: 'elrh_run_records',
-      where: { column: 'id', condition: '=', value: id },
+      where: { column: 'id', operator: '=', value: id.toString() },
     })
 
     if (result === 'OK') {

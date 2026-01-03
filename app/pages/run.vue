@@ -13,7 +13,7 @@
         Nuxt Ignis
       </NuxtLink>
     </div>
-    <div v-if="loading" class="mt-4 mb-8 text-[#e1b400]">
+    <div v-if="loading" class="my-8 text-[#e1b400]">
       Načítání...
     </div>
     <ClientOnly>
@@ -49,7 +49,6 @@
 </template>
 
 <script setup lang="ts">
-// import type { NeonSortDirection } from '#build/types/neon'
 import type { SortDirection } from '@tanstack/vue-table'
 import type { ComponentExposed } from 'vue-component-type-helpers'
 import type RunLogin from '~/components/run/Login.vue'

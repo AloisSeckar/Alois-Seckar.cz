@@ -1,4 +1,4 @@
-import type { NeonSortDirection } from '#build/types/neon'
+import type { NeonSortDirection } from 'nuxt-neon'
 import type { Row } from '@tanstack/table-core'
 
 /** Info about single run based on the database tables */
