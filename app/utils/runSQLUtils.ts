@@ -5,28 +5,16 @@ import type { NeonError, NeonOrderObject, NeonWhereObject } from 'nuxt-neon'
  */
 export async function getTracks(): Promise<TrackInfo[]> {
   const { select } = useNeonClient()
-  const ret = await select<TrackInfo>({
-    // TODO remove workaround once https://github.com/AloisSeckar/nuxt-neon/issues/76 fixed and new module version added into Nuxt Ignis
-    // columns: ['id as tId', 'name as tName', 'length as tLength'],
-    columns: ['id', 'name', 'length'],
+  const tracks = await select<TrackInfo>({
+    columns: ['id as tid', 'name as tname', 'length as tlength'],
     from: 'elrh_run_tracks',
     order: { column: 'name' },
   })
-  if (isNeonSuccess(ret)) {
-    // TODO remove workaround once https://github.com/AloisSeckar/nuxt-neon/issues/76 fixed and new module version added into Nuxt Ignis
-    const tracks = [] as TrackInfo[]
-    /* eslint-disable @typescript-eslint/no-explicit-any */
-    (ret as Record<string, any>[]).forEach((el) => {
-      tracks.push({
-        tid: el['id'],
-        tname: el['name'],
-        tlength: el['length'],
-      })
-    })
-    return tracks
+  if (isNeonSuccess(tracks)) {
+    return tracks as TrackInfo[]
   } else {
     log.error('Error fetching tracks')
-    log.error(formatNeonError(ret as NeonError))
+    log.error(formatNeonError(tracks as NeonError))
     return []
   }
 }
@@ -37,9 +25,7 @@ export async function getTracks(): Promise<TrackInfo[]> {
 export async function getRuns(filter?: RunFilter): Promise<RunRecord[]> {
   const { select } = useNeonClient()
 
-  // TODO remove workaround once https://github.com/AloisSeckar/nuxt-neon/issues/76 fixed and new module version added into Nuxt Ignis
-  // const columns = ['r.id as rId', 'r.date as rDate', 't.id as tId', 't.name as tName', 't.dscr as tDscr', 't.length as tLength', 't.map_link as tMapLink', 'r.dscr as rDscr', 'r.length as rLength', 'r.time as rTime', 'r.speed as rSpeed']
-  const columns = ['r.id', 'r.date', 't.id', 't.name', 't.dscr', 't.length', 't.map_link', 'r.dscr', 'r.length', 'r.time', 'r.speed']
+  const columns = ['r.id as rid', 'r.date as rdate', 't.id as tid', 't.name as tname', 't.dscr as tdscr', 't.length as tlength', 't.map_link as tmaplink', 'r.dscr as rdscr', 'r.length as rlength', 'r.time as rtime', 'r.speed as rspeed']
 
   const from = [
     { table: 'elrh_run_records', alias: 'r' },
@@ -69,31 +55,12 @@ export async function getRuns(filter?: RunFilter): Promise<RunRecord[]> {
     { column: 'r.id', direction: 'DESC' },
   ]
 
-  const ret = await select({ columns, from, where, order })
-  if (isNeonSuccess(ret)) {
-    // TODO remove workaround once https://github.com/AloisSeckar/nuxt-neon/issues/76 fixed and new module version added into Nuxt Ignis
-    const records = [] as RunRecord[]
-    let rid = 0;
-    /* eslint-disable @typescript-eslint/no-explicit-any */
-    (ret as Record<string, any>[]).forEach((el) => {
-      records.push({
-        rid: rid++,
-        rdate: el['date'],
-        tid: el['id'],
-        tname: el['name'],
-        tdscr: el['dscr'],
-        tlength: el['length'],
-        tmaplink: el['map_link'],
-        rdscr: el['dscr'],
-        rlength: el['length'],
-        rtime: el['time'],
-        rspeed: el['speed'],
-      })
-    })
-    return records
+  const runs = await select({ columns, from, where, order })
+  if (isNeonSuccess(runs)) {
+    return runs as RunRecord[]
   } else {
     log.error('Error fetching records')
-    log.error(formatNeonError(ret as NeonError))
+    log.error(formatNeonError(runs as NeonError))
     return []
   }
 }

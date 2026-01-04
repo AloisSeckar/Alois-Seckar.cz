@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  nuxt-neon: 0.8.2
+
 importers:
 
   .:
@@ -6717,8 +6720,8 @@ packages:
   nuxt-link-checker@4.3.6:
     resolution: {integrity: sha512-qL7P5EQpmPKBdHI4L/2euaQveNq+IuoNyDWhxi6G68R4F8Qr//Inqg0bsLFdIre95/bGfnz6fzT7cEnBrUWdiA==}
 
-  nuxt-neon@0.8.1:
-    resolution: {integrity: sha512-TeT+r4uFYXidrF96ApPAcYwvul0jk01haYfhRli1BQjdlCXLm7vlvhHBAUt8ABTp+BNj8yhyel+P4wHKS6RR4A==}
+  nuxt-neon@0.8.2:
+    resolution: {integrity: sha512-RI0bZ6NUpYSi9U8cuiojKthgMX/AudyVKdZVY5nuwrk/tbgFHdsrZd19Gk7fRKQUnScVlEV9FhFuNGIHoz37Ig==}
 
   nuxt-og-image@5.1.12:
     resolution: {integrity: sha512-BrQI7+g8Jqa7QtN+dDUPCs5WBCQM93YlnMJvyCtCOL0M5WKP7JMHyj51dvi9SxQklVvXpfc8FhUDm290K/OuYw==}
@@ -17038,7 +17041,7 @@ snapshots:
       nuxt: 4.2.2(@parcel/watcher@2.5.1)(@types/node@24.9.2)(@vue/compiler-sfc@3.5.26)(better-sqlite3@12.2.0)(cac@6.7.14)(db0@0.3.4(better-sqlite3@12.2.0))(eslint@9.38.0(jiti@2.6.1))(ioredis@5.8.2)(lightningcss@1.30.2)(magicast@0.5.1)(optionator@0.9.4)(rollup@4.52.5)(sass@1.93.3)(terser@5.44.0)(typescript@5.9.3)(vite@7.3.0(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.2))(yaml@2.8.2)
       nuxt-auth-utils: 0.5.25(magicast@0.5.1)
       nuxt-charts: 1.0.2(magicast@0.5.1)(vue@3.5.26(typescript@5.9.3))
-      nuxt-neon: 0.8.1(magicast@0.5.1)
+      nuxt-neon: 0.8.2(magicast@0.5.1)
       nuxt-security: 2.4.0(magicast@0.5.1)(rollup@4.52.5)
       nuxt-spec: 0.1.14(@parcel/watcher@2.5.1)(@types/debug@4.1.12)(@types/node@24.9.2)(@typescript-eslint/utils@8.51.0(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.26)(better-sqlite3@12.2.0)(db0@0.3.4(better-sqlite3@12.2.0))(eslint@9.38.0(jiti@2.6.1))(ioredis@5.8.2)(jiti@2.6.1)(lightningcss@1.30.2)(magicast@0.5.1)(optionator@0.9.4)(rollup@4.52.5)(sass@1.93.3)(terser@5.44.0)(vite@7.3.0(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.2))(yaml@2.8.2)
       open-props: 1.7.16
@@ -17229,7 +17232,7 @@ snapshots:
       - vite
       - vue
 
-  nuxt-neon@0.8.1(magicast@0.5.1):
+  nuxt-neon@0.8.2(magicast@0.5.1):
     dependencies:
       '@neondatabase/serverless': 1.0.2
       '@nuxt/kit': 4.2.2(magicast@0.5.1)
