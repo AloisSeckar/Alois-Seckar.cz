@@ -14,8 +14,14 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    oauth: {
+      github: {
+        clientId: '',
+        clientSecret: '',
+      },
+    },
     public: {
-      key: 'a',
+      key: 0,
     },
   },
 

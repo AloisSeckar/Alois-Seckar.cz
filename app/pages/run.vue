@@ -32,15 +32,23 @@
             v-else ref="runTable" :runs="data!"
             @filter="doFilterTrack" @sort="doSort" @delete="refresh" />
         </div>
-        <!-- my personal login -->
-        <div v-if="useLoginStore().login">
+        <div v-if="loggedIn && user?.githubId === useRuntimeConfig().public.key" class="mt-6">
           <RunForm @add="refreshRuns" />
+          <UButton
+            class="mt-4"
+            label="Logout"
+            color="neutral"
+            size="xs"
+            external
+            @click="clear()" />
         </div>
         <div v-else>
-          <div class="w-16 h-12 m-auto text-gray-800 cursor-pointer" @click="loginForm?.openDialog">
-            A
-          </div>
-          <RunLogin ref="loginForm" />
+          <UButton
+            to="/auth/github"
+            label="A"
+            variant="ghost"
+            size="xs"
+            external />
         </div>
       </UApp>
     </ClientOnly>
@@ -51,10 +59,10 @@
 <script setup lang="ts">
 import type { SortDirection } from '@tanstack/vue-table'
 import type { ComponentExposed } from 'vue-component-type-helpers'
-import type RunLogin from '~/components/run/Login.vue'
 import type RunStats from '~/components/run/Stats.vue'
 
-const loginForm = useTemplateRef<ComponentExposed<typeof RunLogin>>('loginForm')
+const { loggedIn, user, clear } = useUserSession()
+
 const runStats = useTemplateRef<ComponentExposed<typeof RunStats>>('runStats')
 
 const runFilter = ref({

@@ -25,7 +25,7 @@
         </div>
       </template>
       <template #admin-cell="{ row }: RunTableData">
-        <div v-if="useLoginStore().login" class="cursor-pointer" title="Smazat" @click="deleteRun(row.original.rid)">
+        <div v-if="loggedIn && user?.githubId === useRuntimeConfig().public.key" class="cursor-pointer" title="Smazat" @click="deleteRun(row.original.rid)">
           X
         </div>
       </template>
@@ -38,6 +38,8 @@
 import { h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
 import { getPaginationRowModel, type SortDirection } from '@tanstack/vue-table'
+
+const { loggedIn, user } = useUserSession()
 
 const table = useTemplateRef('table')
 
@@ -160,6 +162,11 @@ function filterTrack(tid: number) {
 }
 
 async function deleteRun(id: number) {
+  if (!loggedIn || user.value?.githubId !== useRuntimeConfig().public.key) {
+    alert('Not allowed to delete runs')
+    return
+  }
+
   if (confirm(`Smazat běh ID ${id}?`) == true) {
     const { del } = useNeonClient()
     const result = await del({

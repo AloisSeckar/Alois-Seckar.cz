@@ -52,6 +52,8 @@
 </template>
 
 <script setup lang="ts">
+import type { NeonError } from 'nuxt-neon'
+
 const emits = defineEmits(['add'])
 
 const form = useTemplateRef('runForm')
@@ -105,7 +107,16 @@ type RunData = {
 }
 type VueformData = { data: RunData }
 
+const { loggedIn, user } = useUserSession()
+
 const submitRun = async (_FormData: unknown, form$: VueformData) => {
+  if (!loggedIn || user.value?.githubId !== useRuntimeConfig().public.key) {
+    return {
+      status: 403,
+      statusText: 'Not allowed to insert new runs',
+    }
+  }
+
   const data = form$.data
 
   const run = {
@@ -131,8 +142,7 @@ const submitRun = async (_FormData: unknown, form$: VueformData) => {
   } else {
     return {
       status: 500,
-      // statusText: formatNeonError(result as NeonError),¨
-      statusText: result,
+      statusText: formatNeonError(result as NeonError),
     }
   }
 }
