@@ -1,7 +1,7 @@
 <template>
   <Vueform
     ref="runForm"
-    :endpoint="submitRun"
+    endpoint="/runs-add"
     method="post"
     @response="vueformResponse"
     @error="vueformError">
@@ -52,8 +52,6 @@
 </template>
 
 <script setup lang="ts">
-import type { NeonError } from 'nuxt-neon'
-
 const emits = defineEmits(['add'])
 
 const form = useTemplateRef('runForm')
@@ -104,47 +102,6 @@ type RunData = {
   inputLength: number
   inputTime: string
   inputDscr: string
-}
-type VueformData = { data: RunData }
-
-const { loggedIn, user } = useUserSession()
-
-const submitRun = async (_FormData: unknown, form$: VueformData) => {
-  if (!loggedIn || user.value?.githubId !== useRuntimeConfig().public.key) {
-    return {
-      status: 403,
-      statusText: 'Not allowed to insert new runs',
-    }
-  }
-
-  const data = form$.data
-
-  const run = {
-    date: data.inputDate,
-    track: data.inputTrack.toString(),
-    dscr: data.inputDscr || '',
-    length: data.inputLength.toString(),
-    time: data.inputTime,
-    speed: getAVGSpeed(data.inputTime, data.inputLength).toString(),
-  }
-
-  const { insert } = useNeonClient()
-  const result = await insert({
-    table: 'elrh_run_records',
-    values: run,
-  })
-
-  if (result === 'OK') {
-    return {
-      status: 200,
-      statusText: 'OK',
-    }
-  } else {
-    return {
-      status: 500,
-      statusText: formatNeonError(result as NeonError),
-    }
-  }
 }
 
 // @ts-expect-error noImplictAny
