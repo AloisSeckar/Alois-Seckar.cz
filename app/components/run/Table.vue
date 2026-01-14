@@ -162,24 +162,15 @@ function filterTrack(tid: number) {
 }
 
 async function deleteRun(id: number) {
-  if (!loggedIn || user.value?.githubId !== useRuntimeConfig().public.key) {
-    alert('Not allowed to delete runs')
-    return
-  }
-
   if (confirm(`Smazat běh ID ${id}?`) == true) {
-    const { del } = useNeonClient()
-    const result = await del({
-      table: 'elrh_run_records',
-      where: { column: 'id', operator: '=', value: id.toString() },
-    })
-
-    if (result === 'OK') {
+    try {
+      await $fetch(`/run-delete?id=${id}`, { method: 'DELETE' })
       log.debug(`Record ${id} deleted`)
       alert('Smazáno')
       emits('delete')
-    } else {
-      log.error(result)
+    } catch (error) {
+      log.error(error)
+      alert('Chyba při mazání')
     }
   }
 }
