@@ -70,7 +70,7 @@ const runFilter = ref({
   sortDirection: 'DESC',
 } as RunFilter)
 
-const { data, status, refresh } = useAsyncData<RunRecord[]>(() => getRuns(runFilter.value))
+const { data, status, refresh } = useFetch<RunRecord[]>('/runs', { method: 'POST', body: runFilter.value, key: 'runs' })
 
 function doFilter(filter: RunFilter) {
   runFilter.value.track = filter?.track

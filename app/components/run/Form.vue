@@ -64,7 +64,7 @@ onMounted(() => {
 })
 
 // get list of my running tracks
-const { data } = useAsyncData<TrackInfo[]>(() => getTracks())
+const { data } = useFetch<TrackInfo[]>('/tracks', { key: 'tracks-form' })
 const tracks = ref([] as (SelectValue & { length: number })[])
 watch(() => data.value, () => {
   tracks.value.length = 0

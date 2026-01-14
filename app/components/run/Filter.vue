@@ -76,7 +76,7 @@ const doReset = () => {
 }
 
 // get list of my running tracks
-const { data } = useAsyncData<TrackInfo[]>(() => getTracks())
+const { data } = useFetch<TrackInfo[]>('/tracks', { key: 'tracks-filter' })
 const tracks = ref([] as SelectValue[])
 watch(() => data.value, () => {
   tracks.value.length = 0

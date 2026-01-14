@@ -1,29 +1,8 @@
 import type { NeonError, NeonOrderObject, NeonWhereObject } from 'nuxt-neon'
 
-/**
- * Reads data from `elrh_run_tracks` table
- */
-export async function getTracks(): Promise<TrackInfo[]> {
-  const { select } = useNeonClient()
-  const tracks = await select<TrackInfo>({
-    columns: ['id as tid', 'name as tname', 'length as tlength'],
-    from: 'elrh_run_tracks',
-    order: { column: 'name' },
-  })
-  if (isNeonSuccess(tracks)) {
-    return tracks as TrackInfo[]
-  } else {
-    log.error('Error fetching tracks')
-    log.error(formatNeonError(tracks as NeonError))
-    return []
-  }
-}
-
-/**
- * Reads (filtered) data from `elrh_run_records` table
- */
-export async function getRuns(filter?: RunFilter): Promise<RunRecord[]> {
-  const { select } = useNeonClient()
+export default defineEventHandler(async (event) => {
+  const filter = await readBody<RunFilter | undefined>(event).catch(() => undefined) as RunFilter | undefined
+  const { select } = useNeonServer()
 
   const columns = ['r.id as rid', 'r.date as rdate', 't.id as tid', 't.name as tname', 't.dscr as tdscr', 't.length as tlength', 't.map_link as tmaplink', 'r.dscr as rdscr', 'r.length as rlength', 'r.time as rtime', 'r.speed as rspeed']
 
@@ -46,8 +25,7 @@ export async function getRuns(filter?: RunFilter): Promise<RunRecord[]> {
       where.push({ column: 'r.date', operator: 'BETWEEN', value: `'${fromDate}','${toDate}'`, relation: where.length > 0 ? 'AND' : undefined })
     }
 
-    log.debug('filtering runs using:')
-    log.debug.raw(where)
+    console.debug('filtering runs using:', where)
   }
 
   const order: NeonOrderObject[] = [
@@ -59,8 +37,11 @@ export async function getRuns(filter?: RunFilter): Promise<RunRecord[]> {
   if (isNeonSuccess(runs)) {
     return runs as RunRecord[]
   } else {
-    log.error('Error fetching records')
-    log.error(formatNeonError(runs as NeonError))
-    return []
+    console.error('Error fetching records')
+    console.error(formatNeonError(runs as NeonError))
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Failed to fetch run records',
+    })
   }
-}
+})

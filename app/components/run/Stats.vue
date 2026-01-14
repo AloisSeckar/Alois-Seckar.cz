@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-const { data: runs, refresh } = useAsyncData<RunRecord[]>(() => getRuns())
+const { data: runs, refresh } = useFetch<RunRecord[]>('/runs', { method: 'POST', body: {}, key: 'runs-stats' })
 
 const refreshStats = () => {
   refresh()
