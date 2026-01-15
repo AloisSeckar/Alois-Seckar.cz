@@ -25,7 +25,7 @@
         </div>
       </template>
       <template #admin-cell="{ row }: RunTableData">
-        <div v-if="loggedIn && user?.githubId === useRuntimeConfig().public.key" class="cursor-pointer" title="Smazat" @click="deleteRun(row.original.rid)">
+        <div v-if="allowDelete" class="cursor-pointer" title="Smazat" @click="deleteRun(row.original.rid)">
           X
         </div>
       </template>
@@ -39,7 +39,11 @@ import { h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
 import { getPaginationRowModel, type SortDirection } from '@tanstack/vue-table'
 
-const { loggedIn, user } = useUserSession()
+const { loggedIn } = useUserSession()
+const allowDelete = ref(false)
+watchEffect(async () => {
+  allowDelete.value = loggedIn.value && await $fetch<boolean>('/auth/login')
+})
 
 const table = useTemplateRef('table')
 

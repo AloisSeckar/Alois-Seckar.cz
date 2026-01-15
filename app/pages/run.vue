@@ -32,7 +32,7 @@
             v-else ref="runTable" :runs="data!"
             @filter="doFilterTrack" @sort="doSort" @delete="refresh" />
         </div>
-        <div v-if="loggedIn && user?.githubId === useRuntimeConfig().public.key" class="mt-6">
+        <div v-if="allowInsert" class="mt-6">
           <RunForm @add="refreshRuns" />
           <UButton
             class="mt-4"
@@ -61,7 +61,11 @@ import type { SortDirection } from '@tanstack/vue-table'
 import type { ComponentExposed } from 'vue-component-type-helpers'
 import type RunStats from '~/components/run/Stats.vue'
 
-const { loggedIn, user, clear } = useUserSession()
+const { loggedIn, clear } = useUserSession()
+const allowInsert = ref(false)
+watchEffect(async () => {
+  allowInsert.value = loggedIn.value && await $fetch<boolean>('/auth/login')
+})
 
 const runStats = useTemplateRef<ComponentExposed<typeof RunStats>>('runStats')
 

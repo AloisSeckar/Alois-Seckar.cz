@@ -20,9 +20,7 @@ export default defineNuxtConfig({
         clientSecret: '',
       },
     },
-    public: {
-      key: 0,
-    },
+    key: 0,
   },
 
   eslint: {

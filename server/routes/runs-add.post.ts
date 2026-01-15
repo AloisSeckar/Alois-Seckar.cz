@@ -1,9 +1,7 @@
 import type { NeonError } from 'nuxt-neon'
 
 export default defineEventHandler(async (event) => {
-  const session = await getUserSession(event)
-  const config = useRuntimeConfig()
-  if (!session.user?.githubId || session.user.githubId !== config.public.key) {
+  if (!await checkLogin(event)) {
     throw createError({
       statusCode: 403,
       statusMessage: 'Not allowed to insert new runs',
