@@ -19,7 +19,7 @@ importers:
         version: 7.0.1
       nuxt-ignis:
         specifier: 0.5.3
-        version: 0.5.3(7fec58ad186f0d0d8682942cd7cbd97f)
+        version: 0.5.3(e7c1d68fb70e187401309a956d1264b0)
       vue-component-type-helpers:
         specifier: 3.2.1
         version: 3.2.1
@@ -9786,7 +9786,7 @@ snapshots:
       '@formkit/core': 1.6.9
       '@formkit/utils': 1.6.9
 
-  '@formkit/nuxt@1.6.9(esbuild@0.25.11)(magicast@0.5.1)(rollup@4.52.5)(tailwindcss@4.1.16)(vite@7.3.0(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.2))(vue@3.5.26(typescript@5.9.3))':
+  '@formkit/nuxt@1.6.9(esbuild@0.27.2)(magicast@0.5.1)(rollup@4.52.5)(tailwindcss@4.1.16)(vite@7.3.0(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.2))(vue@3.5.26(typescript@5.9.3))':
     dependencies:
       '@formkit/core': 1.6.9
       '@formkit/i18n': 1.6.9
@@ -9795,7 +9795,7 @@ snapshots:
       chokidar: 3.6.0
       pathe: 1.1.2
       unplugin: 1.16.1
-      unplugin-formkit: 0.2.13(esbuild@0.25.11)(rollup@4.52.5)(vite@7.3.0(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.2))
+      unplugin-formkit: 0.2.13(esbuild@0.27.2)(rollup@4.52.5)(vite@7.3.0(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.2))
     transitivePeerDependencies:
       - esbuild
       - magicast
@@ -17011,9 +17011,9 @@ snapshots:
 
   nuxt-define@1.0.0: {}
 
-  nuxt-ignis@0.5.3(7fec58ad186f0d0d8682942cd7cbd97f):
+  nuxt-ignis@0.5.3(e7c1d68fb70e187401309a956d1264b0):
     dependencies:
-      '@formkit/nuxt': 1.6.9(esbuild@0.25.11)(magicast@0.5.1)(rollup@4.52.5)(tailwindcss@4.1.16)(vite@7.3.0(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.2))(vue@3.5.26(typescript@5.9.3))
+      '@formkit/nuxt': 1.6.9(esbuild@0.27.2)(magicast@0.5.1)(rollup@4.52.5)(tailwindcss@4.1.16)(vite@7.3.0(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.2))(vue@3.5.26(typescript@5.9.3))
       '@maas/vue-equipment': 1.0.0-beta.37(9d891e9b840864719be0d898c5a00a9d)
       '@nuxt/content': 3.7.1(better-sqlite3@12.2.0)(magicast@0.5.1)(valibot@1.2.0(typescript@5.9.3))
       '@nuxt/eslint': 1.12.1(@typescript-eslint/utils@8.51.0(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.26)(eslint@9.38.0(jiti@2.6.1))(magicast@0.5.1)(typescript@5.9.3)(vite@7.3.0(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.2))
@@ -19462,12 +19462,12 @@ snapshots:
       '@nuxt/kit': 4.2.2(magicast@0.5.1)
       '@vueuse/core': 13.9.0(vue@3.5.26(typescript@5.9.3))
 
-  unplugin-formkit@0.2.13(esbuild@0.25.11)(rollup@4.52.5)(vite@7.3.0(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.2)):
+  unplugin-formkit@0.2.13(esbuild@0.27.2)(rollup@4.52.5)(vite@7.3.0(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.2)):
     dependencies:
       pathe: 1.1.2
       unplugin: 1.16.1
     optionalDependencies:
-      esbuild: 0.25.11
+      esbuild: 0.27.2
       rollup: 4.52.5
       vite: 7.3.0(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.2)
 
