@@ -33,7 +33,7 @@ function parseMarkdown(entry: string): ArticleItem {
   return {
     date: entry.substring(entry.indexOf('*`') + 2, entry.indexOf('`*')),
     title: entry.substring(entry.indexOf('| [') + 3, entry.indexOf('](')),
-    link: entry.substring(entry.indexOf('](') + 2, Math.max(entry.indexOf(') - '), entry.indexOf(') conf')),
+    link: entry.substring(entry.indexOf('](') + 2, Math.max(entry.indexOf(') - '), entry.indexOf(') conf'))),
     dscr: stripMarkdown(entry.substring(Math.max(entry.indexOf(') - '), entry.indexOf(') conf')) + 4, entry.lastIndexOf(' |'))),
   }
 }
