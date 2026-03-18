@@ -2,9 +2,10 @@
 
 Created with [Nuxt 3](https://nuxt.com/)
 
-Auto-deploment from `main` to Netlifiy - [https://alois-seckar.netlify.app/](https://alois-seckar.netlify.app/)
+Auto-deploment from `main` branch to Netlifiy @ [https://alois-seckar.netlify.app/](https://alois-seckar.netlify.app/). The public domain [https://alois-seckar.cz/](https://alois-seckar.cz/) points to this deployment.
 
 ## nuxt-ignis
+
 This project uses [Nuxt Ignis](https://github.com/AloisSeckar/nuxt-ignis) to simplify dependency management.
 
 To make it run locally, you need to provide `.env` file with following settings:
