@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  nuxt-neon: 0.8.2
+  nuxt-neon: 0.8.3
 
 importers:
 
@@ -6656,8 +6656,8 @@ packages:
   nuxt-link-checker@4.3.9:
     resolution: {integrity: sha512-iYJU+A/xUhk62v4tol9cdjJS1+ZOSl0+tdUObgifdeSts6IqAUByUAiX4H6yOY2tdQYKjahMFbQr1GJ+/4LYnQ==}
 
-  nuxt-neon@0.8.2:
-    resolution: {integrity: sha512-RI0bZ6NUpYSi9U8cuiojKthgMX/AudyVKdZVY5nuwrk/tbgFHdsrZd19Gk7fRKQUnScVlEV9FhFuNGIHoz37Ig==}
+  nuxt-neon@0.8.3:
+    resolution: {integrity: sha512-R6eFLc9r4iWrJxmLP/9pWXXa0GEfoT7ywktkfqfw76ziMtyjfYj4UJXaArA0SpieUDaAQM00t+B+YVPugjvQrQ==}
 
   nuxt-og-image@5.1.13:
     resolution: {integrity: sha512-H9kqGlmcEb9agWURwT5iFQjbr7Ec7tcQHZZaYSpC/JXKq2/dFyRyAoo6oXTk6ob20dK9aNjkJDcX2XmgZy67+w==}
@@ -9121,7 +9121,7 @@ snapshots:
   '@dxup/nuxt@0.2.2(magicast@0.5.2)':
     dependencies:
       '@dxup/unimport': 0.1.2
-      '@nuxt/kit': 4.2.2(magicast@0.5.2)
+      '@nuxt/kit': 4.4.2(magicast@0.5.2)
       chokidar: 4.0.3
       pathe: 2.0.3
       tinyglobby: 0.2.15
@@ -12502,7 +12502,7 @@ snapshots:
 
   '@types/pg@8.18.0':
     dependencies:
-      '@types/node': 22.19.15
+      '@types/node': 25.5.0
       pg-protocol: 1.13.0
       pg-types: 2.2.0
 
@@ -16690,7 +16690,7 @@ snapshots:
       nuxt: 4.2.2(@parcel/watcher@2.5.6)(@types/node@25.5.0)(@vue/compiler-sfc@3.5.30)(better-sqlite3@12.2.0)(cac@6.7.14)(db0@0.3.4(better-sqlite3@12.2.0))(eslint@9.39.4(jiti@2.6.1))(ioredis@5.10.1)(lightningcss@1.32.0)(magicast@0.5.2)(optionator@0.9.4)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.1)(typescript@5.9.3)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.1)(yaml@2.8.2))(yaml@2.8.2)
       nuxt-auth-utils: 0.5.25(magicast@0.5.2)
       nuxt-charts: 1.0.2(magicast@0.5.2)(vue@3.5.26(typescript@5.9.3))
-      nuxt-neon: 0.8.2(magicast@0.5.2)
+      nuxt-neon: 0.8.3(magicast@0.5.2)
       nuxt-security: 2.4.0(magicast@0.5.2)(rollup@4.59.0)
       nuxt-spec: 0.1.14(@parcel/watcher@2.5.6)(@types/debug@4.1.13)(@types/node@25.5.0)(@typescript-eslint/utils@8.57.1(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(@vue/compiler-sfc@3.5.30)(better-sqlite3@12.2.0)(cac@6.7.14)(db0@0.3.4(better-sqlite3@12.2.0))(eslint@9.39.4(jiti@2.6.1))(ioredis@5.10.1)(jiti@2.6.1)(lightningcss@1.32.0)(magicast@0.5.2)(optionator@0.9.4)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.1)(vite@7.3.1(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.1)(yaml@2.8.2))(yaml@2.8.2)
       open-props: 1.7.16
@@ -16883,10 +16883,10 @@ snapshots:
       - vite
       - vue
 
-  nuxt-neon@0.8.2(magicast@0.5.2):
+  nuxt-neon@0.8.3(magicast@0.5.2):
     dependencies:
       '@neondatabase/serverless': 1.0.2
-      '@nuxt/kit': 4.2.2(magicast@0.5.2)
+      '@nuxt/kit': 4.4.2(magicast@0.5.2)
       sqlstring: 2.3.3
       vite-plugin-commonjs: 0.10.4
     transitivePeerDependencies:
