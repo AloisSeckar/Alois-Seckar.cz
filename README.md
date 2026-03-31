@@ -1,5 +1,7 @@
 # Alois-Seckar.cz
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/377497b7-7d0a-4941-9a68-c870114979af/deploy-status)](https://app.netlify.com/projects/alois-seckar/deploys)
+
 Created with [Nuxt 3](https://nuxt.com/)
 
 Auto-deploment from `main` branch to Netlifiy @ [https://alois-seckar.netlify.app/](https://alois-seckar.netlify.app/). The public domain [https://alois-seckar.cz/](https://alois-seckar.cz/) points to this deployment.
