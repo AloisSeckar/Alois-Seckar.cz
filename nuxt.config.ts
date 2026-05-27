@@ -28,4 +28,18 @@ export default defineNuxtConfig({
       stylistic: true,
     },
   },
+
+  ignis: {
+    config: {
+      html: {
+        title: 'Alois-Seckar.cz',
+        lang: 'cs',
+      },
+    },
+    preset: {
+      ui: 'nuxt-ui',
+      db: 'neon',
+      forms: 'vueform',
+    },
+  }
 })
