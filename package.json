@@ -10,13 +10,10 @@
     "test:nuxt": "vitest --project nuxt"
   },
   "devDependencies": {
-    "@vue/test-utils": "^2.4.10",
     "crypto-js": "4.2.0",
-    "happy-dom": "^20.9.0",
     "node-html-parser": "7.1.0",
-    "nuxt-ignis": "0.6.0-rc.2",
-    "vitest": "^4.1.7",
-    "vue-component-type-helpers": "3.3.2"
+    "nuxt-ignis": "0.6.0-rc.5",
+    "vue-component-type-helpers": "3.3.3"
   },
-  "packageManager": "pnpm@11.4.0"
+  "packageManager": "pnpm@11.5.0"
 }
