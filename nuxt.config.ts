@@ -41,5 +41,13 @@ export default defineNuxtConfig({
       db: 'neon',
       forms: 'vueform',
     },
-  }
+  },
+
+  security: {
+    headers: {
+      contentSecurityPolicy: {
+        'img-src': ["'self'", 'data:', 'https://media2.dev.to'],
+      },
+    },
+  },
 })
