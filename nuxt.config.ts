@@ -44,10 +44,6 @@ export default defineNuxtConfig({
   },
 
   security: {
-    // disabled because of resolution issues on Netlify
-    // TODO remove once h3 v2 is usede everywhere
-    corsHandler: false,
-    //
     headers: {
       contentSecurityPolicy: {
         'img-src': ['\'self\'', 'data:', 'https://media2.dev.to'],

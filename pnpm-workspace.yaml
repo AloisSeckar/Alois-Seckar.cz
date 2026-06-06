@@ -17,3 +17,9 @@ minimumReleaseAgeExclude:
   - '@nuxt-ignis/ui'
   - '@nuxt-ignis/utils'
   - '@nuxt-ignis/validation'
+
+# required to pin h3 version for compatibility
+packageExtensions:
+  nuxt-security:
+    dependencies:
+      h3: ^1.15.11
