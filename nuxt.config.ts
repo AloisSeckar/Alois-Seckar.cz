@@ -23,6 +23,14 @@ export default defineNuxtConfig({
     key: 0,
   },
 
+  vite: {
+    optimizeDeps: {
+      include: [
+        '@tanstack/vue-table',
+      ],
+    },
+  },
+
   eslint: {
     config: {
       stylistic: true,
