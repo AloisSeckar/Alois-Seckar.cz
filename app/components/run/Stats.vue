@@ -16,7 +16,7 @@
       <strong>{{ nejlepsiRok }}</strong>
       <span class="text-xs">{{ nejlepsiRokKm }} km</span>
     </div>
-    <div :class="`${statsCircleClass} bg-sky-300`" title="Průměrně v tomto měsíci (od 2013)">
+    <div :class="`${statsCircleClass} bg-sky-300`" title="Průměrně v jednom měsíci (od 2013)">
       <strong>⌀ Měsíc</strong>
       <span class="text-xs">{{ prumerZaMesic }} km</span>
     </div>
@@ -90,23 +90,17 @@ watch(celkemKm, () => {
   nejlepsiMesic.value = nejlepsiMesic.value.split('-').reverse().join('/')
   nejlepsiMesicKm.value = (maxZaMesic / 1000).toFixed(1)
 
-  let celkemZaVsechnyRoky = 0
-  let pocetLet = 0
-  for (const year in kmZaKazdyRok) {
-    celkemZaVsechnyRoky += kmZaKazdyRok[year]!
-    pocetLet++
-  }
-  prumerZaRok.value = ((celkemZaVsechnyRoky / pocetLet) / 1000).toFixed(1)
+  const startYear = 2013
+  const startMonth = 3
+  const currentYear = parseInt(aktualniRok)
+  const currentMonth = parseInt(aktualniMesic)
+  const totalMonths = (currentYear - startYear) * 12 + (currentMonth - startMonth)
+  const pocetLet = totalMonths / 12
 
-  let celkemZaVsechnyMesice = 0
-  let pocetMesicu = 0
-  for (const mesic in kmZaKazdyMesic) {
-    if (mesic.endsWith(aktualniMesic)) {
-      celkemZaVsechnyMesice += kmZaKazdyMesic[mesic]!
-      pocetMesicu++
-    }
-  }
-  prumerZaMesic.value = ((celkemZaVsechnyMesice / pocetMesicu) / 1000).toFixed(1)
+  const celkem = parseFloat(celkemKm.value)
+
+  prumerZaRok.value = (celkem / pocetLet).toFixed(1)
+  prumerZaMesic.value = (celkem / totalMonths).toFixed(1)
 }, { immediate: true })
 
 function sumRuns() {
