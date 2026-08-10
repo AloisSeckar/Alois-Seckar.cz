@@ -17,9 +17,15 @@ minimumReleaseAgeExclude:
   - '@nuxt-ignis/ui'
   - '@nuxt-ignis/utils'
   - '@nuxt-ignis/validation'
+  # test latest release
+  - nuxt-neon@0.9.0-alpha.1
 
 # required to pin h3 version for compatibility
 packageExtensions:
   nuxt-security:
     dependencies:
       h3: ^1.15.11
+
+# test latest release
+overrides:
+  nuxt-neon: 0.9.0-alpha.1
