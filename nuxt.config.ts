@@ -29,6 +29,22 @@ export default defineNuxtConfig({
         '@tanstack/vue-table',
       ],
     },
+    plugins: [
+      // mitigate https://github.com/AloisSeckar/nuxt-ignis/issues/142
+      // TODO remove when upstream fix available in nuxt-ignis
+      {
+        name: 'stub-vueform-types-dts',
+        enforce: 'pre',
+        resolveId(id: string) {
+          return id.replace(/\\/g, '/').endsWith('@vueform/vueform/types/index.d.ts')
+            ? '\0stub-vueform-types-dts'
+            : null
+        },
+        load(id: string) {
+          return id === '\0stub-vueform-types-dts' ? 'export {}' : null
+        },
+      },
+    ],
   },
 
   eslint: {
