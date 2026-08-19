@@ -10,7 +10,6 @@
     "test:nuxt": "vitest --project nuxt"
   },
   "devDependencies": {
-    "crypto-js": "4.2.0",
     "node-html-parser": "7.1.0",
     "nuxt-ignis": "0.6.1"
   },
