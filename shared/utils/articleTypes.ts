@@ -18,3 +18,13 @@ export type Last5Articles = {
   item4: ArticleItem
   item5: ArticleItem
 }
+
+// fetch request type
+export type ArticleFetchRequest = {
+  // url to fetch from (.md file on github)
+  url: string
+  // number of records returned (all if not set)
+  count?: number
+  // lazy loading offset
+  offset?: number
+}

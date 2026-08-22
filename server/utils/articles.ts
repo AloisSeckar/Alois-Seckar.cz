@@ -1,15 +1,15 @@
 import { parse } from 'node-html-parser'
 
-export async function getArticles(url: string, count: number): Promise<ArticleItem[]> {
-  const htmlData = await $fetch<string>(url)
+export async function getArticles(request: ArticleFetchRequest): Promise<ArticleItem[]> {
+  const htmlData = await $fetch<string>(request.url)
   const htmlPage = parse(htmlData)
   const markdown = htmlPage.innerText
   const mdLines = markdown.split('\n').filter(l => l.startsWith('| **`'))
-  return mdLines.slice(0, count).map(md => parseMarkdown(md))
+  return mdLines.slice(request.offset, request.count).map(md => parseMarkdown(md))
 }
 
 export async function getLast5Articles(url: string): Promise<Last5Articles> {
-  const items = await getArticles(url, 5)
+  const items = await getArticles({ url, count: 5 })
   return {
     item1: items[0] || parseMarkdown(''),
     item2: items[1] || parseMarkdown(''),
