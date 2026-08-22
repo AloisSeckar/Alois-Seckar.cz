@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'node:url'
 import { setup, fetch } from '@nuxt/test-utils/e2e'
 import { describe, expect, test } from 'vitest'
+import type { Last5Articles } from '../shared/utils/articleTypes'
 
 // Testing:
 // https://alois-seckar.cz/nuxt-news

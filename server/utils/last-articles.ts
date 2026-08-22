@@ -1,20 +1,5 @@
 import { parse } from 'node-html-parser'
 
-export type ArticleItem = {
-  date: string
-  title: string
-  link: string
-  dscr: string
-}
-
-export type Last5Articles = {
-  item1: ArticleItem
-  item2: ArticleItem
-  item3: ArticleItem
-  item4: ArticleItem
-  item5: ArticleItem
-}
-
 export async function getLast5Articles(url: string): Promise<Last5Articles> {
   const htmlData = await $fetch<string>(url)
   const htmlPage = parse(htmlData)
