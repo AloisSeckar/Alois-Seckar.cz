@@ -11,15 +11,15 @@ describe('Check if homepage renders correctly', async () => {
     const html = await $fetch('/')
     expect(html).toContain('<h1>Alois Sečkár</h1>') // title appears
     expect(html).toContain('<h2>Programátor</h2>') // section appears
-    expect(html).toContain('src="/ignis.webp"') // image appears
+    expect(html).toContain('src="/_ipx/_/ignis.webp"') // image appears
     expect(html).toContain('/pdf/as-rust.pdf') // link appears
     expect(html).toContain('<h2>Sportovec</h2>') // section appears
-    expect(html).toContain('src="/wbsc.webp"') // image appears
+    expect(html).toContain('src="/_ipx/_/wbsc.webp"') // image appears
     expect(html).toContain('<h2>Krčský patriot</h2>') // section appears
-    expect(html).toContain('src="/krc.webp"') // image appears
+    expect(html).toContain('src="/_ipx/_/krc.webp"') // image appears
     expect(html).toContain('<h2>Ostatní</h2>') // section appears
     expect(html).toContain('href="https://www.deviantart.com/ellrohir"') // link appears
-    expect(html).toContain('src="/instagram.webp"') // image appears
+    expect(html).toContain('src="/_ipx/_/instagram.webp"') // image appears
   })
 
   test('"ramecky" page renders correctly', async () => {
