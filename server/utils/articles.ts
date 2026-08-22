@@ -1,16 +1,21 @@
 import { parse } from 'node-html-parser'
 
-export async function getLast5Articles(url: string): Promise<Last5Articles> {
+export async function getArticles(url: string, count: number): Promise<ArticleItem[]> {
   const htmlData = await $fetch<string>(url)
   const htmlPage = parse(htmlData)
   const markdown = htmlPage.innerText
   const mdLines = markdown.split('\n').filter(l => l.startsWith('| **`'))
+  return mdLines.slice(0, count).map(md => parseMarkdown(md))
+}
+
+export async function getLast5Articles(url: string): Promise<Last5Articles> {
+  const items = await getArticles(url, 5)
   return {
-    item1: parseMarkdown(mdLines[0] || ''),
-    item2: parseMarkdown(mdLines[1] || ''),
-    item3: parseMarkdown(mdLines[2] || ''),
-    item4: parseMarkdown(mdLines[3] || ''),
-    item5: parseMarkdown(mdLines[4] || ''),
+    item1: items[0] || parseMarkdown(''),
+    item2: items[1] || parseMarkdown(''),
+    item3: items[2] || parseMarkdown(''),
+    item4: items[3] || parseMarkdown(''),
+    item5: items[4] || parseMarkdown(''),
   }
 }
 
