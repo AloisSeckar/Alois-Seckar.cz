@@ -30,7 +30,7 @@
                 {{ article.title }}
               </NuxtLink>
               <p class="m-0! text-sm text-left sm:text-justify text-slate-300 break-words">
-                {{ article.dscr }}
+                {{ capitalizeDscr(article.dscr) }}
               </p>
             </div>
           </div>
@@ -60,6 +60,16 @@ function fetchArticles(offset: number) {
     method: 'POST',
     body: { url: props.url, count: PAGE_SIZE, offset },
   })
+}
+
+// ensure first capital letter
+function capitalizeDscr(dscr: string) {
+  const text = dscr.trim()
+  if (!text) {
+    return ''
+  }
+  const capitalized = text.charAt(0).toUpperCase() + text.slice(1)
+  return /[.!?]$/.test(capitalized) ? capitalized : `${capitalized}`
 }
 
 // client-only fetch
