@@ -1,11 +1,15 @@
 import { parse } from 'node-html-parser'
 
 export async function getArticles(request: ArticleFetchRequest): Promise<ArticleItem[]> {
+  // read all entries
   const htmlData = await $fetch<string>(request.url)
   const htmlPage = parse(htmlData)
   const markdown = htmlPage.innerText
   const mdLines = markdown.split('\n').filter(l => l.startsWith('| **`'))
-  return Promise.all(mdLines.slice(request.offset, request.count).map(md => parseMarkdown(md)))
+  // return requested amount
+  const start = request.offset ?? 0
+  const end = request.count ? start + request.count : undefined
+  return Promise.all(mdLines.slice(start, end).map(md => parseMarkdown(md)))
 }
 
 export async function getLast5Articles(url: string): Promise<Last5Articles> {

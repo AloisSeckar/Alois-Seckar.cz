@@ -70,7 +70,8 @@ export default defineNuxtConfig({
   security: {
     headers: {
       contentSecurityPolicy: {
-        'img-src': ['\'self\'', 'data:', 'https://media2.dev.to'],
+        // 'https:' required to display article og:meta thumbnails
+        'img-src': ['\'self\'', 'data:', 'https:'],
       },
     },
   },

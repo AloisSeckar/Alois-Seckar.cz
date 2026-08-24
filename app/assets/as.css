@@ -25,9 +25,9 @@ a:visited {
 }
 
 h1 {
-    font-family: kaushan, cursive;
     font-size: 50px;
-    margin-bottom: 15px;
+    margin-top: 2em;
+    margin-bottom: 1em;
     color: #e1b400;
 }
 
@@ -81,10 +81,6 @@ h2 {
     height: 24px;
     width: 96px;
     margin-top: 1em;
-}
-
-.page-header {
-    margin: 1em;
 }
 
 /* CONTENT */

@@ -1,7 +1,18 @@
 <template>
-  <div class="page-header">
+  <header>
     <NuxtLink to="/">
-      <h2>Alois-Seckar.cz</h2>
+      <h1>
+        Alois-Seckar.cz
+        <span v-if="subtitle">
+          - {{ subtitle }}
+        </span>
+      </h1>
     </NuxtLink>
-  </div>
+  </header>
 </template>
+
+<script setup lang="ts">
+defineProps<{
+  subtitle?: string
+}>()
+</script>
