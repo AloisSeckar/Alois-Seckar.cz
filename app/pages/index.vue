@@ -24,6 +24,7 @@
           </NuxtLink>
         </div>
         <WidgetDevDocuments />
+        <WidgetDevDigest />
         <WidgetDevTo />
       </section>
       <section class="content-block">
