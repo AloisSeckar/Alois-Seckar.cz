@@ -1,7 +1,11 @@
 <template>
   <div>
-    <ThePageHeader />
-    <section id="content">
+    <header class="my-1">
+      <NuxtLink to="/">
+        <h1>Alois-Seckar.cz</h1>
+      </NuxtLink>
+    </header>
+    <section id="content" class="mb-8">
       Aplikaci "Svobodné rámečky" nyní naleznete na
       <NuxtLink to="http://ellrohir.mzf.cz/ramecky/">
         http://ellrohir.mzf.cz/ramecky/
