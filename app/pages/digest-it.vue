@@ -10,15 +10,13 @@
         Další položky se načítají postupně při scrollování dolů.
       </p>
 
-      <ArticleDigest :url="CODA_DIGEST_URL" />
+      <ArticleDigest source="coda" />
     </div>
     <ThePageFooter />
   </div>
 </template>
 
 <script setup lang="ts">
-const CODA_DIGEST_URL = 'https://raw.githubusercontent.com/AloisSeckar/master-coda/refs/heads/master/CodaDigest.md'
-
 useSeoMeta({
   title: 'Coda Digest | Alois-Seckar.cz',
   description: 'Sbírka zajímavých článků a novinek ze světa IT.',

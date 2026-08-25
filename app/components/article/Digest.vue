@@ -50,15 +50,25 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  url: string
+  source: ArticleSource
 }>()
 
 const PAGE_SIZE = 10
+const CACHE_TTL = 10 * 60 * 1000
+
+type DigestCache = {
+  items: ArticleItem[]
+  canLoadMore: boolean
+  fetchedAt: number
+}
+
+// keeps already loaded (and scrolled) items when navigating away and back
+const cache = useState<Partial<Record<ArticleSource, DigestCache>>>('article-digest-cache', () => ({}))
+const cached = computed(() => cache.value[props.source])
 
 function fetchArticles(offset: number) {
   return $fetch<ArticleItem[]>('/get-articles', {
-    method: 'POST',
-    body: { url: props.url, count: PAGE_SIZE, offset },
+    query: { source: props.source, count: PAGE_SIZE, offset },
   })
 }
 
@@ -73,28 +83,46 @@ function capitalizeDscr(dscr: string) {
 }
 
 // client-only fetch
-const { data, status } = useAsyncData(`article-digest-${props.url}`, () => fetchArticles(0), { server: false, lazy: true })
+const { data, status } = useAsyncData(`article-digest-${props.source}`, () => fetchArticles(0), {
+  server: false,
+  lazy: true,
+  getCachedData: () => {
+    const entry = cached.value
+    return entry && Date.now() - entry.fetchedAt < CACHE_TTL ? entry.items : undefined
+  },
+})
 const loading = computed(() => status.value === 'idle' || status.value === 'pending')
 
-const articles = ref<ArticleItem[]>([])
-const canLoadMore = ref(false)
+const articles = computed(() => cached.value?.items ?? [])
+const canLoadMore = computed(() => cached.value?.canLoadMore ?? false)
 const loadingMore = ref(false)
 
 watch(data, (value) => {
-  articles.value = value ?? []
-  canLoadMore.value = articles.value.length === PAGE_SIZE
+  // same reference means the data came from `getCachedData`
+  if (!value || value === cached.value?.items) {
+    return
+  }
+  cache.value[props.source] = {
+    items: value,
+    canLoadMore: value.length === PAGE_SIZE,
+    fetchedAt: Date.now(),
+  }
 }, { immediate: true })
 
 async function loadMore() {
+  const entry = cached.value
+  if (!entry) {
+    return
+  }
   loadingMore.value = true
   try {
-    const next = await fetchArticles(articles.value.length)
-    articles.value.push(...next)
+    const next = await fetchArticles(entry.items.length)
+    entry.items.push(...next)
     if (next.length < PAGE_SIZE) {
-      canLoadMore.value = false
+      entry.canLoadMore = false
     }
   } catch {
-    canLoadMore.value = false
+    entry.canLoadMore = false
   } finally {
     loadingMore.value = false
   }

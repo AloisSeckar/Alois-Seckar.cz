@@ -20,12 +20,29 @@ export type Last5Articles = {
   item5: ArticleItem
 }
 
+// allowed article lists
+// (mapped to their .md files in `articleSources.ts`)
+export type ArticleSource = 'nuxt' | 'java' | 'coda'
+
 // fetch request type
 export type ArticleFetchRequest = {
-  // url to fetch from (.md file on github)
-  url: string
+  // source to fetch from (allowed whitelist)
+  source: ArticleSource
   // number of records returned (all if not set)
   count?: number
   // lazy loading offset
   offset?: number
+}
+
+// headers for route settings
+
+export const ARTICLE_DIGEST_HEADERS = {
+  'cache-control': 'public, max-age=300, stale-while-revalidate=3600',
+  'netlify-cdn-cache-control': 'public, durable, s-maxage=3600, stale-while-revalidate=86400',
+  'netlify-vary': 'query=source|count|offset',
+}
+
+export const LEGACY_DIGEST_HEADERS = {
+  'cache-control': 'public, max-age=300, stale-while-revalidate=3600',
+  'netlify-cdn-cache-control': 'public, durable, s-maxage=3600, stale-while-revalidate=86400',
 }

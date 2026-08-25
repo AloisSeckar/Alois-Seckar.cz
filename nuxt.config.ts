@@ -1,3 +1,5 @@
+import { ARTICLE_DIGEST_HEADERS, LEGACY_DIGEST_HEADERS } from './shared/utils/articleTypes'
+
 export default defineNuxtConfig({
   extends: [
     'nuxt-ignis',
@@ -21,6 +23,16 @@ export default defineNuxtConfig({
       },
     },
     key: 0,
+  },
+
+  routeRules: {
+    // caching data in Netlify CDN
+    '/get-articles': {
+      headers: ARTICLE_DIGEST_HEADERS,
+    },
+    '/nuxt-news': { headers: LEGACY_DIGEST_HEADERS },
+    '/java-news': { headers: LEGACY_DIGEST_HEADERS },
+    '/coda-digest': { headers: LEGACY_DIGEST_HEADERS },
   },
 
   vite: {
