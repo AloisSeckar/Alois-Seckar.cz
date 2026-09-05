@@ -48,4 +48,10 @@ onMounted(async () => {
 #dev::part(more):hover {
   background-color: rgb(225, 180, 0);
 }
+#dev::part(title) {
+  font-size: 0.85em;
+}
+#dev::part(title):hover {
+  color: rgb(225, 180, 0);
+}
 </style>

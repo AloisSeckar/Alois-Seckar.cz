@@ -193,7 +193,7 @@ export default class DevTo extends HTMLElement {
     const list = articlesToRender.map(article => `
 <li>
   <img src="${article.cover_image}" alt="${DevTo.#encode(article.title)}">
-  <a href="${article.url}" target="_blank" data-id="${article.id}">
+  <a href="${article.url}" target="_blank" data-id="${article.id}" part="title">
     ${DevTo.#encode(article.title)}
     <time datetime="${article.published_timestamp}">${this.#dateFormatter.format(new Date(article.published_timestamp))}</time>
   </a>
