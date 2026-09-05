@@ -6,6 +6,7 @@
       :items-per-page="table?.tableApi?.getState().pagination.pageSize"
       :total="table?.tableApi?.getFilteredRowModel().rows.length"
       :sibling-count="1" class="flex flex-row justify-center mt-2"
+      :ui="{ first: 'cursor-pointer', prev: 'cursor-pointer', item: 'cursor-pointer', next: 'cursor-pointer', last: 'cursor-pointer' }"
       @update:page="(p) => table?.tableApi?.setPageIndex(p - 1)" />
     <UTable
       ref="table"
