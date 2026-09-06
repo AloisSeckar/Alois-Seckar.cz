@@ -90,7 +90,7 @@ function doFilterTrack(tid: number) {
 
 function doSort(column: string, direction: SortDirection) {
   runFilter.value.sortColumn = column
-  runFilter.value.sortDirection = direction === 'asc' ? 'ASC' : 'DESC' // TODO fix once solved in nuxt-neon (issue opened https://github.com/AloisSeckar/nuxt-neon/issues/46)
+  runFilter.value.sortDirection = direction
   filterRuns()
 }
 
