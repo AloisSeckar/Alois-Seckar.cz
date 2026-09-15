@@ -31,7 +31,7 @@ const fetchArticleLines = defineCachedFunction(async (source: ArticleSource): Pr
   const htmlData = await $fetch<string>(ARTICLE_SOURCES[source])
   const htmlPage = parse(htmlData)
   const markdown = htmlPage.innerText
-  return markdown.split('\n').filter(l => l.startsWith('| **`'))
+  return markdown.split('\n').filter(l => l.startsWith('| **`') && !/\| \*\*JDK \d+ release date\*\* \|/.test(l))
 }, {
   name: 'article-lines',
   group: 'articles',
