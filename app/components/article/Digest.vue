@@ -14,14 +14,18 @@
         <UCard
           class="text-left ring-1 ring-teal-500/40 bg-slate-900/60 shadow-[0_0_12px_3px_#38b2ac] transition-shadow hover:shadow-[0_0_18px_5px_#38b2ac]">
           <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-            <img
-              v-if="article.image"
-              :src="article.image"
-              :alt="article.title"
-              loading="lazy"
-              referrerpolicy="no-referrer"
-              class="w-full sm:w-40 h-[120px]! object-cover rounded-lg shrink-0 border-2 border-[#e1b400]"
-              @error="article.image = undefined">
+            <div class="relative w-full sm:w-40 h-[120px] shrink-0 overflow-hidden rounded-lg border-2 border-[#e1b400]">
+              <USkeleton v-if="!loaded.has(article.link)" class="absolute inset-0 rounded-none" />
+              <img
+                :src="failed.has(article.link) ? PLACEHOLDER : imageUrl(article.link)"
+                :alt="article.title"
+                loading="lazy"
+                referrerpolicy="no-referrer"
+                class="w-full h-full! object-cover transition-opacity duration-300"
+                :class="loaded.has(article.link) ? 'opacity-100' : 'opacity-0'"
+                @load="loaded.add(article.link)"
+                @error="onImageError(article.link)">
+            </div>
             <div class="min-w-0 flex flex-col gap-2">
               <span class="font-mono text-sm text-[#e1b400]">
                 {{ article.date }}
@@ -55,6 +59,23 @@ const props = defineProps<{
 
 const PAGE_SIZE = 10
 const CACHE_TTL = 10 * 60 * 1000
+const PLACEHOLDER = '/article-placeholder.svg'
+
+const loaded = reactive(new Set<string>())
+const failed = reactive(new Set<string>())
+
+function imageUrl(link: string) {
+  return `/article-image?${new URLSearchParams({ source: props.source, link })}`
+}
+
+function onImageError(link: string) {
+  if (failed.has(link)) {
+    // even the placeholder failed, at least stop the skeleton
+    loaded.add(link)
+  } else {
+    failed.add(link)
+  }
+}
 
 type DigestCache = {
   items: ArticleItem[]

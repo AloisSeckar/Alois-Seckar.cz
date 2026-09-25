@@ -21,11 +21,32 @@ describe('Check if endpoints for scraping news articles work properly', async ()
     expect(jsonData[0]).toHaveProperty('title')
     expect(jsonData[0]).toHaveProperty('link')
     expect(jsonData[0]).toHaveProperty('dscr')
+    expect(jsonData[0]).not.toHaveProperty('image')
   })
 
   test('should refuse to fetch an unknown source', async () => {
     const response = await fetch('/get-articles?source=https://example.com/evil.md')
     expect(response.status).toBe(400)
+  })
+
+  // https://alois-seckar.cz/article-image
+
+  test('should redirect to article image', async () => {
+    const articles = await (await fetch('/get-articles?source=nuxt&count=1')).json() as ArticleItem[]
+    const query = new URLSearchParams({ source: 'nuxt', link: articles[0]!.link })
+    const response = await fetch(`/article-image?${query}`, { redirect: 'manual' })
+    expect(response.status).toBe(302)
+    expect(response.headers.get('location')).toBeTruthy()
+  })
+
+  test('should refuse to fetch image for an unknown source', async () => {
+    const response = await fetch('/article-image?source=evil&link=https://example.com', { redirect: 'manual' })
+    expect(response.status).toBe(400)
+  })
+
+  test('should refuse to fetch image for a link outside of the source', async () => {
+    const response = await fetch('/article-image?source=nuxt&link=https://example.com', { redirect: 'manual' })
+    expect(response.status).toBe(404)
   })
 
   // legacy

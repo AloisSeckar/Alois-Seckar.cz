@@ -5,7 +5,6 @@ export type ArticleItem = {
   title: string
   link: string
   dscr: string
-  image?: string
 }
 
 // return type of scraping endpoints

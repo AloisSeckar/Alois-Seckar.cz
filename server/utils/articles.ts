@@ -6,18 +6,19 @@ const LINES_STALE_MAX_AGE = 60 * 60 * 24 // serve stale for a day while revalida
 
 // og:image of an already published article practically never changes
 const IMAGE_MAX_AGE = 60 * 60 * 24 * 30 // 30 days
+const IMAGE_FETCH_TIMEOUT = 5000
 
 export async function getArticles(request: ArticleFetchRequest): Promise<ArticleItem[]> {
   const mdLines = await fetchArticleLines(request.source)
   // return requested amount
   const start = request.offset ?? 0
   const end = request.count ? start + request.count : undefined
-  return Promise.all(mdLines.slice(start, end).map(md => parseMarkdown(md)))
+  return mdLines.slice(start, end).map(md => parseMarkdown(md))
 }
 
 export async function getLast5Articles(source: ArticleSource): Promise<Last5Articles> {
   const items = await getArticles({ source, count: 5 })
-  const empty = await parseMarkdown('')
+  const empty = parseMarkdown('')
   return {
     item1: items[0] || empty,
     item2: items[1] || empty,
@@ -41,35 +42,48 @@ const fetchArticleLines = defineCachedFunction(async (source: ArticleSource): Pr
   getKey: (source: ArticleSource) => source,
 })
 
-async function parseMarkdown(entry: string): Promise<ArticleItem> {
-  const article: ArticleItem = {
+function parseMarkdown(entry: string): ArticleItem {
+  return {
     date: entry.substring(entry.indexOf('*`') + 2, entry.indexOf('`*')),
     title: entry.substring(entry.indexOf('| [') + 3, entry.indexOf('](')),
-    link: entry.substring(entry.indexOf('](') + 2, entry.indexOf(') - ')),
+    link: parseLink(entry),
     dscr: stripMarkdown(entry.substring(entry.indexOf(') - ') + 4, entry.lastIndexOf(' |'))),
   }
+}
 
-  if (article.link) {
-    article.image = await fetchImage(article.link) ?? undefined
-  }
-
-  return article
+function parseLink(entry: string): string {
+  return entry.substring(entry.indexOf('](') + 2, entry.indexOf(') - '))
 }
 
 function stripMarkdown(entry: string): string {
   return entry.replaceAll('**', '').replaceAll('_', '')
 }
 
-// try to extract og:image meta tag
+// `undefined` = link is not part of the source (do not fetch arbitrary client-supplied URLs)
+// `null` = article has no usable og:image
+// throws when the article page cannot be fetched
+export async function getArticleImage(source: ArticleSource, link: string): Promise<string | null | undefined> {
+  const mdLines = await fetchArticleLines(source)
+  if (!mdLines.some(l => parseLink(l) === link)) {
+    return undefined
+  }
+  return fetchImage(link)
+}
+
 // must return `null` instead of `undefined` on a miss, Nitro refuses to cache `undefined`
+// errors are rethrown on purpose, so transient failures are not cached
 const fetchImage = defineCachedFunction(async (link: string): Promise<string | null> => {
+  const htmlData = await $fetch<string>(link, { timeout: IMAGE_FETCH_TIMEOUT, responseType: 'text' })
+  const htmlPage = parse(htmlData)
+  const content = htmlPage.querySelector('meta[property="og:image"]')?.getAttribute('content')
+  if (!content) {
+    return null
+  }
   try {
-    const htmlData = await $fetch<string>(link)
-    const htmlPage = parse(htmlData)
-    const ogImage = htmlPage.querySelector('meta[property="og:image"]')
-    return ogImage?.getAttribute('content') ?? null
+    // og:image may be relative to the article URL
+    const url = new URL(content, link)
+    return url.protocol === 'https:' ? url.href : null
   } catch {
-    // placeholder image will be used
     return null
   }
 }, {
