@@ -9,7 +9,7 @@ describe('Check if homepage renders correctly', async () => {
 
   test('"index" page renders correctly', async () => {
     const html = await $fetch('/')
-    expect(html).toContain('<h1>Alois Sečkár</h1>') // title appears
+    expect(html).toMatch(/<h1[^>]*>Alois Sečkár<\/h1>/) // title appears
     expect(html).toContain('<h2>Programátor</h2>') // section appears
     expect(html).toContain('src="/_ipx/_/ignis.webp"') // image appears
     expect(html).toContain('/pdf/as-rust.pdf') // link appears
