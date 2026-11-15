@@ -21,7 +21,7 @@ export type Last5Articles = {
 
 // allowed article lists
 // (mapped to their .md files in `articleSources.ts`)
-export type ArticleSource = 'nuxt' | 'java' | 'it'
+export type ArticleSource = 'nuxt' | 'java' | 'ai' | 'it'
 
 // fetch request type
 export type ArticleFetchRequest = {

@@ -47,7 +47,7 @@ Browser
 ### Pages
 
 - `/` (`index.vue`) - static portfolio sections, links to PDF documents, links to digests and the dev.to articles widget.
-- `/digest-java`, `/digest-nuxt`, `/digest-it` - article digests rendered by the `ArticleDigest` component.
+- `/digest-java`, `/digest-nuxt`, `/digest-ai`, `/digest-it` - article digests rendered by the `ArticleDigest` component.
 - `/run` - running statistics with filter, table, stats and an admin form.
 - `/ramecky` - points to the new location of the old "Svobodné rámečky" app. The global middleware `redirect.global.ts` redirects old `/ramecky/index.php` URLs here.
 

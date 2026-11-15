@@ -1,8 +1,8 @@
 <template>
   <h3 class="text-[#e1b400] text-2xl text-center mt-6 mb-4">
-    Přehledy novinek a článků
+    Přehledy novinek a&nbsp;článků
   </h3>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-4xl mx-auto">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-4xl mx-auto">
     <NuxtLink
       v-for="digest in digests"
       :key="digest.to"
@@ -34,19 +34,25 @@ const digests = [
     to: '/digest-java',
     type: 'Java',
     title: 'Java News',
-    dscr: 'Co je nového v Java ekosystému',
+    dscr: 'Co je nového v\xa0Java ekosystému',
   },
   {
     to: '/digest-nuxt',
     type: 'Nuxt',
     title: 'Nuxt News',
-    dscr: 'Novinky ze světa Nuxt frameworku a Vue.js',
+    dscr: 'Novinky ze světa Nuxt frameworku a\xa0Vue.js',
+  },
+  {
+    to: '/digest-ai',
+    type: 'AI',
+    title: 'AI News',
+    dscr: 'Novinky ze světa umělé inteligence',
   },
   {
     to: '/digest-it',
     type: 'IT',
     title: 'IT Digest',
-    dscr: 'Další zajímavosti a texty z IT branže',
+    dscr: 'Další zajímavosti a\xa0texty z\xa0IT branže',
   },
 ]
 </script>

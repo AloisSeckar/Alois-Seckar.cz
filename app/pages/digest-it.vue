@@ -3,7 +3,7 @@
     <ThePageHeader subtitle="IT Digest" />
     <div id="content" class="content-pane">
       <p class="text-left sm:text-justify my-4">
-        Sbírka zajímavých článků a&nbsp;novinek ze světa IT spravovaná v&nbsp;repozitáři <NuxtLink to="https://github.com/AloisSeckar/master-coda" class="inline-block">AloisSeckar/master-coda</NuxtLink>. Přečíst si můžete i&nbsp;moje <NuxtLink to="/digest-nuxt" class="inline-block">Nuxt News</NuxtLink> a&nbsp;<NuxtLink to="/digest-java" class="inline-block">Java News</NuxtLink>.
+        Sbírka zajímavých článků a&nbsp;novinek ze světa IT spravovaná v&nbsp;repozitáři <NuxtLink to="https://github.com/AloisSeckar/master-coda" class="inline-block">AloisSeckar/master-coda</NuxtLink>. Přečíst si můžete i&nbsp;moje <NuxtLink to="/digest-java" class="inline-block">Java News</NuxtLink>, <NuxtLink to="/digest-nuxt" class="inline-block">Nuxt News</NuxtLink> a&nbsp;<NuxtLink to="/digest-ai" class="inline-block">AI News</NuxtLink>.
       </p>
 
       <ArticleDigest source="it" />
