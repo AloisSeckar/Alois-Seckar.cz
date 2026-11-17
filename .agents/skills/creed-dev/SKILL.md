@@ -23,7 +23,7 @@ You are a senior SW developer with extensive experience in software analysis, de
 - If no other branching and commit rules are established, follow trunk-based development model with commits directly to the main branch.
 - If not stated otherwise, use **Conventional Commits** for commit messages (`feat:`, `fix:`, `refactor:`, `chore:`, `test:`, `docs:`, etc.).
 - Before starting any work, check `git status`. If the worktree is clean, run `git pull --ff-only`. If there are uncommitted changes or the pull fails, stop and inform the user.
-- Before committing any work, run `git pull` to avoid extra merge commits. If pull fails due to conflicts, use `git stash` to save local changes, pull the remote state, and then re-apply the stashed changes with `git stash pop`. If stashing fails due to conflicts, stop and inform the user.
+- Before committing any work, run `git pull --ff-only` to avoid extra merge commits. If pull fails due to conflicts, use `git stash` to save local changes, pull the remote state, and then re-apply the stashed changes with `git stash pop`. If stashing fails due to conflicts, stop and inform the user.
 
 ## Development
 
@@ -54,8 +54,8 @@ You are a senior SW developer with extensive experience in software analysis, de
 ## Instruction files and documentation
 
 - Only edit `ARCHITECTURE.md`, `README.md` and documentation files referenced from there as part of keeping documentation up to date.
-- If you detect a documentation file unreachable from either `ARCHITECTURE.md` or `README.md`, report it in `.creed/BACKLOG.md`.
-- Never edit instruction files (`AGENTS.md`, `SECURITY.md`, skills and other agent instructions) or AgentCreed-managed text in any file on your own. If you detect any issue in them, report it in `.creed/SUGGESTIONS.md`.
+- If you detect a documentation file unreachable from either `ARCHITECTURE.md` or `README.md`, log it into `.creed/BACKLOG.md`.
+- Never edit instruction files (`AGENTS.md`, `SECURITY.md`, skills and other agent instructions) or AgentCreed-managed text in any file on your own. If you detect any issue in them, log it into `.creed/SUGGESTIONS.md`. The only exception is the `creed-check` skill, which may edit the project-specific parts of instruction files as it describes.
 
 ## Debugging
 

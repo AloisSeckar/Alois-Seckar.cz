@@ -23,11 +23,17 @@ Split a passage into separate items only where it holds independent rules. Keep 
 
 For duplication checks, intentional documentation summaries and navigation are not duplicates to remove. Preserve them while consolidating redundant normative rules with the same scope and unnecessarily repeated documented facts. Summaries must stay consistent with their authoritative sources.
 
-When a flaw is in an instruction file or inside AgentCreed-managed text that `AGENTS.md` does not allow editing, do not edit it; log the finding into `.creed/SUGGESTIONS.md` instead. This restriction applies to every editing step below.
+All documentation files in this skill's reach (`ARCHITECTURE.md`, `README.md` and their `linked-files`) are part of the scope and you can edit them to fix every wrong or outdated passage directly.
+
+To fix minor flaws as described below, you are also allowed to edit project-specific parts of instruction files. This overrides the prohibition in `creed-dev`. Only when a flaw is detected inside AgentCreed-managed text, do not edit it; log the finding into `.creed/SUGGESTIONS.md` instead.
 
 Fix typos and grammar mistakes in any file you read and may edit right away, without asking and without adding them into `fixes`, provided the meaning does not change. If a correction could change the meaning, treat it as an ambiguity (add it into `questions`).
 
 When moving or rephrasing a `source`, move text word for word by default and keep its strength words (MUST, ALWAYS, NEVER, pause, make sure). Before applying such a change, compare each old rule with its new wording and mark it kept / merged / strengthened / weakened / dropped for the final report.
+
+## 0. Preparation
+
+If and only if `.creed/check` is not present in `project root` (the first run after installation), skip the `git status` and `git pull --ff-only` check required by `creed-dev` and continue right away.
 
 ## 1. Gathering information
 
@@ -76,7 +82,7 @@ For each item of `documented-facts` list, verify it is:
 1. Really a documented fact. If it is imposing a security boundary, move its source into `SECURITY.md` (or appropriate nested file linked from there). If it is giving instructions that are not related to security, move its source into `AGENTS.md` (or appropriate nested file linked from there). If it is a pending task, TODO or open question, move it into `.creed/BACKLOG.md`.
 2. Clear and unambiguous. Rephrase the source if needed. If the intention is not clear to you, add it into `questions`.
 3. Not duplicated by any other item in any list. If yes, keep only one in the source.
-4. Accurate. Verify it against the codebase and configuration (e.g. package manifests, scripts, folder structure). Fix verifiably wrong facts, remove transient states (e.g. test counts) and add uncertain cases into `questions`.
+4. Accurate. Verify it against the project's own code and configuration (e.g. package manifests, scripts, folder structure). Do not dig into third-party libraries or other pulled-in code (e.g. `node_modules`); take it as fact that such code does what its name, documentation and usage suggest. If the behavior of third-party code is uncertain, add it into `questions`. Fix verifiably wrong facts, remove transient states (e.g. test counts) and add uncertain cases into `questions`.
 
 After all items are checked:
 
@@ -92,5 +98,7 @@ Respond with a summary of:
 - items logged into `.creed/SUGGESTIONS.md` and `.creed/BACKLOG.md`
 - typos and grammar mistakes fixed
 - every moved or rephrased rule with its old and new wording, marked as kept, merged, strengthened, weakened or dropped
+
+Finally, write the current timestamp (ISO 8601) into `.creed/check` in `project root`. Create the file if missing. Overwrite it if exists.
 
 <!-- ↑↑↑ agentcreed ↑↑↑ -->

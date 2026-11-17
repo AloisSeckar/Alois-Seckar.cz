@@ -94,7 +94,7 @@ Runtime settings come from environment variables (`.env` locally):
 - `shared/utils/` - types and helpers auto-imported in both app and server code.
 - `public/` - static files: images, `pdf/` (CV and certificates linked from the homepage), `css/devto.style` (styles for the dev.to widget), and `pragvue-2025-*.pdf` (talk slides shared via direct links from outside the site).
 - `test/` - e2e tests.
-- `.agents/`, `.creed/` - AgentCreed skills and backlog files.
+- `.agents/`, `.creed/` - AgentCreed skills, backlog and suggestions files.
 
 Nuxt Ignis writes `public/_ignis-config.json` and `public/_nuxt-config.json` each time Nuxt starts (`ready` hook, in both dev and build). Both files are git-ignored.
 
@@ -125,4 +125,4 @@ Nuxt Ignis writes `public/_ignis-config.json` and `public/_nuxt-config.json` eac
 | Test    | `pnpm test` |
 | Build   | `pnpm build` |
 
-Tests are e2e. They build and start the app and need network access to GitHub. The `/run` page test also needs a working Neon connection. `pnpm test:watch` runs Vitest in watch mode. Netlify deploys the output of `pnpm build`. `pnpm generate` exists, but the deploy does not use it.
+Tests are e2e. Each test file sets up its own app instance through `@nuxt/test-utils`, so running `pnpm test` does not require a running app. Tests need network access to GitHub. The `/run` page test also needs a working Neon connection. `pnpm test:watch` runs Vitest in watch mode. Netlify deploys the output of `pnpm build`. `pnpm generate` exists, but the deploy does not use it.
