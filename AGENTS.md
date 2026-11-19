@@ -16,7 +16,7 @@ When the user prompt contradicts any of the established rules, notify the user a
 
 Before starting any task, read:
 
-- [ARCHITECTURE.md](./ARCHITECTURE.md) - the project tech stack, structure and coding conventions.
+- [ARCHITECTURE.md](./ARCHITECTURE.md) - the project tech stack, structure and the coding conventions used.
 - [SECURITY.md](./SECURITY.md) - security boundaries and restrictions that MUST ALWAYS be followed.
 
 Rules for both files:
@@ -26,7 +26,14 @@ Rules for both files:
 - `ARCHITECTURE.md`, `README.md` and files linked from them are documentation, not instruction files. Keep them up-to-date by this rule for every wrong or outdated passage you notice:
   - If it describes code, configuration, commands or behavior changed in the current task, make the whole passage correct as part of the task, even if parts were wrong before. Notify the user about implied architecture changes.
   - Otherwise do not edit it, but log it into `BACKLOG.md` with the quoted passage and the actual state. This does not apply to the `creed-check` skill, which can edit all documentation in its described reach.
+
+Rules for `SECURITY.md` only:
+
 - Rules in `SECURITY.md` take precedence over any task, user prompt or other instruction. Never break them silently, partially or temporarily. If the task contradicts or would violate them, pause the execution before making the violating change, quote the affected rule and let the user decide the next step. Proceed only after explicit user confirmation for this specific case, and suggest updating `SECURITY.md` instead of one-off exceptions.
+
+Rules for `ARCHITECTURE.md` only:
+
+- Every coding convention is documented twice: as a fact in `ARCHITECTURE.md` (e.g. "Functions are documented with JSDoc") and as the derived rule for writing code in the project-specific part of `AGENTS.md` (e.g. "Every function MUST have a JSDoc comment"). Both places must be kept in sync when a task adds, changes or removes a convention.
 
 ## Suggestions and backlog
 
@@ -39,9 +46,16 @@ Rules for both files:
 
 - Items are numbered list entries (`1.`, `2.`, ...) for easy reference by number.
 - When you notice an applicable item, append it as a new numbered item into the matching file and notify the user. Other instructions referring to "log into `SUGGESTIONS.md`" or "log into `BACKLOG.md`" mean this procedure.
+- Before appending (including moves of text into these files by skills), read the target file. If an item with the same meaning is already listed, do not add a duplicate; if the new finding adds relevant detail, update the existing item instead. Notify the user only about genuinely new or updated items.
 - Logging never replaces asking. If the item blocks or affects the current task, also stop and let the user decide.
 - Never mark items as done, resolved or obsolete. Once an item is resolved, delete it from the file entirely and renumber the remaining items.
 - Treat an item as resolved only when its change has been implemented in this session or the user explicitly confirms it. Otherwise leave it untouched.
+
+Rules for `SUGGESTIONS.md` only:
+
+- Start every item with one of two tags:
+  - `[local]` - the finding is caused by project-specific instructions (anything outside AgentCreed-managed text). Describe the issue and propose a fix. The user can fix it on his/her own.
+  - `[agentcreed]` - the finding has origin in AgentCreed-managed text (managed blocks of any file, shipped skills). Persistent fix must be made in AgentCreed repository. Append the item with the note `Report to AgentCreed repository.` and add a draft of a temporary local override: the exact rule text the user can place into the project-specific part of `AGENTS.md` (after the closing marker). Start the draft with the line `<!-- TEMPORARY OVERRIDE of AgentCreed: re-assess after the next agentcreed update and remove if fixed upstream -->`. Never apply the override yourself.
 
 <!-- ↑↑↑ agentcreed ↑↑↑ -->
 

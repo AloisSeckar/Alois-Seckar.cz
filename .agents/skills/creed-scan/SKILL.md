@@ -13,6 +13,10 @@ Use this approach to systematically explore and understand a codebase.
 
 If the `ARCHITECTURE.md` file already exists in the project root, treat it as a source of truth. Otherwise, fall back to `README.md`. Verify available claims against the code and look directly into the code for anything it does not cover.
 
+## Preparation
+
+If and only if `.creed/.check` is not present in `project root` yet (the first run after installation), skip the `git status` and `git pull --ff-only` check required by `creed-dev` and continue right away.
+
 ## Project Analysis Workflows
 
 Copy this checklist and track progress:
@@ -82,6 +86,8 @@ Look for and report:
 - **Database**: SQL, NoSQL, ORM used
 - **Authentication**: JWT, OAuth, Sessions
 - **Testing**: Jest, Pytest, Go test, etc.
+
+Check each pattern before listing it under Conventions. Do not list patterns that break `creed-dev` rules (e.g. repeated code) or boundaries imposed by `SECURITY.md`; log them as findings into `.creed/BACKLOG.md` instead.
 
 ## Step 5: Development Workflow
 
