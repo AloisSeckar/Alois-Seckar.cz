@@ -62,3 +62,10 @@ Rules for `SUGGESTIONS.md` only:
 ## Project-specific rules
 
 - Running the test suite (`pnpm test`) is not "running the application" in the sense of `creed-dev`. Tests manage their own app instance and may be run to verify changes.
+- Follow the standard Nuxt 4 directory layout (`app/`, `server/`, `shared/`) and rely on Nuxt auto-imports instead of manually importing utilities and types from `shared/utils/`.
+- Name new server route files with an explicit HTTP method suffix (`.get.ts`, `.post.ts`, `.delete.ts`).
+- Define shared types as `type` aliases in `shared/utils/*Types.ts`.
+- In server handlers, report failures with `createError({ statusCode, statusMessage })` and log with `console.*`. In client code, log with `log` (consola from Nuxt Ignis).
+- Write UI text in Czech and code and comments in English.
+- Follow the ESLint stylistic rules in `eslint.config.mjs`: no semicolons, single quotes, 2-space indent, `} else {` on one line, up to 4 attributes per line on single-line tags and 3 on multi-line tags, and no newline before a closing bracket.
+- Style templates with Tailwind utilities, and use the `!` important modifier (e.g. `m-0!`) when overriding Nuxt Ignis unlayered global CSS.

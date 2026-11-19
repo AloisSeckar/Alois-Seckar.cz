@@ -8,7 +8,7 @@ This file describes the project tech stack, structure and the coding conventions
 
 ## Overview
 
-Personal website and portfolio of Alois Sečkár, published at <https://alois-seckar.cz/>. It is a server-rendered Nuxt app on Netlify with a homepage, three IT article digests and a running statistics page backed by a Neon PostgreSQL database.
+Personal website and portfolio of Alois Sečkár, published at <https://alois-seckar.cz/>. It is a server-rendered Nuxt app on Netlify with a homepage, four IT article digests and a running statistics page backed by a Neon PostgreSQL database.
 
 ## Tech Stack
 
@@ -108,7 +108,7 @@ Nuxt Ignis writes `public/_ignis-config.json` and `public/_nuxt-config.json` eac
 ## Conventions
 
 - Standard Nuxt 4 layout with `app/`, `server/` and `shared/`. Utilities and types are auto-imported, so code rarely imports from `shared/utils/`.
-- Server route files carry the HTTP method suffix (`.get.ts`, `.post.ts`, `.delete.ts`).
+- Server route files carry the HTTP method suffix (`.get.ts`, `.post.ts`, `.delete.ts`), except the legacy digest endpoints (`nuxt-news.ts`, `java-news.ts`, `coda-digest.ts`).
 - Shared types are `type` aliases in `shared/utils/*Types.ts`.
 - Server handlers usually report failures with `createError({ statusCode, statusMessage })` and log with `console.*`. Client code logs with `log` (consola from Nuxt Ignis).
 - UI text is Czech. Code and comments are English. Some local variable names in `RunStats` are Czech.
