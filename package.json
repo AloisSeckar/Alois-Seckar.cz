@@ -4,11 +4,9 @@
   "scripts": {
     "eslint": "eslint .",
     "dev": "nuxt dev",
-    "test": "vitest",
+    "test": "vitest run",
     "build": "nuxt build",
-    "generate": "nuxt generate",
-    "test:watch": "vitest --watch",
-    "test:nuxt": "vitest --project nuxt"
+    "generate": "nuxt generate"
   },
   "devDependencies": {
     "node-html-parser": "7.1.0",
