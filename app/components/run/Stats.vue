@@ -57,7 +57,7 @@ const prumerZaRok = ref('0')
 const celkemKm = computed(() => {
   let totalMeters = 0
   runs.value?.forEach((run: RunRecord) => {
-    totalMeters += run.tid > 0 ? run.tlength : run.rlength
+    totalMeters += getRunLength(run)
   })
   return (totalMeters / 1000).toFixed(1)
 })
@@ -113,12 +113,12 @@ function sumRuns() {
     if (!kmZaKazdyRok[runRok]) {
       kmZaKazdyRok[runRok] = 0
     }
-    kmZaKazdyRok[runRok] += run.tid > 0 ? run.tlength : run.rlength
+    kmZaKazdyRok[runRok] += getRunLength(run)
 
     if (!kmZaKazdyMesic[runMesic]) {
       kmZaKazdyMesic[runMesic] = 0
     }
-    kmZaKazdyMesic[runMesic] += run.tid > 0 ? run.tlength : run.rlength
+    kmZaKazdyMesic[runMesic] += getRunLength(run)
   })
 
   return {
@@ -141,9 +141,13 @@ function getCelkemZaObdobi(rok: string, mesic?: string) {
       }
     }
     if (runCounts) {
-      totalYear += run.tid > 0 ? run.tlength : run.rlength
+      totalYear += getRunLength(run)
     }
   })
   return (totalYear / 1000).toFixed(1)
+}
+
+function getRunLength(run: RunRecord) {
+  return run.tid > 0 ? run.tlength : run.rlength
 }
 </script>
