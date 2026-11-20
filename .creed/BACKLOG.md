@@ -14,5 +14,4 @@ This file holds pending tasks only, as a numbered list. Resolved items are delet
 4. Security: `app/components/widget/devto.js` puts dev.to API data into `innerHTML` without escaping or sanitizing (`article.url`, `article.cover_image`, `article.user.profile_image_90`, `article.body_html`). `SECURITY.md` treats third-party API data as untrusted.
 5. Unused code: `sumTimes()` in `shared/utils/runUtils.ts` is not used anywhere.
 6. Duplicated code: the run length expression `run.tid > 0 ? run.tlength : run.rlength` appears 4 times in `app/components/run/Stats.vue` and twice in `app/components/run/Table.vue` (`totalLenth`, `getLengthInfo()`). Move it to a shared helper.
-7. Bug: `capitalizeDscr()` in `app/components/article/Digest.vue` ends with `/[.!?]$/.test(capitalized) ? capitalized : \`${capitalized}\``, so both branches return the same value. Either add the missing period or remove the ternary.
-8. Missing tests: `getAVGSpeed()` in `shared/utils/runUtils.ts` has no unit tests. The admin endpoints `runs-add` and `run-delete` have no tests for the `403` response when the user is not logged in.
+7. Missing tests: `getAVGSpeed()` in `shared/utils/runUtils.ts` has no unit tests. The admin endpoints `runs-add` and `run-delete` have no tests for the `403` response when the user is not logged in.

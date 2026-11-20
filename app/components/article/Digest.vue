@@ -100,7 +100,7 @@ function capitalizeDscr(dscr: string) {
     return ''
   }
   const capitalized = text.charAt(0).toUpperCase() + text.slice(1)
-  return /[.!?]$/.test(capitalized) ? capitalized : `${capitalized}`
+  return /[.!?]$/.test(capitalized) ? capitalized : `${capitalized}.`
 }
 
 // client-only fetch
