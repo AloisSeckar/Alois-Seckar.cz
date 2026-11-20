@@ -4,4 +4,4 @@
 
 [build.environment]
   NODE_VERSION = "24"
-  PNPM_VERSION = "10"
+  PNPM_VERSION = "12"
