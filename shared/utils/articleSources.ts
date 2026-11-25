@@ -3,10 +3,10 @@ import type { ArticleSource } from './articleTypes'
 // allowed markdown sources
 // do not just fetch any arbitrary client-supplied URL
 export const ARTICLE_SOURCES: Record<ArticleSource, string> = {
-  nuxt: 'https://raw.githubusercontent.com/AloisSeckar/demos-nuxt/refs/heads/main/NuxtNews.md',
-  java: 'https://raw.githubusercontent.com/AloisSeckar/demos-java/refs/heads/master/JavaNews.md',
-  ai: 'https://raw.githubusercontent.com/AloisSeckar/master-coda/refs/heads/master/AINews.md',
-  it: 'https://raw.githubusercontent.com/AloisSeckar/master-coda/refs/heads/master/CodaDigest.md',
+  nuxt: 'https://raw.githubusercontent.com/AloisSeckar/it-news/refs/heads/main/nuxt/NuxtNews.md',
+  java: 'https://raw.githubusercontent.com/AloisSeckar/it-news/refs/heads/main/java/JavaNews.md',
+  ai: 'https://raw.githubusercontent.com/AloisSeckar/it-news/refs/heads/main/ai/AINews.md',
+  it: 'https://raw.githubusercontent.com/AloisSeckar/it-news/refs/heads/main/it/ITDigest.md',
 }
 
 export function isArticleSource(value: unknown): value is ArticleSource {
